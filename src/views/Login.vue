@@ -7,11 +7,11 @@
       <div class="col-md-6 bg-white" style="height: 100vh;">
         <div style="position: absolute;top: 30%; transform: translateY(-30%)">
           <div >
-            <h4>Vlam-sys Login</h4>
+            <h4>Extraordinary-CBT Login</h4>
           </div>
           <div>
             <div class="alert alert-danger" v-if="errors.invalid">{{ errors.invalid }}</div>
-            <p class="text-muted">Selamat datang di aplikasi Vlam-Sys. Masukkan username dan password</p>
+            <p class="text-muted">Selamat datang di aplikasi Extraordinary-CBT. Masukkan username dan password</p>
             <form @submit.prevent="postLogin">
             <div class="input-group mb-3">
               <div class="input-group-prepend">

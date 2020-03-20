@@ -36,11 +36,6 @@
     components: {
       'breadcrumb' : Breadcrumb
     },
-    computed: {
-      ...mapState('user', {
-        authenticated: state => state.authenticated
-      })
-    },
     methods: {
       ...mapActions('user', ['loggedOut']),
       logout() { 

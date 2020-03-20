@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import auth from './auth.js'
 import user from './user.js'
+import sekolah from './sekolah.js'
 
 Vue.use(Vuex)
 
@@ -10,10 +11,12 @@ export default new Vuex.Store({
   modules: {
   	auth,
   	user,
+    sekolah
   },
   state: {
     errors: [],
     isLoading: false,
+    loadPage: false,
     token: localStorage.getItem('token'),
   },
   getters: {
@@ -36,6 +39,9 @@ export default new Vuex.Store({
     },
     SET_LOADING(state, payload) {
       state.isLoading = payload
+    },
+    LOADING_PAGE(state, payload) {
+      state.loadPage = payload
     }
   }
 })

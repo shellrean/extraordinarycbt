@@ -33,6 +33,7 @@ const actions = {
 					commit('SET_ERRORS',error.response.data.errors, { root: true})
 				}
 				commit('SET_LOADING',false, { root: true })
+				reject(error)
 			})
 		})
 	},

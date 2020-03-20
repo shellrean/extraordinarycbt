@@ -10,6 +10,7 @@ import BootstrapVue from 'bootstrap-vue'
 
 import Permissions from './mixins/Permission.js'
 import Awesome from './awesome.js'
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 Vue.config.productionTip = false
 Vue.config.performance = true

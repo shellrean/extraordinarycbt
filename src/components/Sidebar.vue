@@ -14,7 +14,7 @@
             <i class="c-sidebar-nav-icon cil-building"></i> Sekolah
           </router-link>
         </li>
-        <li class="c-sidebar-nav-item" v-if="$can('server')">
+      <!--   <li class="c-sidebar-nav-item" v-if="$can('server')">
           <router-link class="c-sidebar-nav-link" :to="{ name: 'server.data' }">
             <i class="c-sidebar-nav-icon cil-storage"></i>  Server lokal
           </router-link>
@@ -76,6 +76,12 @@
           <router-link class="c-sidebar-nav-link" :to="{ name: 'hasil-ujian' }">
             <i class="c-sidebar-nav-icon cil-chart"></i>Hasil Ujian
           </router-link>
+        </li> -->
+        <li class="c-sidebar-nav-item">
+          <a class="c-sidebar-nav-link" href="#" @click.prevent="logout">
+            <i class="c-sidebar-nav-icon cil-account-logout"></i> 
+            Logout
+          </a>
         </li>
       </ul>
       <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
@@ -84,12 +90,8 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
-  computed: {
-    ...mapState('user', {
-      authenticated: state => state.authenticated
-    })
-  },
   methods: {
+    ...mapActions('user', ['loggedOut']),
       logout() { 
         return new Promise((resolve, reject) => {
             this.loggedOut()
