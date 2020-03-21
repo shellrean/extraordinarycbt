@@ -51,18 +51,18 @@
 							</b-button>
 						</template>
 					</b-table>
-					<div class="row">
+					<div class="row" v-if="sekolah">
                         <div class="col-md-6">
-                            <p v-if="sekolah"><i class="fa fa-bars"></i> {{ sekolah.data.length }} item dari {{ sekolah.total }} total data</p>
+                            <p><i class="fa fa-bars"></i> {{ sekolah.data.length }} item dari {{ sekolah.total }} total data</p>
                         </div>
                         <div class="col-md-6">
-                            <div class="float-right" v-if="sekolah">
+                            <div class="float-right">
                                 <b-pagination
 								    size="sm"
                                     v-model="page"
                                     :total-rows="sekolah.total"
                                     :per-page="sekolah.per_page"
-                                    v-if="sekolah && sekolah.total"
+                                    v-if="sekolah"
                                     ></b-pagination>
                             </div>
                         </div>

@@ -30,6 +30,15 @@ const mutations = {
 }
 
 const actions = {
+	getUserLists({ commit }) {
+		return new Promise((resolve, reject) => {
+			$axios.get(`/user-lists`)
+			.then((response) => {
+				commit('ASSIGN_USER', response.data.data)
+				resolve(response.data)
+			})
+		})
+	},
 	setRoleUser({commit}, payload) {
 		return new Promise((resolve, reject) => {
 			commit('CLEAR_ERRORS', '', { root: true })

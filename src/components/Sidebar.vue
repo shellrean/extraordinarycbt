@@ -14,11 +14,12 @@
             <i class="c-sidebar-nav-icon cil-building"></i> Sekolah
           </router-link>
         </li>
-      <!--   <li class="c-sidebar-nav-item" v-if="$can('server')">
+        <li class="c-sidebar-nav-item" v-if="$can('server')">
           <router-link class="c-sidebar-nav-link" :to="{ name: 'server.data' }">
             <i class="c-sidebar-nav-icon cil-storage"></i>  Server lokal
           </router-link>
         </li>
+        <!-- 
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
           <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#"  v-if="$can('akademik')">
             <i class="c-sidebar-nav-icon cil-layers"></i> Data master
@@ -77,6 +78,11 @@
             <i class="c-sidebar-nav-icon cil-chart"></i>Hasil Ujian
           </router-link>
         </li> -->
+        <li class="c-sidebar-nav-item" v-if="$can('setting')">
+          <router-link class="c-sidebar-nav-link" :to="{ name: 'role.permissions' }">
+            <i class="c-sidebar-nav-icon cil-snowflake"></i>Setting
+          </router-link>
+        </li>
         <li class="c-sidebar-nav-item">
           <a class="c-sidebar-nav-link" href="#" @click.prevent="logout">
             <i class="c-sidebar-nav-icon cil-account-logout"></i> 

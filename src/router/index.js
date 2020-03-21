@@ -10,6 +10,13 @@ const DataSekolah = () => import('../views/sekolah/Sekolah.vue')
 const AddSekolah = () => import('../views/sekolah/Add.vue')
 const EditSekolah = () => import('../views/sekolah/Edit.vue')
 
+import ServerIndex from '../views/server/Index.vue'
+const DataServer = () => import('../views/server/Server.vue')
+const AddServer = () => import('../views/server/Add.vue')
+
+import SettingIndex from '../views/setting/Index.vue'
+const SetPermission = () => import('../views/setting/SetPermission')
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -47,6 +54,38 @@ const routes = [
         component: EditSekolah,
         meta: { title: 'Edit sekolah' }
       }
+    ]
+  },
+  {
+    path: '/server',
+    component: ServerIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'server.data',
+        component: DataServer,
+        meta: { title: 'Manage server' }
+      },
+      {
+        path: 'add',
+        name: 'server.add',
+        component: AddServer,
+        meta: { title: 'Tambah server' }
+      }
+    ]
+  },
+  {
+    path: '/setting',
+    component: SettingIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: 'role-permission',
+        name: 'role.permissions',
+        component: SetPermission,
+        meta: { title: 'Set Permissions' }
+      },
     ]
   },
 ]

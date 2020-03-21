@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import auth from './auth.js'
 import user from './user.js'
 import sekolah from './sekolah.js'
+import server from './server.js'
 
 Vue.use(Vuex)
 
@@ -11,7 +12,8 @@ export default new Vuex.Store({
   modules: {
   	auth,
   	user,
-    sekolah
+    sekolah,
+    server
   },
   state: {
     errors: [],
