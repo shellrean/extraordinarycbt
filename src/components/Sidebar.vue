@@ -19,11 +19,12 @@
             <i class="c-sidebar-nav-icon cil-storage"></i>  Server lokal
           </router-link>
         </li>
-        <!-- 
+        
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-          <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#"  v-if="$can('akademik')">
+          <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#"  v-if="$can('matpel') || $can('peserta')">
             <i class="c-sidebar-nav-icon cil-layers"></i> Data master
           </a>
+
           <ul class="c-sidebar-nav-dropdown-items">
             <li class="c-sidebar-nav-item" v-if="$can('peserta')">
               <router-link class="c-sidebar-nav-link" to="/peserta">
@@ -36,7 +37,7 @@
             </li>
           </ul>
         </li>
-        <li class="c-sidebar-nav-item" v-if="$can('soal')">
+        <!-- <li class="c-sidebar-nav-item" v-if="$can('soal')">
           <router-link class="c-sidebar-nav-link" to="/banksoal">
             <i class="c-sidebar-nav-icon cil-briefcase"></i>Banksoal
           </router-link>

@@ -14,6 +14,16 @@ import ServerIndex from '../views/server/Index.vue'
 const DataServer = () => import('../views/server/Server.vue')
 const AddServer = () => import('../views/server/Add.vue')
 
+import MatpelIndex from '../views/matpel/Index.vue'
+const DataMatpel = () => import('../views/matpel/Matpel.vue')
+const AddMatpel = () => import('../views/matpel/Add.vue')
+const EditMatpel = () => import('../views/matpel/Edit.vue')
+
+import PesertaIndex from '../views/peserta/Index.vue'
+const DataPeserta = () => import('../views/peserta/Peserta.vue')
+const AddPeserta = () => import('../views/peserta/Add.vue')
+const UploadPeserta = () => import('../views/peserta/Upload.vue')
+
 import SettingIndex from '../views/setting/Index.vue'
 const SetPermission = () => import('../views/setting/SetPermission')
 
@@ -72,6 +82,56 @@ const routes = [
         name: 'server.add',
         component: AddServer,
         meta: { title: 'Tambah server' }
+      }
+    ]
+  },
+  {
+    path: '/matpel',
+    component: MatpelIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'matpel.data',
+        component: DataMatpel,
+        meta: { title: 'Manage mata pelajaran' }
+      },
+      {
+        path: 'add',
+        name: 'matpel.add',
+        component: AddMatpel,
+        meta: { title: 'Tambah mata pelajara' }
+      },
+      {
+        path: 'edit/:id',
+        name: 'matpel.edit',
+        component: EditMatpel,
+        meta: { title: 'Edit mata pelajaran' }
+      }
+    ]
+  },
+  {
+    path: '/peserta',
+    component: PesertaIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'peserta.data',
+        component: DataPeserta,
+        meta: { title: 'Manage peserta' }
+      },
+      {
+        path: 'add',
+        name: 'peserta.add',
+        component: AddPeserta,
+        meta: { title: 'Tambah peserta' }
+      },
+      {
+        path: 'upload',
+        name: 'peserta.upload',
+        component: UploadPeserta,
+        meta: { title: 'Upload peserta' }
       }
     ]
   },

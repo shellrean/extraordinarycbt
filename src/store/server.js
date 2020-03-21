@@ -2,6 +2,7 @@ import $axios from '../api.js'
 
 const state = () => ({
 	servers: [],
+	allServers: [],
 	server: {
 		name_server: '',
 		description: '',
@@ -14,6 +15,9 @@ const mutations = {
 	ASSIGN_DATA(state, payload) {
 		state.servers = payload
 	},
+	ASSIGN_ALL_DATA(state, payload) {
+        state.allServers = payload
+    },
 	SET_PAGE(state, payload) {
 		state.page = payload
 	},
@@ -51,6 +55,15 @@ const actions = {
 			})
 		})
 	},
+	getAllServers({ commit, state }, payload) {
+        return new Promise(( resolve, reject ) =>  {
+            $axios.get(`/server/list`)
+            .then((response) => {
+                commit('ASSIGN_ALL_DATA', response.data)
+                resolve(response.data)
+            })
+        }) 
+    },
 	submitServer({ dispatch, commit, state }) {
 		return new Promise((resolve, reject) => {
 			commit('SET_LOADING', true, { root: true })

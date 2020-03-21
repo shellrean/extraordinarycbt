@@ -46,7 +46,7 @@ const actions = {
 			let search = typeof payload != 'undefined' ? payload : ''
 			$axios.get(`/sekolah?page=${state.page}&q=${search}`)
 			.then((response) => {
-				commit('ASSIGN_DATA', response.data)
+				commit('ASSIGN_DATA', response.data.data)
 				resolve(response.data)
 			})
 			.catch((err) => {

@@ -5,6 +5,8 @@ import auth from './auth.js'
 import user from './user.js'
 import sekolah from './sekolah.js'
 import server from './server.js'
+import peserta from './peserta.js'
+import matpel from './matpel.js'
 
 Vue.use(Vuex)
 
@@ -13,7 +15,9 @@ export default new Vuex.Store({
   	auth,
   	user,
     sekolah,
-    server
+    server,
+    peserta,
+    matpel
   },
   state: {
     errors: [],

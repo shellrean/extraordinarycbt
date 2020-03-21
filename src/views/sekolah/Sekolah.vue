@@ -114,7 +114,7 @@ export default {
 			this.$swal({
 				title: 'Informasi',
 				text: 'Tindakan ini akan menghapus secara permanent!',
-				type: 'warning',
+				icon: 'warning',
 				showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#c7c6c6',
