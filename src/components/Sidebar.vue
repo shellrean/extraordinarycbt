@@ -37,29 +37,17 @@
             </li>
           </ul>
         </li>
-        <!-- <li class="c-sidebar-nav-item" v-if="$can('soal')">
+         <li class="c-sidebar-nav-item" v-if="$can('banksoal')">
           <router-link class="c-sidebar-nav-link" to="/banksoal">
             <i class="c-sidebar-nav-icon cil-briefcase"></i>Banksoal
           </router-link>
         </li>
-        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown" v-if="$can('jadwal')" >
-          <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-            <i class="c-sidebar-nav-icon cil-notes"></i>Ujian
-          </a>
-          <ul class="c-sidebar-nav-dropdown-items">
-            <li class="c-sidebar-nav-item">
-              <router-link class="c-sidebar-nav-link" :to="{ name: 'ujian.data' }">
-                <span class="c-sidebar-nav-icon"></span> Jadwal
-              </router-link>
-            </li>
-            <li class="c-sidebar-nav-item">
-              <router-link class="c-sidebar-nav-link" :to="{ name: 'ujian.hasil' }">
-                <span class="c-sidebar-nav-icon"></span> Hasil ujian
-              </router-link>
-            </li>
-          </ul>
+        <li class="c-sidebar-nav-item" v-if="$can('jadwal')">
+          <router-link class="c-sidebar-nav-link" :to="{ name: 'ujian.data' }">
+            <i class="c-sidebar-nav-icon cil-notes"></i>Jadwal ujian
+          </router-link>
         </li>
-        <li class="c-sidebar-nav-item" v-if="$can('koreksi_esay')">
+        <li class="c-sidebar-nav-item" v-if="$can('skoring')">
           <router-link class="c-sidebar-nav-link" :to="{ name: 'ujian.koreksi' }">
             <i class="c-sidebar-nav-icon cil-task"></i> Koreksi esay
           </router-link>
@@ -69,21 +57,48 @@
             <i class="c-sidebar-nav-icon cil-folder"></i>File media
           </router-link>
         </li>
-        <li class="c-sidebar-nav-item" v-if="$can('setting')">
-          <router-link class="c-sidebar-nav-link" :to="{ name: 'role.permissions' }">
-            <i class="c-sidebar-nav-icon cil-snowflake"></i>Setting role
+        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown" v-if="$can('jadwal')" >
+          <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+            <i class="c-sidebar-nav-icon cil-chart"></i>Reporting
+          </a>
+          <ul class="c-sidebar-nav-dropdown-items">
+            <li class="c-sidebar-nav-item">
+              <router-link class="c-sidebar-nav-link" :to="{ name: 'ujian.data' }">
+                <span class="c-sidebar-nav-icon"></span> Capaian Siswa
+              </router-link>
+            </li>
+            <li class="c-sidebar-nav-item">
+              <router-link class="c-sidebar-nav-link" :to="{ name: 'ujian.hasil' }">
+                <span class="c-sidebar-nav-icon"></span> Kesulitan soal
+              </router-link>
+            </li>
+          </ul>
+        </li>
+        <li class="c-sidebar-nav-item" v-if="$can('filemedia')">
+          <router-link class="c-sidebar-nav-link" to="/filemedia">
+            <i class="c-sidebar-nav-icon cil-bullhorn"></i>Informasi
+          </router-link>
+        </li>
+        <li class="c-sidebar-nav-item" v-if="$can('filemedia')">
+          <router-link class="c-sidebar-nav-link" to="/filemedia">
+            <i class="c-sidebar-nav-icon cil-bug"></i>Pengaduan masalah
           </router-link>
         </li>
         <li class="c-sidebar-nav-item" v-if="$role('school')">
           <router-link class="c-sidebar-nav-link" :to="{ name: 'hasil-ujian' }">
             <i class="c-sidebar-nav-icon cil-chart"></i>Hasil Ujian
           </router-link>
-        </li> -->
+        </li>
         <li class="c-sidebar-nav-item" v-if="$can('setting')">
           <router-link class="c-sidebar-nav-link" :to="{ name: 'role.permissions' }">
-            <i class="c-sidebar-nav-icon cil-snowflake"></i>Setting
+            <i class="c-sidebar-nav-icon cil-cog"></i>Setting
           </router-link>
         </li>
+        <li class="c-sidebar-nav-item" v-if="$can('setting')">
+          <router-link class="c-sidebar-nav-link" :to="{ name: 'role.permissions' }">
+            <i class="c-sidebar-nav-icon cil-globe-alt"></i>Heager Actions
+          </router-link>
+        </li> 
         <li class="c-sidebar-nav-item">
           <a class="c-sidebar-nav-link" href="#" @click.prevent="logout">
             <i class="c-sidebar-nav-icon cil-account-logout"></i> 

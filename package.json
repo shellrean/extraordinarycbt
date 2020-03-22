@@ -1,6 +1,6 @@
 {
   "name": "Extraordinary-CBT",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -18,8 +18,13 @@
     "core-js": "^3.6.4",
     "fibers": "^4.0.2",
     "jquery": "^3.4.1",
+    "luxon": "^1.22.0",
     "node-sass": "^4.13.1",
     "perfect-scrollbar": "^1.5.0",
+    "prosemirror-tables": "^0.9.1",
+    "register-service-worker": "^1.6.2",
+    "tiptap": "^1.26.5",
+    "tiptap-extensions": "^1.28.5",
     "vue": "^2.6.11",
     "vue-datetime": "^1.0.0-beta.11",
     "vue-loading-overlay": "^3.3.2",
@@ -29,10 +34,12 @@
     "vue-select": "^3.9.4",
     "vue-spinner": "^1.0.3",
     "vue-sweetalert2": "^3.0.3",
-    "vuex": "^3.1.2"
+    "vuex": "^3.1.2",
+    "weekstart": "^1.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",
+    "@vue/cli-plugin-pwa": "^4.2.3",
     "@vue/cli-plugin-router": "~4.2.0",
     "@vue/cli-plugin-vuex": "~4.2.0",
     "@vue/cli-service": "~4.2.0",

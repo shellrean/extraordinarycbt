@@ -28,6 +28,7 @@ Vue.use(BootstrapVue)
 Vue.use(VueSweetalert2)
 
 import { mapActions, mapGetters } from 'vuex'
+import './registerServiceWorker'
 
 new Vue({
 	el: '#app',

@@ -7,6 +7,10 @@ import sekolah from './sekolah.js'
 import server from './server.js'
 import peserta from './peserta.js'
 import matpel from './matpel.js'
+import banksoal from './banksoal.js'
+import soal from './soal.js'
+import filemedia from './filemedia.js'
+import ujian from './ujian.js'
 
 Vue.use(Vuex)
 
@@ -17,7 +21,11 @@ export default new Vuex.Store({
     sekolah,
     server,
     peserta,
-    matpel
+    matpel,
+    banksoal,
+    soal,
+    filemedia,
+    ujian
   },
   state: {
     errors: [],

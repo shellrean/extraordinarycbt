@@ -28,7 +28,10 @@
                                 {{ from ? from+data.index : 1+data.index }}
                             </template>
                             <template v-slot:cell(nama)="row">
-                                {{ row.item.nama }} <b-badge variant="success" class="mr-1" v-show="row.item.jurusan_id != 0">khusus</b-badge>
+                                {{ row.item.nama }} 
+                                <b-badge variant="success" class="mr-1" v-show="row.item.jurusan_id != 0">khusus</b-badge>
+                                <b-badge variant="success" class="mr-1" v-show="row.item.agama_id != 0">agama</b-badge>
+                                <b-badge variant="info" class="mr-1" v-if="row.item.agama_id != 0" v-text="row.item.agama_id">agama</b-badge>
                                 <b-badge variant="info" class="mr-1" v-if="row.item.jurusan_id != 0" v-for="(jur, index) in row.item.jurusan_id" v-text="jur" :key="index"></b-badge>
                             </template>
                             <template v-slot:cell(actions)="row">

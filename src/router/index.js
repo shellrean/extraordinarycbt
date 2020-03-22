@@ -24,6 +24,20 @@ const DataPeserta = () => import('../views/peserta/Peserta.vue')
 const AddPeserta = () => import('../views/peserta/Add.vue')
 const UploadPeserta = () => import('../views/peserta/Upload.vue')
 
+import BanksoalIndex from '../views/banksoal/Index.vue'
+const DataBanksoal = () => import('../views/banksoal/DataBanksoal.vue')
+const SoalBanksoal = () => import('../views/banksoal/SoalBanksoal.vue')
+const SoalBanksoalTambah = () => import('../views/banksoal/SoalBanksoalTambah.vue')
+const SoalBanksoalEdit = () => import('../views/banksoal/SoalBanksoalEdit.vue')
+const SoalBanksoalPrev = () => import('../views/banksoal/SoalBanksoalPrev.vue')
+
+import UjianIndex from '../views/ujian/Index.vue'
+const DataUjian = () => import('../views/ujian/Ujian.vue')
+
+import KoreksiIndex from '../views/koreksi/Index.vue'
+const KoreksiUjian = () => import('../views/koreksi/KoreksiUjian.vue')
+const KoreksiEsay = () => import('../views/koreksi/KoreksiEsay.vue')
+
 import SettingIndex from '../views/setting/Index.vue'
 const SetPermission = () => import('../views/setting/SetPermission')
 
@@ -132,6 +146,75 @@ const routes = [
         name: 'peserta.upload',
         component: UploadPeserta,
         meta: { title: 'Upload peserta' }
+      }
+    ]
+  },
+  {
+    path: '/banksoal',
+    component: BanksoalIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'banksoal.data',
+        component: DataBanksoal,
+        meta: { title: 'Manage banksoal' }
+      },
+      {
+        path: 'soal/:banksoal_id',
+        name: 'banksoal.soal',
+        component: SoalBanksoal,
+        meta: { title: 'Manage soal' }
+      },
+      {
+        path: 'soal/:banksoal_id/tambah',
+        name: 'banksoal.soal.tambah',
+        component: SoalBanksoalTambah,
+        meta: { title: 'Tambah soal' }
+      },
+      {
+        path: 'soal/:banksoal_id/:soal_id',
+        name: 'banksoal.soal.edit',
+        component : SoalBanksoalEdit,
+        meta: { title: 'Edit soal' }
+      },
+      {
+        path: 'prev/:banksoal_id',
+        name: 'banksoal.prev',
+        component: SoalBanksoalPrev,
+        meta: { title: 'Preview soal banksoal' }
+      }
+    ]
+  },
+  {
+    path: '/ujian',
+    component: UjianIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'ujian.data',
+        component: DataUjian,
+        meta: { title: 'Manage ujian' }
+      }
+    ]
+  },
+  {
+    path: '/koreksi',
+    component: KoreksiIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'ujian.koreksi',
+        component: KoreksiUjian,
+        meta: { title: 'Koreksi jawaban peserta' }
+      },
+      {
+        path: 'esay/:banksoal',
+        name: 'koreksi.esay',
+        component: KoreksiEsay,
+        meta: { title: 'Koreksi esay' }
       }
     ]
   },

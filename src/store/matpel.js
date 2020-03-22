@@ -7,6 +7,7 @@ const state = () => ({
         kode_mapel: '',
         nama: '',
         jurusan_id: '',
+        agama_id: ''
     },
 	page: 1,
     from: 1
@@ -25,14 +26,16 @@ const mutations = {
     ASSIGN_FORM(state, payload) {
         state.matpel = {
             kode_mapel: payload.kode_mapel,
-            nama: payload.nama
+            nama: payload.nama,
+            agama_id: payload.agama_id
         }
     },
     CLEAR_FORM(state) {
         state.matpel = {
             kode_mapel: '',
             nama: '',
-            jurusan_id: ''
+            jurusan_id: '',
+            agama_id: ''
         }
     },
     SET_FROM_DATA(state, payload) {

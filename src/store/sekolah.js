@@ -8,7 +8,8 @@ const state = () => ({
 		alamat: ''
 	},
 	page: 1,
-	jurusan: []
+	jurusan: [],
+	agama: []
 })
 
 const mutations = {
@@ -23,6 +24,9 @@ const mutations = {
 	},
 	ASSIGN_ALL_JURUSAN(state, payload) {
 		state.jurusan = payload
+	},
+	ASSIGN_ALL_AGAMA(state, payload) {
+		state.agama = payload
 	},
 	ASSIGN_FORM(state, payload) {
 		state.sekola = {
@@ -131,6 +135,17 @@ const actions = {
 			$axios.get(`/jurusan`)
 			.then((response) => {
 				commit('ASSIGN_ALL_JURUSAN', response.data)
+			})
+			.catch((err) => {
+				reject(err)
+			})
+		})
+	},
+	getAgamas({ commit }) {
+		return new Promise((resolve, reject) => {
+			$axios.get(`/agama`)
+			.then((response) => {
+				commit('ASSIGN_ALL_AGAMA', response.data)
 			})
 			.catch((err) => {
 				reject(err)

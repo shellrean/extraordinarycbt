@@ -25,6 +25,13 @@
 			:taggable="true"
 			v-if="jurusans.data"></multiselect>
 		</div>
+		<div class="form-group">
+			<b-form-checkbox size="lg" v-model="agama" switch value="1">Matpel agama</b-form-checkbox>
+		</div>
+		<div class="form-group" v-show="agama">
+			<label>Agama</label>
+			<v-select label="nama" :options="agamas.data" v-model="matpel.agama_id" :reduce="nama => nama.id"></v-select>
+		</div>
 	</div>
 </template>
 <script>
@@ -37,10 +44,12 @@ export default {
 	name: 'FormMatpel',
 	created() {
 		this.getJurusans()
+		this.getAgamas()
 	},
 	data() {
 		return {
 			produktif: false,
+			agama: false
 		}
 	},
 	components: {
@@ -53,12 +62,13 @@ export default {
 			matpel : state => state.matpel
 		}),
 		...mapState('sekolah', {
-			jurusans: state => state.jurusan
+			jurusans: state => state.jurusan,
+			agamas: state => state.agama
 		})
 	},
 	methods: {
 		...mapMutations('matpel', ['CLEAR_FORM']),
-		...mapActions('sekolah',['getJurusans'])
+		...mapActions('sekolah',['getJurusans', 'getAgamas'])
 	},
 	destroyed() {
 		this.CLEAR_FORM()
