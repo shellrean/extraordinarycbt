@@ -35,6 +35,9 @@ const actions = {
 				commit('ASSIGN_DATA', response.data.data)
 				resolve(response.data)
 			})
+			.catch((err) => {
+				reject()
+			})
 		})
 	},
 	getUjianByBanksoal({ commit, state }, payload) {
@@ -136,7 +139,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			$axios.get(`/ujian/esay/koreksi/${payload}`)
 			.then((response) => {
-				commit('ASSIGN_JAWABAN_ESAY', response.data)
+				commit('ASSIGN_JAWABAN_ESAY', response.data.data)
 				resolve()
 			})
 			.catch((err) => {

@@ -38,6 +38,10 @@ import KoreksiIndex from '../views/koreksi/Index.vue'
 const KoreksiUjian = () => import('../views/koreksi/KoreksiUjian.vue')
 const KoreksiEsay = () => import('../views/koreksi/KoreksiEsay.vue')
 
+import FilemediaIndex from '../views/filemedia/Index.vue'
+const DataFilemedia = () => import('../views/filemedia/Filemedia.vue')
+const DataDirFilemedia = () => import('../views/filemedia/DirFilemedia.vue')
+
 import SettingIndex from '../views/setting/Index.vue'
 const SetPermission = () => import('../views/setting/SetPermission')
 
@@ -215,6 +219,25 @@ const routes = [
         name: 'koreksi.esay',
         component: KoreksiEsay,
         meta: { title: 'Koreksi esay' }
+      }
+    ]
+  },
+  {
+    path: '/filemedia',
+    component: FilemediaIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'filemedia.data',
+        component: DataFilemedia,
+        meta: { title: 'Manage filemedia' }
+      },
+      {
+        path: '/filemedia/directory/:directory_id',
+        name: 'filemedia.directory',
+        component: DataDirFilemedia,
+        meta: { title: 'Manage directory filemedia' }
       }
     ]
   },

@@ -38,9 +38,14 @@ const actions = {
 		})
 	},
 	loggedOut({ commit }, payload) {
-		$axios.get('logout')
-		.then((response) => {
-			resolve(response.message)
+		return new Promise((resolve, reject) => {
+			$axios.get('logout')
+			.then((response) => {
+				resolve(response.message)
+			})
+			.catch((err) => {
+				reject()
+			})
 		})
 	}
 }

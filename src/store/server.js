@@ -46,7 +46,7 @@ const actions = {
 			$axios.get(`/server?page=${state.page}&q=${search}&s=${sekolah}`)
 			.then((response) => {
 				commit('SET_LOADING', false, { root: true })
-				commit('ASSIGN_DATA', response.data)
+				commit('ASSIGN_DATA', response.data.data)
 				resolve(response.data)
 			})
 			.catch((err) => {
@@ -70,10 +70,7 @@ const actions = {
 			$axios.post(`/server`, state.server)
 			.then((response) => {
 				commit('SET_LOADING', false, { root: true })
-				dispatch('getServers').then(() => {
-					commit('CLEAR_FORM')
-					resolve(response.data)
-				})
+				resolve()
 				resolve(response.data)
 			})
 			.catch((error) => {
@@ -84,27 +81,45 @@ const actions = {
 			})
 		})
 	},
-	removeServer({ dispatch }, payload) {
+	removeServer({ commit }, payload) {
 		return new Promise((resolve, reject) => {
+			commit('SET_LOADING', true, { root: true })
 			$axios.delete(`/server/${payload}`)
 			.then((response) => {
-				dispatch('getServers').then(() => resolve())
+				commit('SET_LOADING', false, { root: true })
+				resolve()
+			})
+			.catch(() => {
+				commit('SET_LOADING', false, { root: true })
+				reject()
 			})
 		})
 	},
-	revertServer({ dispatch }, payload) {
+	revertServer({ commit }, payload) {
 		return new Promise((resolve, reject) => {
+			commit('SET_LOADING', true, { root: true })
 			$axios.post(`/server/changed/${payload}`)
 			.then((response) => {
-				dispatch('getServers').then(() => resolve())
+				commit('SET_LOADING', false, { root: true })
+				resolve()
+			})
+			.catch(() => {
+				commit('SET_LOADING', false, { root: true })
+				reject()
 			})
 		})
 	},
-	resetSerial({ dispatch }, payload) {
+	resetSerial({ commit }, payload) {
 		return new Promise((resolve, reject) => {
+			commit('SET_LOADING', true, { root: true })
 			$axios.post(`/server/reset-serial/${payload}`)
 			.then((response) => {
-				dispatch('getServers').then(() => resolve())
+				commit('SET_LOADING', false, { root: true })
+				resolve()
+			})
+			.catch(() => {
+				commit('SET_LOADING', false, { root: true })
+				reject()
 			})
 		})
 	}

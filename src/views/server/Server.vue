@@ -21,10 +21,8 @@
                     <br>
 					<div class="row" v-if="sekolahs">
 						<div class="col-md-3">
-							<div class="input-group mb-3">
-								<select class="form-control" v-model="sekolah" @change="getDataServers">
-									<option v-for="sekolah in sekolahs" :key="sekolah.id" :value="sekolah.id" v-text="sekolah.nama"></option>
-								</select>
+							<div class="form-group mb-3">
+								<v-select label="nama" :options="sekolahs.data" v-model="sekolah" :reduce="nama => nama.id"></v-select>
 							</div>
 						</div>
 					</div>
@@ -45,21 +43,18 @@
                             </b-card>
                         </template>
 						<template v-slot:cell(actions)="row">
-							<b-button variant="success" v-if="$can('active_server')" title="Aktif/Matikan server" class="mr-1" size="sm" @click="reserveServer(row.item.id)">
+							<b-button :disabled="isLoading" variant="success" v-if="$can('active_server')" title="Aktif/Matikan server" class="mr-1" size="sm" @click="reserveServer(row.item.id)">
 								<font-awesome-icon icon="dot-circle" /> Aktif/Matikan
 							</b-button>
-							<b-button variant="warning" v-if="$can('reset_server')" title="Hapus UUID" class="mr-1" size="sm" @click="resetSerial(row.item.id)">
+							<b-button :disabled="isLoading" variant="warning" v-if="$can('reset_server')" title="Hapus UUID" class="mr-1" size="sm" @click="resetSerial(row.item.id)">
 								<font-awesome-icon icon="sync" /> Reset UUID
 							</b-button>
-							<b-button variant="danger" v-if="$can('delete_server')" title="Hapus server" class="mr-1" size="sm" @click="deleteServer(row.item.id)">
+							<b-button :disabled="isLoading" variant="danger" v-if="$can('delete_server')" title="Hapus server" class="mr-1" size="sm" @click="deleteServer(row.item.id)">
 								<i class="cil-trash"></i> Hapus
 							</b-button>
 						</template>
 					</b-table>
-					<div class="text-center text-light my-2" v-show="isLoading">
-						<b-spinner small type="grow"></b-spinner> Geting data...
-			        </div>
-					<div class="row" v-if="servers">
+					<div class="row" v-if="servers && typeof servers.data != 'undefined'"">
                         <div class="col-md-6">
                             <p><i class="fa fa-bars"></i> {{ servers.data.length }} item dari {{ servers.total }} total data</p>
                         </div>
@@ -68,6 +63,7 @@
                                 <b-pagination
 								   size="sm"
                                     v-model="page"
+                                    :disabled="isLoading"
                                     :total-rows="servers.total"
                                     :per-page="servers.per_page"
                                     v-if="servers"
@@ -135,9 +131,14 @@
 </template>
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
 
 export default {
 	name: 'DataServer',
+	components: {
+        vSelect
+    },
 	created() {
 		if(!this.$role('school')) {
 			this.getAllSekolah()
@@ -169,10 +170,10 @@ export default {
 	computed: {
 		...mapGetters(['isLoading']),
 		...mapState('server', {
-			servers: state => state.servers.data
+			servers: state => state.servers
 		}),
 		...mapState('sekolah', {
-			sekolahs: state => state.sekolah.data
+			sekolahs: state => state.sekolah
 		}),
 		page: {
 			get() {
@@ -190,7 +191,7 @@ export default {
 			this.$swal({
 				title: 'Informasi',
 				text: 'Tindakan ini akan menghapus secara permanent!',
-				type: 'warning',
+				icon: 'warning',
 				showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#c5c5c5',
@@ -205,6 +206,15 @@ export default {
 		                  type: 'success',
 		                  text: 'Server berhasil dihapus.'
 		                })
+		                this.getDataServers()
+					})
+					.catch(() => {
+						this.$notify({
+		                  group: 'foo',
+		                  title: 'Error',
+		                  type: 'error',
+		                  text: 'Terjadi kesalahan.'
+		                })
 					})
                 }
             })
@@ -218,6 +228,15 @@ export default {
                   type: 'success',
                   text: 'Status server changed.'
                 })
+                this.getDataServers()
+			})
+			.catch(() => {
+				this.$notify({
+                  group: 'foo',
+                  title: 'Error',
+                  type: 'error',
+                  text: 'Terjadi kesalahan.'
+                })
 			})
 		},
 		getDataServers() {
@@ -227,10 +246,10 @@ export default {
 		},
 		printServer() {
 			this.$notify({
-                  group: 'foo',
-                  title: 'Information',
-                  type: 'info',
-                  text: 'This is future.'
+                group: 'foo',
+                title: 'Information',
+                type: 'info',
+                text: 'This is future.'
             })
 		}
 	},
@@ -248,6 +267,11 @@ export default {
 		},
 		pesertas() {
 			this.isBusy = false
+		},
+		sekolah(val) {
+			if(val != 0 || val != null) {
+				this.getDataServers();
+			}
 		}
 	}
 }

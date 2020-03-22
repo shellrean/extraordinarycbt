@@ -52,10 +52,16 @@ const actions = {
 	},
 	getContentFilemedia({ commit, state }, payload) {
 		return new Promise(( resolve, reject) => {
+			commit('SET_LOADING', true, { root: true })
 			$axios.get(`/directory/banksoal/${payload}?page=${state.page}`)
 			.then((response) => {
 				commit('ASSIGN_CONTENT_DIRECTORY', response.data.data)
+				commit('SET_LOADING', false, { root: true })
 				resolve(response.data)
+			})
+			.catch((err) => {
+				commit('SET_LOADING', false, { root: true })
+				reject()
 			})
 		})
 	},
@@ -75,6 +81,20 @@ const actions = {
 			$axios.post(`/upload/file-audio`,payload,{ headers: { 'Content-Type': 'multipart/form-data'} })
 			.then((response) => {
 				resolve(response.data)
+			})
+		})
+	},
+	removeFilemedia({ commit, state }, payload) {
+		return new Promise ((resolve, reject) => {
+			commit('SET_LOADING', true, { root: true })
+			$axios.delete(`/directory/filemedia/${payload}`) 
+			.then((response) => {
+				commit('SET_LOADING', false, { root: true })
+				resolve(response.data)
+			})
+			.catch((err) => {
+				commit('SET_LOADING', false, { root: true })
+				reject()
 			})
 		})
 	}

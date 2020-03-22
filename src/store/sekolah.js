@@ -47,13 +47,16 @@ const mutations = {
 const actions = {
 	getSekolah({ commit, state }, payload) {
 		return new Promise(( resolve, reject) => {
+			commit('SET_LOADING', true, { root: true })
 			let search = typeof payload != 'undefined' ? payload : ''
 			$axios.get(`/sekolah?page=${state.page}&q=${search}`)
 			.then((response) => {
 				commit('ASSIGN_DATA', response.data.data)
+				commit('SET_LOADING', false, { root: true })
 				resolve(response.data)
 			})
 			.catch((err) => {
+				commit('SET_LOADING', false, { root: true })
 				reject(err)
 			})
 		})
@@ -119,14 +122,17 @@ const actions = {
 			})
 		})
 	},
-	removeSekolah({ dispatch }, payload) {
+	removeSekolah({ commit }, payload) {
 		return new Promise((resolve, reject) => {
+			commit('SET_LOADING', true, { root: true })
 			$axios.delete(`/sekolah/${payload}`)
 			.then((response) => {
-				dispatch('getSekolah').then(() => resolve())
+				commit('SET_LOADING',false, { root: true })
+                resolve()
 			})
 			.catch((err) => {
-				reject(err)
+				commit('SET_LOADING',false, { root: true })
+				reject()
 			})
 		})
 	},

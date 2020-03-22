@@ -72,6 +72,14 @@ export default {
           this.$router.push({ name: 'home' })
         }
       })
+      .catch(() => {
+        this.$notify({
+          group: 'foo',
+          title: 'Error',
+          type: 'errir',
+          text: 'Terjadi kesalahan.'
+        })
+      })
     }
   },
   destroyed() {

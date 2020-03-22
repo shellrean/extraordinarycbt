@@ -13,14 +13,15 @@
                         </div>
                     </div>
                     <br>
+                    <template v-if="esies && typeof esies.data != 'undefined'">
 					<b-table striped hover bordered small :fields="fields" :items="esies.data" show-empty>
 			            <template v-slot:cell(show_details)="row">
 			        	     <b-button size="sm" @click="row.toggleDetails" :variant="row.detailsShowing ? 'danger' : 'info'"><i :class="row.detailsShowing ? 'cil-chevron-top' : 'cil-chevron-bottom'" /></b-button>
 			            </template>
 			           	<template v-slot:cell(akurasi)="row">
 			           		<b-progress :max="100" height="2rem" show-progress variant="info">
-		                        <b-progress-bar :value="30">
-		                        	Akurasi: <strong>100</strong>
+		                        <b-progress-bar :value="row.item.similiar">
+		                        	Akurasi: <strong v-text="row.item.similiar"></strong>
 		                        </b-progress-bar>
 		                    </b-progress>
 			           	</template>
@@ -45,7 +46,7 @@
 		                        <div class="col-md-4">
 		                            <b-card>
 		                                <div class="input-group mb-3">
-											<input type="text" v-model="val" class="form-control" placeholder="Point">
+											<input type="number" v-model="val" class="form-control" placeholder="Point" step="0.1" max="1" min="0">
 											<div class="input-group-append">
 												<button class="btn btn-outline-primary" type="button" @click="submitNilai(row.item.id)">Submit</button>
 											</div>
@@ -54,7 +55,6 @@
 											<strong>Pertanyaan</strong><br><br>
 											<div v-html="row.item.pertanyaan.pertanyaan"></div>
 											<br><br>
-											<strong>Point maksimal : 10</strong>
 										</div>
 		                            </b-card>
 		                        </div>
@@ -63,21 +63,26 @@
 			        </b-table>
 			        <div class="row">
                         <div class="col-md-6">
-                            <p v-if="esies.data"><i class="fa fa-bars"></i> {{ esies.data.length }} item dari {{ esies.meta.total }} total data</p>
+                            <p v-if="esies.data"><i class="fa fa-bars"></i> {{ esies.data.length }} item dari {{ esies.total }} total data</p>
                         </div>
                         <div class="col-md-6">
                             <div class="float-right">
                                 <b-pagination
                                     size="sm"
                                     v-model="page"
-                                    :total-rows="esies.meta.total"
-                                    :per-page="esies.meta.per_page"
+                                    :total-rows="esies.total"
+                                    :per-page="esies.per_page"
                                     aria-controls="products"
-                                    v-if="esies.data && esies.data.length > 0"
                                     ></b-pagination>
                             </div>
                         </div>
                     </div>
+                	</template>
+                	<template v-else>
+                        <div class="text-center text-light my-2">
+                            <b-spinner small type="grow"></b-spinner>
+                        </div>
+                    </template>
 			    </div>
 			    <div class="card-footer"></div>
 			</div>

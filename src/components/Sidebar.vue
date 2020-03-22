@@ -1,6 +1,6 @@
 <template>
 	   <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
-      <div class="c-sidebar-brand"><img class="c-sidebar-brand-full" src="/img/brand/dki.png" height="46" alt="CoreUI Logo"><img class="c-sidebar-brand-minimized" src="/img/brand/dki.png" height="46" alt="Logo"></div>
+      <div class="c-sidebar-brand"><img class="c-sidebar-brand-full" src="/img/brand/dki.png" height="46" alt="Logo"><img class="c-sidebar-brand-minimized" src="/img/brand/dki.png" height="46" alt="Logo"></div>
       <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item">
           <router-link class="c-sidebar-nav-link" to="/">
@@ -57,7 +57,7 @@
             <i class="c-sidebar-nav-icon cil-folder"></i>File media
           </router-link>
         </li>
-        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown" v-if="$can('jadwal')" >
+       <!--  <li class="c-sidebar-nav-item c-sidebar-nav-dropdown" v-if="$can('jadwal')" >
           <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon cil-chart"></i>Reporting
           </a>
@@ -98,7 +98,7 @@
           <router-link class="c-sidebar-nav-link" :to="{ name: 'role.permissions' }">
             <i class="c-sidebar-nav-icon cil-globe-alt"></i>Heager Actions
           </router-link>
-        </li> 
+        </li>  -->
         <li class="c-sidebar-nav-item">
           <a class="c-sidebar-nav-link" href="#" @click.prevent="logout">
             <i class="c-sidebar-nav-icon cil-account-logout"></i> 
@@ -113,7 +113,7 @@
 import { mapState, mapActions } from 'vuex'
 export default {
   methods: {
-    ...mapActions('user', ['loggedOut']),
+    ...mapActions('auth', ['loggedOut']),
       logout() { 
         return new Promise((resolve, reject) => {
             this.loggedOut()

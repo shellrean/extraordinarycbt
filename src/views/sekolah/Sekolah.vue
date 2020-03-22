@@ -22,51 +22,56 @@
                         </div>
                     </div>
                     <br>
-                    <div class="text-center text-light my-2" v-show="!sekolah">
-					    <b-spinner small type="grow"></b-spinner> Getting data first time...
-                    </div>
-					<b-table striped hover bordered small :fields="fields" :items="sekolah.data" v-if="sekolah" show-empty>
-						<template v-slot:cell(show_details)="row">
-                            <b-button 
-                            size="sm" 
-                            @click="row.toggleDetails" 
-                            :variant="row.detailsShowing ? 'danger' : 'info'">
-                            	<i :class="row.detailsShowing ? 'cil-chevron-top' : 'cil-chevron-bottom'" />
-                            </b-button>
-                        </template>
-						<template v-slot:row-details="row">
-                            <b-card>
-                            	<strong>Alamat</strong><br>
-                                {{ row.item.alamat}}
-                            </b-card>
-                        </template>
-						<template v-slot:cell(actions)="row">
-							<router-link 
-							:to="{ name: 'sekolah.edit', params: { id: row.item.id } }" 
-							class="btn btn-warning btn-sm mr-1" v-if="$can('edit_sekolah')">
-								<i class="cil-pencil"></i> Edit
-							</router-link>
-							<b-button variant="danger" size="sm" @click="deleteSekolah(row.item.id)" v-if="$can('delete_sekolah')">
-								<i class="cil-trash"></i> Hapus
-							</b-button>
-						</template>
-					</b-table>
-					<div class="row" v-if="sekolah">
-                        <div class="col-md-6">
-                            <p><i class="fa fa-bars"></i> {{ sekolah.data.length }} item dari {{ sekolah.total }} total data</p>
+                    <template v-if="sekolah && typeof sekolah.data != 'undefined'">
+						<b-table striped hover bordered small :fields="fields" :items="sekolah.data" v-if="sekolah" show-empty>
+							<template v-slot:cell(show_details)="row">
+	                            <b-button 
+	                            size="sm" 
+	                            @click="row.toggleDetails" 
+	                            :variant="row.detailsShowing ? 'danger' : 'info'">
+	                            	<i :class="row.detailsShowing ? 'cil-chevron-top' : 'cil-chevron-bottom'" />
+	                            </b-button>
+	                        </template>
+							<template v-slot:row-details="row">
+	                            <b-card>
+	                            	<strong>Alamat</strong><br>
+	                                {{ row.item.alamat}}
+	                            </b-card>
+	                        </template>
+							<template v-slot:cell(actions)="row">
+								<router-link 
+								:to="{ name: 'sekolah.edit', params: { id: row.item.id } }" 
+								class="btn btn-warning btn-sm mr-1" v-if="$can('edit_sekolah')">
+									<i class="cil-pencil"></i> Edit
+								</router-link>
+								<b-button :disabled="isLoading" variant="danger" size="sm" @click="deleteSekolah(row.item.id)" v-if="$can('delete_sekolah')">
+									<i class="cil-trash"></i> Hapus
+								</b-button>
+							</template>
+						</b-table>
+						<div class="row" v-if="sekolah">
+	                        <div class="col-md-6">
+	                            <p><i class="fa fa-bars"></i> {{ sekolah.data.length }} item dari {{ sekolah.total }} total data</p>
+	                        </div>
+	                        <div class="col-md-6">
+	                            <div class="float-right">
+	                                <b-pagination
+									    size="sm"
+									    :disabled="isLoading"
+	                                    v-model="page"
+	                                    :total-rows="sekolah.total"
+	                                    :per-page="sekolah.per_page"
+	                                    v-if="sekolah"
+	                                    ></b-pagination>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </template>
+	                <template v-else>
+                        <div class="text-center text-light my-2">
+                            <b-spinner small type="grow"></b-spinner>
                         </div>
-                        <div class="col-md-6">
-                            <div class="float-right">
-                                <b-pagination
-								    size="sm"
-                                    v-model="page"
-                                    :total-rows="sekolah.total"
-                                    :per-page="sekolah.per_page"
-                                    v-if="sekolah"
-                                    ></b-pagination>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
 				</div>
 				<div class="card-footer"></div>
 			</div>
@@ -74,7 +79,7 @@
 	</div>
 </template>
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
 	name: 'DataSekolah',
@@ -96,8 +101,9 @@ export default {
 		}
 	},
 	computed: {
+		...mapGetters(['isLoading']),
 		...mapState('sekolah', {
-			sekolah: state => state.sekolah.data
+			sekolah: state => state.sekolah
 		}),
 		page: {
 			get() {
@@ -123,6 +129,7 @@ export default {
                 if (result.value) {
                     this.removeSekolah(id)
                     .then(() => {
+                    	this.getSekolah()
                     	this.notifSuccess('Berhasil menghapus data sekolah');
                     })
                     .catch(() => {
