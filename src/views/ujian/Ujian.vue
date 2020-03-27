@@ -272,21 +272,7 @@ export default {
 		},
 		ujians() {
 			this.isBusy = false
-		},
-		timeout() {
-			const filter = this.ujians.data.filter((ujian) => {
-				return ujian.status_ujian == 1
-			})
-
-			filter.forEach((item) => {
-				this.changeToken({ id: item.id})
-			})
-
-			this.getUjians()
 		}
-	},
-	mounted() {
-		setInterval(() => { this.timeout ++ }, 15 * 60000);
 	}
 }
 </script>

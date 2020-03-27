@@ -78,49 +78,49 @@
                       class="menubar__button"
                       @click="showImagePrompt(commands.image)"
                     >
-                      <font-awesome-icon icon="image" />
+                      <i class="cil-satelite"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.bold() }"
                       @click="commands.bold"
                     >
-                      <font-awesome-icon icon="bold" />
+                     <i class="cil-bold"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.italic() }"
                       @click="commands.italic"
                     >
-                      <font-awesome-icon icon="italic" />
+                     <i class="cil-italic"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.strike() }"
                       @click="commands.strike"
                     >
-                      <font-awesome-icon icon="strikethrough" />
+                     <i class="cil-strikethrough"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.underline() }"
                       @click="commands.underline"
                     >
-                      <font-awesome-icon icon="underline" />
+                     <i class="cil-underline"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.paragraph() }"
                       @click="commands.paragraph"
                     >
-                      <font-awesome-icon icon="paragraph" />
+                     <i class="cil-paragraph"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.heading({ level: 1 }) }"
                       @click="commands.heading({ level: 1 })"
                     >
-                      H1
+                      <small>H1</small>
                     </button>
 
                     <button
@@ -128,7 +128,7 @@
                       :class="{ 'is-active': isActive.heading({ level: 2 }) }"
                       @click="commands.heading({ level: 2 })"
                     >
-                      H2
+                      <small>H2</small>
                     </button>
 
                     <button
@@ -136,41 +136,41 @@
                       :class="{ 'is-active': isActive.heading({ level: 3 }) }"
                       @click="commands.heading({ level: 3 })"
                     >
-                      H3
+                      <small>H3</small>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.bullet_list() }"
                       @click="commands.bullet_list"
                     >
-                      <font-awesome-icon icon="list" />
+                     <i class="cil-list"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.ordered_list() }"
                       @click="commands.ordered_list"
                     >
-                      <font-awesome-icon icon="list-ol" />
+                     <i class="cil-list-numbered"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.blockquote() }"
                       @click="commands.blockquote"
                     >
-                      <font-awesome-icon icon="quote-right" />
+                     <i class="cil-double-quote-sans-left"></i>
                     </button>
                     <button
                       class="menubar__button"
                       @click="commands.undo"
                     >
-                      <font-awesome-icon icon="undo" />
+                     <i class="cil-action-undo"></i>
                     </button>
 
                     <button
                       class="menubar__button"
                       @click="commands.redo"
                     >
-                      <font-awesome-icon icon="redo" />
+                     <i class="cil-action-redo"></i>
                     </button>
                   </div>
                 </editor-menu-bar>
@@ -190,49 +190,49 @@
                       class="menubar__button"
                       @click="showImagePrompt(commands.image)"
                     >
-                      <font-awesome-icon icon="image" />
+                      <i class="cil-satelite"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.bold() }"
                       @click="commands.bold"
                     >
-                      <font-awesome-icon icon="bold" />
+                     <i class="cil-bold"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.italic() }"
                       @click="commands.italic"
                     >
-                      <font-awesome-icon icon="italic" />
+                     <i class="cil-italic"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.strike() }"
                       @click="commands.strike"
                     >
-                      <font-awesome-icon icon="strikethrough" />
+                     <i class="cil-strikethrough"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.underline() }"
                       @click="commands.underline"
                     >
-                      <font-awesome-icon icon="underline" />
+                     <i class="cil-underline"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.paragraph() }"
                       @click="commands.paragraph"
                     >
-                      <font-awesome-icon icon="paragraph" />
+                     <i class="cil-paragraph"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.heading({ level: 1 }) }"
                       @click="commands.heading({ level: 1 })"
                     >
-                      H1
+                      <small>H1</small>
                     </button>
 
                     <button
@@ -240,7 +240,7 @@
                       :class="{ 'is-active': isActive.heading({ level: 2 }) }"
                       @click="commands.heading({ level: 2 })"
                     >
-                      H2
+                      <small>H2</small>
                     </button>
 
                     <button
@@ -248,41 +248,41 @@
                       :class="{ 'is-active': isActive.heading({ level: 3 }) }"
                       @click="commands.heading({ level: 3 })"
                     >
-                      H3
+                      <small>H3</small>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.bullet_list() }"
                       @click="commands.bullet_list"
                     >
-                      <font-awesome-icon icon="list" />
+                     <i class="cil-list"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.ordered_list() }"
                       @click="commands.ordered_list"
                     >
-                      <font-awesome-icon icon="list-ol" />
+                     <i class="cil-list-numbered"></i>
                     </button>
                     <button
                       class="menubar__button"
                       :class="{ 'is-active': isActive.blockquote() }"
                       @click="commands.blockquote"
                     >
-                      <font-awesome-icon icon="quote-right" />
+                     <i class="cil-double-quote-sans-left"></i>
                     </button>
                     <button
                       class="menubar__button"
                       @click="commands.undo"
                     >
-                      <font-awesome-icon icon="undo" />
+                     <i class="cil-action-undo"></i>
                     </button>
 
                     <button
                       class="menubar__button"
                       @click="commands.redo"
                     >
-                      <font-awesome-icon icon="redo" />
+                     <i class="cil-action-redo"></i>
                     </button>
                   </div>
                 </editor-menu-bar>
@@ -305,103 +305,103 @@
                     <editor-menu-bar :editor="pilihan[index]" v-slot="{ commands, isActive }">
                     <div class="menubar">
                       <button
-                        class="menubar__button"
-                        @click="showImagePrompt(commands.image)"
-                      >
-                        <font-awesome-icon icon="image" />
-                      </button>
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.bold() }"
-                        @click="commands.bold"
-                      >
-                        <font-awesome-icon icon="bold" />
-                      </button>
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.italic() }"
-                        @click="commands.italic"
-                      >
-                        <font-awesome-icon icon="italic" />
-                      </button>
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.strike() }"
-                        @click="commands.strike"
-                      >
-                        <font-awesome-icon icon="strikethrough" />
-                      </button>
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.underline() }"
-                        @click="commands.underline"
-                      >
-                        <font-awesome-icon icon="underline" />
-                      </button>
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.paragraph() }"
-                        @click="commands.paragraph"
-                      >
-                        <font-awesome-icon icon="paragraph" />
-                      </button>
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-                        @click="commands.heading({ level: 1 })"
-                      >
-                        H1
-                      </button>
+                      class="menubar__button"
+                      @click="showImagePrompt(commands.image)"
+                    >
+                      <i class="cil-satelite"></i>
+                    </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.bold() }"
+                      @click="commands.bold"
+                    >
+                     <i class="cil-bold"></i>
+                    </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.italic() }"
+                      @click="commands.italic"
+                    >
+                     <i class="cil-italic"></i>
+                    </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.strike() }"
+                      @click="commands.strike"
+                    >
+                     <i class="cil-strikethrough"></i>
+                    </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.underline() }"
+                      @click="commands.underline"
+                    >
+                     <i class="cil-underline"></i>
+                    </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.paragraph() }"
+                      @click="commands.paragraph"
+                    >
+                     <i class="cil-paragraph"></i>
+                    </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.heading({ level: 1 }) }"
+                      @click="commands.heading({ level: 1 })"
+                    >
+                      <small>H1</small>
+                    </button>
 
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-                        @click="commands.heading({ level: 2 })"
-                      >
-                        H2
-                      </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.heading({ level: 2 }) }"
+                      @click="commands.heading({ level: 2 })"
+                    >
+                      <small>H2</small>
+                    </button>
 
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-                        @click="commands.heading({ level: 3 })"
-                      >
-                        H3
-                      </button>
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.bullet_list() }"
-                        @click="commands.bullet_list"
-                      >
-                        <font-awesome-icon icon="list" />
-                      </button>
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.ordered_list() }"
-                        @click="commands.ordered_list"
-                      >
-                        <font-awesome-icon icon="list-ol" />
-                      </button>
-                      <button
-                        class="menubar__button"
-                        :class="{ 'is-active': isActive.blockquote() }"
-                        @click="commands.blockquote"
-                      >
-                        <font-awesome-icon icon="quote-right" />
-                      </button>
-                      <button
-                        class="menubar__button"
-                        @click="commands.undo"
-                      >
-                        <font-awesome-icon icon="undo" />
-                      </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.heading({ level: 3 }) }"
+                      @click="commands.heading({ level: 3 })"
+                    >
+                      <small>H3</small>
+                    </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.bullet_list() }"
+                      @click="commands.bullet_list"
+                    >
+                     <i class="cil-list"></i>
+                    </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.ordered_list() }"
+                      @click="commands.ordered_list"
+                    >
+                     <i class="cil-list-numbered"></i>
+                    </button>
+                    <button
+                      class="menubar__button"
+                      :class="{ 'is-active': isActive.blockquote() }"
+                      @click="commands.blockquote"
+                    >
+                     <i class="cil-double-quote-sans-left"></i>
+                    </button>
+                    <button
+                      class="menubar__button"
+                      @click="commands.undo"
+                    >
+                     <i class="cil-action-undo"></i>
+                    </button>
 
-                      <button
-                        class="menubar__button"
-                        @click="commands.redo"
-                      >
-                        <font-awesome-icon icon="redo" />
-                      </button>
+                    <button
+                      class="menubar__button"
+                      @click="commands.redo"
+                    >
+                     <i class="cil-action-redo"></i>
+                    </button>
                     </div>
                     </editor-menu-bar>
                     <editor-content class="editor__content" :editor="pilihan[index]" />
@@ -746,7 +746,7 @@ export default {
     },
     pilihGambar(index) {
       const gambar = this.contentDirectory.data[index]
-      this.gambar_pilih = 'http://192.168.0.200/storage/'+gambar.dirname+'/'+gambar.filename
+      this.gambar_pilih = 'http://45.251.72.66/storage/'+gambar.dirname+'/'+gambar.filename
     },
     masukGambar() {
       const command = this.command
