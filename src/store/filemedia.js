@@ -67,12 +67,15 @@ const actions = {
 	},
 	addFilemedia({ commit, state }, payload) {
 		return new Promise ((resolve, reject) => {
+			commit('SET_LOADING', true, { root: true })
 			$axios.post(`/directory/filemedia`, payload) 
 			.then((response) => {
+				commit('SET_LOADING', false, { root: true })
 				resolve(response.data)
 			})
 			.catch((err) => {
-				reject()
+				commit('SET_LOADING', false, { root: true })
+				reject(err)
 			})
 		})
 	},

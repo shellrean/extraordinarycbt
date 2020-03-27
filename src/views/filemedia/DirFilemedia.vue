@@ -14,7 +14,7 @@
 								<label class="custom-file-label">{{ label ? label : 'Pilih File...' }}</label>
 							</div>
 							<div class="input-group-append">
-								<button class="btn btn-outline-primary" type="button" @click="uploadFile">Upload</button>
+								<button class="btn btn-outline-primary" type="button" @click="uploadFile" :disabled="isLoading">{{ isLoading ? 'Loading..' : 'Upload' }}</button>
 							</div>
 							</div>
 						</div>
@@ -120,6 +120,14 @@ export default {
 		          type: 'success',
 		          text: 'Filemedia berhasil ditambahkan.'
 		        })
+           	})
+           	.catch(() => {
+           		this.$notify({
+		          group: 'foo',
+		          title: 'Error',
+		          type: 'error',
+		          text: 'Terjadi kesalahan.'
+		        })	
            	})
 		}
 	},

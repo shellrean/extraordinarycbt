@@ -438,7 +438,7 @@
                 <label class="custom-file-label">{{ label ? label : 'Pilih File...' }}</label>
               </div>
               <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button" @click="uploadFile">Upload</button>
+                <button class="btn btn-outline-primary" type="button" @click="uploadFile" :disabled="isLoading">{{ isLoading ? 'Uploading...' : 'Upload' }}</button>
               </div>
               </div>
             </div>
@@ -684,7 +684,7 @@ export default {
       formData.append('directory_id', this.banksoal.directory_id)
       formData.append('image',this.image)
       this.addFilemedia(formData)
-      .then(() => 
+      .then(() => {
         this.getContentFilemedia(this.banksoal.directory_id),
         this.$notify({
           group: 'foo',
@@ -692,7 +692,15 @@ export default {
           type: 'success',
           text: 'Filemedia berhasil ditambahkan.'
         })
-      )
+      })
+      .catch((err) => {
+        this.$notify({
+          group: 'foo',
+          title: 'Error',
+          type: 'error',
+          text: 'Terjadi kesalahan saat upload file'
+        })
+      })
     },
     clearForm() {
       this.question.setContent(''),
@@ -746,7 +754,7 @@ export default {
     },
     pilihGambar(index) {
       const gambar = this.contentDirectory.data[index]
-      this.gambar_pilih = 'http://45.251.72.66/storage/'+gambar.dirname+'/'+gambar.filename
+      this.gambar_pilih = this.baseURL+'/storage/'+gambar.dirname+'/'+gambar.filename
     },
     masukGambar() {
       const command = this.command
