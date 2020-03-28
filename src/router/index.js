@@ -23,6 +23,7 @@ import PesertaIndex from '../views/peserta/Index.vue'
 const DataPeserta = () => import('../views/peserta/Peserta.vue')
 const AddPeserta = () => import('../views/peserta/Add.vue')
 const UploadPeserta = () => import('../views/peserta/Upload.vue')
+const KartuPeserta = () => import('../views/peserta/Kartu.vue')
 
 import BanksoalIndex from '../views/banksoal/Index.vue'
 const DataBanksoal = () => import('../views/banksoal/DataBanksoal.vue')
@@ -150,6 +151,12 @@ const routes = [
         name: 'peserta.upload',
         component: UploadPeserta,
         meta: { title: 'Upload peserta' }
+      },
+      {
+        path: 'kartu/:id',
+        name: 'peserta.kartu',
+        component: KartuPeserta,
+        meta: { title: 'Kartu peserta' }
       }
     ]
   },

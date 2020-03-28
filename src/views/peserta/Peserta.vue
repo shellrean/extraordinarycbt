@@ -15,10 +15,10 @@
                             <div class="small text-muted">Manage data peserta</div>
                         </div>
                         <div class="d-none d-md-block col-sm-7">
-                            <a :href="'/prev/peserta'" target="_blank" class="btn float-right btn-primary btn-sm mx-1">
+                            <router-link :to="{ name: 'peserta.kartu', params: { 'id': sekolah } }" class="btn float-right btn-primary btn-sm mx-1">
                                 <i class="cil-print"></i>
-                                Cetak data peserta
-                            </a>
+                                Cetak kartu peserta
+                            </router-link>
                             <router-link :to="{ name: 'peserta.upload' }" class="btn float-right btn-success btn-sm" v-if="$can('upload_peserta')">
                             	<i class="cil-cloud-upload"></i>
                             	Upload peserta
