@@ -7,12 +7,12 @@
                 </div>
                 <div class="card-body back">
                 	<div class="paper">
-                		<div class="page" v-for="peserta in pesertas.data">
+                		<div class="page" >
 							<center>
 								<table align="center" width="100%">
 						        	<tr>
 						        		<td style="padding:3px;">
-											<table style="width:10.4cm;border:1px solid #666;" class="kartu">
+											<table style="width:10.4cm;border:1px solid #666;" class="kartu" v-for="peserta in pesertas.data">
 												<tr>
 													<td colspan="3" style="border-bottom:1px solid #666; padding: 0;">
 														<table width="100%" class="kartu">
