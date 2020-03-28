@@ -622,7 +622,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('filemedia', ['getContentFilemedia','getDirectories','uploadFileAudio']),
+    ...mapActions('filemedia', ['getContentFilemedia','getDirectories','uploadFileAudio','addFilemedia']),
     ...mapActions('soal',['editSoalBanksoal']),
     ...mapActions('banksoal',['updateSoalBanksoal','getBanksoal']),
     ...mapMutations(['CLEAR_ERRORS','SET_LOADING']),
