@@ -39,6 +39,9 @@
 				             				<b-card>
 				             					<strong>Jawaban peserta</strong><br><br>
 				             					<div v-html="row.item.esay"></div>
+				             					<div class="mt-2">
+				             						<b-button variant="primary" size="sm" @click="jadikanRujukan(row.item.soal_id, row.item.esay)" :disabled="isLoading">Jadikan rujukan</b-button>
+				             					</div>
 				             				</b-card>
 				             			</div>
 				                    </div>
@@ -46,9 +49,9 @@
 		                        <div class="col-md-4">
 		                            <b-card>
 		                                <div class="input-group mb-3">
-											<input type="number" v-model="val" class="form-control" placeholder="Point" step="0.1" max="1" min="0">
+											<input type="number" v-model.number="val" class="form-control" :class="{'is-invalid': val > 1 || val < 0 }" placeholder="Point" step="0.1" max="1" min="0">
 											<div class="input-group-append">
-												<button class="btn btn-outline-primary" type="button" @click="submitNilai(row.item.id)">Submit</button>
+												<button class="btn btn-outline-primary" type="button" @click="submitNilai(row.item.id)" :disabled="isLoading">Submit</button>
 											</div>
 										</div>
 										<div class="mt-2">
@@ -90,7 +93,7 @@
 	</div>
 </template>
 <script>
-	import { mapActions, mapState } from 'vuex'
+	import { mapActions, mapState, mapGetters } from 'vuex'
 	export default {
 		name: 'KoreksiUjian',
 		created() {
@@ -106,6 +109,7 @@
 	        }
 	    },
 	    computed: {
+	    	...mapGetters(['isLoading']),
 	    	...mapState('ujian', {
 	            esies: state => state.essies
 	        }),
@@ -119,11 +123,42 @@
 	        }
 	    },
 		methods: {
-			...mapActions('ujian', ['getExistsByBanksoal','submitNilaiEsay']),
+			...mapActions('ujian', ['getExistsByBanksoal','submitNilaiEsay','setRujukan']),
 			submitNilai(id) {
+				if(this.val > 1 ) {
+					this.$swal({
+						title: 'Error',
+						text: 'Point tidak boleh lebih dari 1 (0, 0.1, 0.2, 0.3 .... 1)',
+						icon: 'error'
+		            })
+		            return;
+				}
 				this.submitNilaiEsay({
 					id: id,
 					val: this.val
+				})
+				.then(() => {
+					this.val = 0;
+					this.getExistsByBanksoal(this.$route.params.banksoal)
+					this.$notify({
+                        group: 'foo',
+                        title: 'Sukses',
+                        type: 'success',
+                        text: 'Nilai berhasil disubmit.'
+                    })
+				})
+				.catch(() => {
+					this.$swal({
+						title: 'Error',
+						text: 'Gagal submit nilai',
+						icon: 'error'
+		            })
+				})
+			},
+			jadikanRujukan(id, esay) {
+				this.setRujukan({
+					soal_id: id,
+					rujukan: esay
 				})
 				.then(() => {
 					this.getExistsByBanksoal(this.$route.params.banksoal)

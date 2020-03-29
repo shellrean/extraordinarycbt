@@ -164,11 +164,17 @@ const actions = {
 			})
 		})
 	},
-	submitNilaiEsay({ dispatch, state }, payload) {
+	submitNilaiEsay({ commit, state }, payload) {
 		return new Promise((resolve, reject) => {
+			commit('SET_LOADING', true, { root: true })
 			$axios.post(`/ujian/esay/input`, payload)
 			.then((response) => {
-				resolve()
+				commit('SET_LOADING', false, { root: true })
+				resolve(response)
+			})
+			.catch((err) => {
+				commit('SET_LOADING', false, { root: true })
+				reject(err)
 			})
 		})
 	},
@@ -193,6 +199,20 @@ const actions = {
 			})
 			.catch((err) => {
 				reject()
+			})
+		})
+	},
+	setRujukan({ state, commit }, payload) {
+		return new Promise((resolve, reject) => {
+			commit('SET_LOADING', true, { root: true })
+			$axios.post(`/ujian/esay/rujukan`, payload)
+			.then((response) => {
+				commit('SET_LOADING', false, { root: true })
+				resolve(response)
+			})
+			.catch((err) => {
+				commit('SET_LOADING', false, { root: true })
+				reject(err)
 			})
 		})
 	}
