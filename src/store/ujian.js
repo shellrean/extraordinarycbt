@@ -2,15 +2,21 @@ import $axios from '../api.js'
 
 const state = () => ({
 	ujians: [],
+	ujianAll: [],
 	pesertas: [],
 	page: 1,
 	hasilUjian: [],
-	essies: []
+	essies: [],
+	sekolahs: [],
+	banksoals: []
 })
 
 const mutations = {
 	ASSIGN_DATA(state, payload) {
 		state.ujians = payload
+	},
+	ASSIGN_DATA_ALL(state, payload) {
+		state.ujianAll = payload
 	},
 	SET_PAGE(state, payload) {
 		state.ujians = payload
@@ -21,8 +27,14 @@ const mutations = {
 	ASSIGN_HASIL_UJIAN(state, payload) {
 		state.hasilUjian = payload
 	},
+	ASSIGN_DATA_SEKOLAH(state, payload) {
+		state.sekolahs = payload
+	},
 	ASSIGN_JAWABAN_ESAY(state, payload) {
 		state.essies = payload
+	},
+	ASSIGN_DATA_BANKSOAL(state, payload) {
+		state.banksoals = payload
 	}
 }
 
@@ -37,6 +49,43 @@ const actions = {
 			})
 			.catch((err) => {
 				reject()
+			})
+		})
+	},
+	getAllUjians({ commit, state }, payload) {
+		let search = typeof payload != 'undefined' ? payload: ''
+		return new Promise((resolve, reject) => {
+			$axios.get(`/ujian/`)
+			.then((response) => {
+				commit('ASSIGN_DATA_ALL', response.data.data)
+				resolve(response.data)
+			})
+			.catch((err) => {
+				reject()
+			})
+		})
+	},
+	getSekolahByJadwal({ commit, state }, payload) {
+		return new Promise((resolve, reject) => {
+			$axios.get(`/ujian/result/sekolah/jadwal/${payload}`)
+			.then((response) => {
+				commit('ASSIGN_DATA_SEKOLAH', response.data)
+				resolve(response.data)
+			})
+			.catch((err) => {
+				reject(err)
+			})
+		})
+	},
+	getHasilByJadwalAndSekolah({ commit, state }, payload) {
+		return new Promise((resolve, reject) => {
+			$axios.post(`/ujian/result/sekolah/hasil?page=${state.page}`,payload)
+			.then((response) => {
+				commit('ASSIGN_HASIL_UJIAN', response.data.data)
+				resolve(response.data)
+			})
+			.catch((err) => {
+				reject(err)
 			})
 		})
 	},

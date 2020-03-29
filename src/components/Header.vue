@@ -37,7 +37,7 @@
       'breadcrumb' : Breadcrumb
     },
     methods: {
-      ...mapActions('user', ['loggedOut']),
+      ...mapActions('auth', ['loggedOut']),
       logout() { 
         return new Promise((resolve, reject) => {
             this.loggedOut()

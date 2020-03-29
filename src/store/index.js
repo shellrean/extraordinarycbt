@@ -11,6 +11,7 @@ import banksoal from './banksoal.js'
 import soal from './soal.js'
 import filemedia from './filemedia.js'
 import ujian from './ujian.js'
+import heager from './heager.js'
 
 Vue.use(Vuex)
 
@@ -25,7 +26,8 @@ export default new Vuex.Store({
     banksoal,
     soal,
     filemedia,
-    ujian
+    ujian,
+    heager
   },
   state: {
     errors: [],

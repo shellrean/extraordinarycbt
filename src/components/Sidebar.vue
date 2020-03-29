@@ -83,10 +83,10 @@
           <router-link class="c-sidebar-nav-link" to="/filemedia">
             <i class="c-sidebar-nav-icon cil-bug"></i>Pengaduan masalah
           </router-link>
-        </li>
-        <li class="c-sidebar-nav-item" v-if="$role('school')">
-          <router-link class="c-sidebar-nav-link" :to="{ name: 'hasil-ujian' }">
-            <i class="c-sidebar-nav-icon cil-chart"></i>Hasil Ujian
+        </li>-->
+        <li class="c-sidebar-nav-item" v-if="$can('hasil_ujian')">
+          <router-link class="c-sidebar-nav-link" :to="{ name: 'hasil.ujian' }">
+            <i class="c-sidebar-nav-icon cil-chart"></i>Hasil ujian
           </router-link>
         </li>
         <li class="c-sidebar-nav-item" v-if="$can('setting')">
@@ -95,10 +95,10 @@
           </router-link>
         </li>
         <li class="c-sidebar-nav-item" v-if="$can('setting')">
-          <router-link class="c-sidebar-nav-link" :to="{ name: 'role.permissions' }">
-            <i class="c-sidebar-nav-icon cil-globe-alt"></i>Heager Actions
+          <router-link class="c-sidebar-nav-link" :to="{ name: 'heager.dashboard' }">
+            <i class="c-sidebar-nav-icon cil-globe-alt"></i>Heager actions
           </router-link>
-        </li>  -->
+        </li>  
         <li class="c-sidebar-nav-item">
           <a class="c-sidebar-nav-link" href="#" @click.prevent="logout">
             <i class="c-sidebar-nav-icon cil-account-logout"></i> 

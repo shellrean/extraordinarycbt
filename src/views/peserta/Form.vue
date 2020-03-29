@@ -30,6 +30,10 @@
 			<label>Jurusan</label>
 			<v-select label="nama" :options="jurusans.data" v-model="peserta.jurusan_id" :reduce="nama => nama.id"></v-select>
 		</div>
+		<div class="form-group">
+			<label>Agama</label>
+			<v-select label="nama" :options="agamas.data" v-model="peserta.agama_id" :reduce="nama => nama.id"></v-select>
+		</div>
 	</div>
 </template>
 <script>
@@ -45,6 +49,7 @@ export default {
     created() {
     	this.getAllServers()
     	this.getJurusans()
+    	this.getAgamas()
     },
 	computed: {
 		...mapState(['errors']),
@@ -55,12 +60,13 @@ export default {
 			servers: state => state.allServers
 		}),
 		...mapState('sekolah', {
-			jurusans: state => state.jurusan
+			jurusans: state => state.jurusan,
+			agamas: state => state.agama
 		})
 	},
 	methods: {
 		...mapActions('server', ['getAllServers']),
-		...mapActions('sekolah',['getJurusans']),
+		...mapActions('sekolah',['getJurusans','getAgamas']),
 		...mapMutations('peserta',['CLEAR_FORM'])
 	},
 	destroyed() {

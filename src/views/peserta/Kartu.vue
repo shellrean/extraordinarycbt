@@ -11,7 +11,7 @@
 							<center>
 								<table align="center" width="100%">
 						        	<tr>
-						        		<td style="padding:3px;">
+						        		<td style="padding:3px;display: flex;justify-content: space-around;">
 											<table style="width:10.4cm;border:1px solid #666;" class="kartu" v-for="peserta in pesertas.data">
 												<tr>
 													<td colspan="3" style="border-bottom:1px solid #666; padding: 0;">

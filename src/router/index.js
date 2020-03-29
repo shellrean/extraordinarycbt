@@ -35,6 +35,9 @@ const SoalBanksoalPrev = () => import('../views/banksoal/SoalBanksoalPrev.vue')
 import UjianIndex from '../views/ujian/Index.vue'
 const DataUjian = () => import('../views/ujian/Ujian.vue')
 
+import HasilIndex from '../views/hasil/Index.vue'
+const DataHasil = () => import('../views/hasil/Hasil.vue')
+
 import KoreksiIndex from '../views/koreksi/Index.vue'
 const KoreksiUjian = () => import('../views/koreksi/KoreksiUjian.vue')
 const KoreksiEsay = () => import('../views/koreksi/KoreksiEsay.vue')
@@ -45,6 +48,9 @@ const DataDirFilemedia = () => import('../views/filemedia/DirFilemedia.vue')
 
 import SettingIndex from '../views/setting/Index.vue'
 const SetPermission = () => import('../views/setting/SetPermission')
+
+import HeagerIndex from '../views/heager/Index.vue'
+const HeagerDashboard = () => import('../views/heager/Dashboard.vue')
 
 Vue.use(VueRouter)
 
@@ -249,6 +255,19 @@ const routes = [
     ]
   },
   {
+    path: '/hasil',
+    component: HasilIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: 'ujian',
+        name: 'hasil.ujian',
+        component: DataHasil,
+        meta: { title: 'Hasil ujian' }
+      }
+    ]
+  },
+  {
     path: '/setting',
     component: SettingIndex,
     meta: { requiresAuth: true },
@@ -261,6 +280,19 @@ const routes = [
       },
     ]
   },
+  {
+    path: '/heager',
+    component: HeagerIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'heager.dashboard',
+        component: HeagerDashboard,
+        meta: { title: 'Heager Actions only super administrator' }
+      }
+    ]
+  }
 ]
 
 const router = new VueRouter({
