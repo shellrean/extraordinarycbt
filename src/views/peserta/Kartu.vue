@@ -4,15 +4,16 @@
             <div class="card">
                 <div class="card-header">
                     <router-link :to="{ name: 'peserta.data' }" class="btn btn-light btn-sm mr-1">Kembali</router-link>
+                    <button class="btn float-right btn-primary btn-sm mx-1" @click="print">Print</button>
                 </div>
-                <div class="card-body back">
-                	<div class="paper">
-                		<div class="page" >
+                <div class="card-body back" >
+                	<div class="paper" id="printKartu">
+                		<div class="page" v-for="peserta in pesertas.data">
 							<center>
 								<table align="center" width="100%">
 						        	<tr>
-						        		<td style="padding:3px;display: flex;justify-content: space-around;flex-wrap: wrap;">
-											<table style="width:10.4cm;border:1px solid #666;" class="kartu" v-for="peserta in pesertas.data">
+						        		<td style="padding:3px;">
+											<table style="width:10.4cm;border:1px solid #666;" class="kartu" >
 												<tr>
 													<td colspan="3" style="border-bottom:1px solid #666; padding: 0;">
 														<table width="100%" class="kartu">
@@ -93,6 +94,9 @@
 	methods: {
 		...mapActions('peserta', ['getPesertas','removePeserta']),
 		...mapActions('sekolah', ['getAllSekolah', ]),
+        print() {
+            this.$htmlToPaper('printKartu');
+        }
 	},
 	watch: {
 		page() {
@@ -144,219 +148,6 @@
     font-family: arial;
     font-size: 11px
 }
-/*
-.page-landscape {
-    position: relative;
-    width: 29.7cm;
-    min-height: 21cm;
-    page-break-after: always;
-    margin: 0.5cm;
-    background: #FFF;
-    padding: 1.5cm;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    -webkit-box-sizing: initial;
-    -moz-box-sizing: initial;
-    box-sizing: initial;
-    page-break-after: always
-}
-
-.page-landscape * {
-    font-family: arial;
-    font-size: 11px
-}
-
-.footer {
-    position: absolute;
-    bottom: 1.5cm;
-    left: 1.5cm;
-    right: 1.5cm;
-    width: auto;
-    height: 30px
-}
-
-.kanan {
-    float: right
-}
-
-.barcode {
-    font-family: MyBarcode
-}
-
-.datatable {
-    background: #FFF;
-    border-collapse: collapse;
-    border: 1px solid #000
-}
-
-.datatable th {
-    color: #000;
-    border: 1px solid #000;
-    border-top: 1px solid #000;
-    background: #C4BC96;
-    padding: 3px;
-    border: 1px solid #000
-}
-
-.datatable tr:nth-child(even) {
-    background: #f8f8f8
-}
-
-.datatable td {
-    padding: 5px 5px;
-    border: 1px solid #000
-}
-
-.it-grid {
-    background: #FFF;
-    border-collapse: collapse;
-    border: 1px solid #000
-}
-
-.it-grid th {
-    color: #000;
-    border: 1px solid #000;
-    border-top: 1px solid #000;
-    background: #C4BC96;
-    padding: 3px;
-    border: 1px solid #000
-}
-
-.it-grid tr:nth-child(even) {
-    background: #f8f8f8
-}
-
-.it-grid td {
-    padding: 3px;
-    border: 1px solid #000
-}
-
-.seri {
-    font-family: 'Lucida Handwriting'
-}
-
-.it-cetak td {
-    padding: 6px 5px
-}
-
-h1 {
-    font-weight: normal
-}
-
-h2 {
-    font-weight: normal
-}
-
-h3 {
-    font-weight: normal
-}
-
-h4 {
-    font-weight: normal
-}
-
-h5 {
-    font-weight: normal
-}
-
-h6 {
-    font-weight: normal
-}
-
-table {
-    border-collapse: collapse;
-    page-break-inside: auto
-}
-
-td {
-    padding: 3px
-}
-
-.f14 {
-    font-size: 14pt
-}
-
-.f12 {
-    font-size: 12pt
-}
-
-.line-bottom {
-    border-bottom: 1px solid black
-}
-
-.detail {
-    margin-top: 10px;
-    margin-bottom: 10px
-}
-
-.detail td {
-    padding: 5px;
-    font-size: 12px
-}
-
-.detail span {
-    border-bottom: 1px solid black;
-    display: inline-block;
-    font-size: 12px
-}
-
-.cetakan {
-    font-size: 14px;
-    line-height: 1.5em
-}
-
-.cetakan * {
-    font-size: 14px;
-    line-height: 1.5em
-}
-
-.cetakan span {
-    border-bottom: 1px solid black;
-    display: inline-block
-}
-
-.full {
-    width: 100%
-}
-
-nip {
-    display: inline-block;
-    width: 130px
-}
-
-ol {
-    margin-left: 30px
-}
-
-ol>li {
-    padding: 10px
-}
-
-tr {
-    page-break-inside: avoid;
-    page-break-after: auto
-}
-
-thead {
-    display: table-row-group
-}
-
-tfoot {
-    display: table-row-group
-}
-
-.table th,
-.table td {
-    padding: 5px
-}
-
-.table tbody tr:nth-child(even) {
-    background: #EEE
-}
-
-.table thead {
-    background: #ccc
-}*/
-
 @media print {
     body {
         background: #fff;
@@ -379,7 +170,8 @@ tfoot {
         height: 10cm;
         padding: 0.7cm;
         box-shadow: none;
-        margin: 0
+        margin: 0;
+        page-break-before: always;
     }
     @page {
         size: A4;

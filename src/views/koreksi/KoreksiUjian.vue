@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <br>
-					<b-table striped hover bordered :busy="isBusy" small :fields="fields" :items="banksoals" show-empty>
+					<b-table striped hover bordered :busy="isBusy" small :fields="fields" :items="banksoals" show-empty v-if="banksoals">
 						<template v-slot:cell(aksi)="row">
 							<router-link :to="{ name: 'koreksi.esay', params: { banksoal: row.item.id } }" class="btn btn-sm btn-primary"><i class="cil-task"></i> Koreksi banksoal ini</router-link>
 						</template>

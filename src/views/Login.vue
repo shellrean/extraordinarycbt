@@ -40,6 +40,7 @@
         </div>
       </div>
     </div>
+    <div class="fixed-bottom text-center text-muted"><a>Extraordinary-CBT</a> {{ version }} &copy; 2020 shellrean.</div>
   </div>
 </template>
 <script>
@@ -49,7 +50,8 @@ export default {
     return {
       data: {
         username: '',
-        password: ''
+        password: '',
+        version: process.env.VUE_APP_VERSION
       }
     }
   },

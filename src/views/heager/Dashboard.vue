@@ -14,6 +14,13 @@
                 <b-button variant="primary" size="sm" :disabled="isLoading" @click="generateUjian">Generate</b-button>
               </td>
             </tr>
+            <tr>
+              <td>Anlys soal</td>
+              <td></td>
+              <td>
+                <b-button variant="info" size="sm" :disabled="isLoading">Release analys</b-button>
+              </td>
+            </tr>
           </table>
         </div>
         <div class="card-footer">

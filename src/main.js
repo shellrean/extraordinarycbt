@@ -7,6 +7,7 @@ import CoreuiVue from '@coreui/coreui'
 import Notifications from 'vue-notification'
 import VueSweetalert2 from 'vue-sweetalert2'
 import BootstrapVue from 'bootstrap-vue'
+import VueHtmlToPaper from 'vue-html-to-paper';
 
 import Permissions from './mixins/Permission.js'
 import Awesome from './awesome.js'
@@ -20,6 +21,21 @@ if (process.env.VUE_APP_ENV === 'production') {
 	Vue.config.debug = false;
 	Vue.config.silent = true; 
 }
+
+const options = {
+  name: '_blank',
+  specs: [
+    'fullscreen=yes',
+    'titlebar=yes',
+    'scrollbars=yes'
+  ],
+  styles: [
+    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+    'https://unpkg.com/kidlat-css/css/kidlat.css'
+  ]
+}
+
+Vue.use(VueHtmlToPaper, options);
 
 Vue.mixin(Permissions)
 Vue.use(CoreuiVue)
