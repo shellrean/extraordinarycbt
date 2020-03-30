@@ -192,7 +192,7 @@ const actions = {
 	},
 	getExistsByBanksoal({ state, commit }, payload) {
 		return new Promise((resolve, reject) => {
-			$axios.get(`/ujian/esay/koreksi/${payload}`)
+			$axios.get(`/ujian/esay/koreksi/${payload}?page=${state.page}`)
 			.then((response) => {
 				commit('ASSIGN_JAWABAN_ESAY', response.data.data)
 				resolve()
