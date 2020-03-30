@@ -19,7 +19,7 @@ const mutations = {
 		state.ujianAll = payload
 	},
 	SET_PAGE(state, payload) {
-		state.ujians = payload
+		state.page = payload
 	},
 	ASSIGN_PESERTA_UJIAN(state, payload) {
 		state.pesertas = payload

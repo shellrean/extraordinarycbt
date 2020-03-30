@@ -169,6 +169,6 @@
 	        page() {
 	            this.getExistsByBanksoal(this.$route.params.banksoal)
 	        }
-	    },
+	    }
 	}
 </script>
