@@ -59,16 +59,16 @@
         </li>
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown" v-if="$can('reporting')" >
           <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-            <i class="c-sidebar-nav-icon cil-chart"></i>Reporting
+            <i class="c-sidebar-nav-icon cil-chart-line"></i>Reporting
           </a>
           <ul class="c-sidebar-nav-dropdown-items">
-            <li class="c-sidebar-nav-item">
+<!--             <li class="c-sidebar-nav-item">
               <router-link class="c-sidebar-nav-link" :to="{ name: 'ujian.data' }">
                 <span class="c-sidebar-nav-icon"></span> Capaian siswa
               </router-link>
-            </li>
+            </li> -->
             <li class="c-sidebar-nav-item">
-              <router-link class="c-sidebar-nav-link" :to="{ name: 'ujian.hasil' }">
+              <router-link class="c-sidebar-nav-link" :to="{ name: 'analys.banksoal' }">
                 <span class="c-sidebar-nav-icon"></span> Kesulitan soal
               </router-link>
             </li>

@@ -52,6 +52,10 @@ const SetPermission = () => import('../views/setting/SetPermission')
 import HeagerIndex from '../views/heager/Index.vue'
 const HeagerDashboard = () => import('../views/heager/Dashboard.vue')
 
+import AnalysIndex from '../views/analys/Index.vue'
+const AnalysBanksoal = () => import('../views/analys/Banksoal.vue')
+const AnalysBanksoalSoal = () => import('../views/analys/SoalBanksoal.vue')
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -290,6 +294,25 @@ const routes = [
         name: 'heager.dashboard',
         component: HeagerDashboard,
         meta: { title: 'Heager Actions only super administrator' }
+      }
+    ]
+  },
+  {
+    path: '/analys',
+    component: AnalysIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: 'banksoal',
+        name: 'analys.banksoal',
+        component: AnalysBanksoal,
+        meta: { title: 'Banksoal analys' }
+      },
+      {
+        path: 'banksoal/:banksoal_id',
+        name: 'analys.banksoal_soal',
+        component: AnalysBanksoalSoal,
+        meta: { title: 'Banksoal analys' }
       }
     ]
   }

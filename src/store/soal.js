@@ -55,6 +55,18 @@ const actions = {
 			})
 		}) 
 	},
+	getAllSoalAnalys({ commit, state }, payload) {
+		return new Promise(( resolve, reject ) =>  {
+			$axios.get(`/all-soal/banksoal/analys/${payload.banksoal_id}`)
+			.then((response) => {
+				commit('ASSIGN_DATA_ALL', response.data)
+				resolve(response.data)
+			})
+			.catch((err) => {
+				reject()
+			})
+		})	
+	},
 	editSoalBanksoal({ commit, state }, payload ) {
 		return new Promise(( resolve, reject) => {
 			commit('SET_LOADING',true, { root: true })

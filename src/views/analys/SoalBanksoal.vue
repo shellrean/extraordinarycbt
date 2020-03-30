@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <router-link :to="{ name: 'banksoal.soal', params: { banksoal_id: $route.params.banksoal_id } }" class="btn btn-light btn-sm mr-1">Kembali</router-link>
+                    <router-link :to="{ name: 'analys.banksoal' }" class="btn btn-light btn-sm mr-1">Kembali</router-link>
                     <button class="btn float-right btn-primary btn-sm mx-1" @click="print">Print</button>
                 </div>
                 <div class="card-body back" id="printSoal">
@@ -19,10 +19,21 @@
 										<tr>
 											<td colspan="2">
 												<table class="table-sm">
-													<tr v-for="(jawaban, index) in soal.jawabans">
+													<tr>
 														<td width="20px"></td>
-														<td style="text-transform: uppercase;"> {{ index | charIndex }} ) <i v-show="jawaban.correct == '1'"  class="cil-star text-warning"></i> </td>
-														<td v-html="jawaban.text_jawaban"></td>
+														<td style="text-transform: uppercase;">
+															<GChart
+															    type="PieChart"
+															    :data="soal.diagram"
+															/>
+														</td>
+													</tr>
+													<tr v-if="soal.analys != null && typeof soal.analys['penjawab'] != 'undefined'">
+														<td></td>
+														<td>
+															Soal dijawab oleh <strong>{{ soal.analys['penjawab'] }}</strong> peserta<br>
+															Data terakhir di perbarui pada <em>{{ soal.analys['updated'] }}</em>
+														</td>
 													</tr>
 												</table>
 											</td>
@@ -39,10 +50,19 @@
 </template>
 <script>
 	import { mapActions, mapState, mapGetters } from 'vuex'
+	import { GChart } from 'vue-google-charts'
+
 	export default {
 		name: 'SoalBanksoal',
 		created() {
 			this.getAllSoalPaper()
+		},
+		data() {
+			return {
+			}
+		},
+		components: {
+			GChart
 		},
 		computed: {
 	        ...mapGetters(['isLoading']),
@@ -64,9 +84,9 @@
 			}
 		},
 		methods: {
-			...mapActions('soal',['getSoals','getAllSoal','removeSoal']),
+			...mapActions('soal',['getSoals','getAllSoalAnalys','removeSoal']),
 			getAllSoalPaper() {
-				this.getAllSoal({ banksoal_id: this.$route.params.banksoal_id })
+				this.getAllSoalAnalys({ banksoal_id: this.$route.params.banksoal_id })
 	            .then(() => {
 	                
 	            })

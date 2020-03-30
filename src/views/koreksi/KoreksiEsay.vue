@@ -164,6 +164,11 @@
 					this.getExistsByBanksoal(this.$route.params.banksoal)
 				})
 			}
-		}
+		},
+		watch: {
+	        page() {
+	            this.getExistsByBanksoal(this.$route.params.banksoal)
+	        }
+	    },
 	}
 </script>

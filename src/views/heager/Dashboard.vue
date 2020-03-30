@@ -18,7 +18,7 @@
               <td>Anlys soal</td>
               <td></td>
               <td>
-                <b-button variant="info" size="sm" :disabled="isLoading">Release analys</b-button>
+                <b-button variant="info" size="sm" :disabled="isLoading" @click="releaseAnalys">Release analys</b-button>
               </td>
             </tr>
           </table>
@@ -38,7 +38,7 @@
       ...mapGetters(['isLoading'])
     },
     methods: {
-      ...mapActions('heager', ['generateHasilUjian']),
+      ...mapActions('heager', ['generateHasilUjian','generateAnalys']),
       generateUjian() {
         this.$swal({
           title: 'Informasi',
@@ -53,6 +53,27 @@
             this.generateHasilUjian()
             .then(() => {
               this.notifSuccess('Generate hasil ujian berhasil')
+            })
+            .catch(() => {
+              this.notifError()
+            })
+          }
+        })
+      },
+      releaseAnalys() {
+        this.$swal({
+          title: 'Informasi',
+          text: "Tindakan ini membutuhkan resource besar, pastikan server sedang kosong dan pastikan anda sudah meng archive jawaban siswa sebelumnya agar tidak terjadi double dalam analys",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#c3c3c3',
+          confirmButtonText: 'Iya, Lanjutkan!'
+        }).then((result) => {
+          if (result.value) {
+            this.generateAnalys()
+            .then(() => {
+              this.notifSuccess('reelase analys berhasil')
             })
             .catch(() => {
               this.notifError()
