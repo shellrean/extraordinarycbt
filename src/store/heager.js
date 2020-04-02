@@ -36,6 +36,20 @@ const actions = {
                 reject(err)
             })
         })
+    },
+    arhiveJawaban({ state, commit }, payload) {
+        return new Promise((resolve, reject) => {
+            commit('SET_LOADING', true, { root: true })
+            $axios.get(`heager/arsip/jawaban`)
+            .then((response) => {
+                commit('SET_LOADING', false, { root: true })
+                resolve(response)
+            })
+            .catch((err) => {
+                commit('SET_LOADING', false, { root: true })
+                reject(err)
+            })
+        })
     }
 }
 

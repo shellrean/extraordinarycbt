@@ -6,19 +6,26 @@
           This application using <b-badge variant="primary">api/v1</b-badge> of centra-cbt
         </div>
         <div class="card-body">
-          <table class="table">
+          <table class="table table-hover">
             <tr>
               <td>Generate nilai ujian</td>
               <td></td>
               <td>
-                <b-button variant="primary" size="sm" :disabled="isLoading" @click="generateUjian">Generate</b-button>
+                <b-button variant="primary" size="sm" :disabled="isLoading" @click="generateUjian">Take action</b-button>
               </td>
             </tr>
             <tr>
-              <td>Anlys soal</td>
+              <td>Arsipkan jawaban peserta</td>
               <td></td>
               <td>
-                <b-button variant="info" size="sm" :disabled="isLoading" @click="releaseAnalys">Release analys</b-button>
+                <b-button variant="info" size="sm" :disabled="isLoading" @click="archeveJawaban">Take action</b-button>
+              </td>
+            </tr>
+            <tr>
+              <td>Rilis analys soal</td>
+              <td></td>
+              <td>
+                <b-button variant="primary" size="sm" :disabled="isLoading" @click="releaseAnalys">Take action</b-button>
               </td>
             </tr>
           </table>
@@ -38,11 +45,11 @@
       ...mapGetters(['isLoading'])
     },
     methods: {
-      ...mapActions('heager', ['generateHasilUjian','generateAnalys']),
+      ...mapActions('heager', ['generateHasilUjian','generateAnalys','arhiveJawaban']),
       generateUjian() {
         this.$swal({
           title: 'Informasi',
-          text: "Tindakan ini membutuhkan resource besar, pastikan server sedang kosong",
+          text: "Ini hanya akan mengenerate hasil ujian yang saat ini aktif",
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -63,7 +70,7 @@
       releaseAnalys() {
         this.$swal({
           title: 'Informasi',
-          text: "Tindakan ini membutuhkan resource besar, pastikan server sedang kosong dan pastikan anda sudah meng archive jawaban siswa sebelumnya agar tidak terjadi double dalam analys",
+          text: "Pastikan anda sudah menjadikan arsip jawaban siswa sebelumnya agar tidak terjadi double dalam analys",
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -74,6 +81,27 @@
             this.generateAnalys()
             .then(() => {
               this.notifSuccess('reelase analys berhasil')
+            })
+            .catch(() => {
+              this.notifError()
+            })
+          }
+        })
+      },
+      archeveJawaban() {
+        this.$swal({
+          title: 'Informasi',
+          text: "Pastikan anda sudah generate hasil ujian peserta",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#c3c3c3',
+          confirmButtonText: 'Iya, Lanjutkan!'
+        }).then((result) => {
+          if (result.value) {
+            this.arhiveJawaban()
+            .then(() => {
+              this.notifSuccess('arsip jawaban berhasil')
             })
             .catch(() => {
               this.notifError()
