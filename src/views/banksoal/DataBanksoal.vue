@@ -26,10 +26,13 @@
                                             <td width="150px">Pembuat</td><td v-text="row.item.user.name"></td>
                                         </tr>
                                         <tr>
-                                            <td>Jumlah PG</td><td v-text="row.item.jumlah_soal+' / '+row.item.inputed+' ('+row.item.jumlah_pilihan+' opsi )'"></td>
+                                            <td>Jumlah PG</td><td v-text="row.item.jumlah_soal+' ('+row.item.jumlah_pilihan+' opsi )'"></td>
                                         </tr>
                                         <tr>
                                             <td>Jumlah esay</td><td v-text="row.item.jumlah_soal_esay"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Soal terimput</td><td v-text="row.item.inputed"></td>
                                         </tr>
                                     </table>
                                 </b-card>
