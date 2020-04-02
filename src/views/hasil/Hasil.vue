@@ -70,7 +70,7 @@
                     </b-table>
                     <div class="row" v-show="hasils.data">
                         <div class="col-md-6">
-                            <p v-if="hasils.data"><i class="fa fa-bars"></i> {{ hasils.data.length }} server dari {{ hasils.total }} total server</p>
+                            <p v-if="hasils.data"><i class="fa fa-bars"></i> {{ hasils.data.length }} server dari {{ hasils.total }} total hasil ujian</p>
                         </div>
                         <div class="col-md-6">
                             <div class="float-right">
@@ -159,6 +159,9 @@
             jadwal(val) {
                 if(val != 0 && val != '') {
                     this.getSekolahByJadwal(val)
+                    .then(() => {
+                        this.sekolah = 0
+                    })
                     .catch(() => {
 
                     })

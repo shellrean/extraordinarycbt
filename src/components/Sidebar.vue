@@ -128,3 +128,8 @@ export default {
     },
 }
 </script>
+<style type="text/css">
+  .router-link-exact-active.router-link-active {
+    background-color: #46536d !important;
+  }
+</style>
