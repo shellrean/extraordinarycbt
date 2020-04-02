@@ -43,7 +43,7 @@
     					          <table class="table" v-if="row.item.jawabans != ''">
     					          	<tr v-for="(jawab, index) in row.item.jawabans" :key="index">
                                         <td width="20px">
-                                            <font-awesome-icon v-show="jawab.correct == '1'" icon="star" class="text-warning" />
+                                            <i class="cil-bookmark text-warning" v-show="jawab.correct == '1'"></i>
                                         </td>
     					          		<td>
     					          			<div v-html="jawab.text_jawaban"></div>

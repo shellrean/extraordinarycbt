@@ -87,7 +87,7 @@
 					<b-table striped hover bordered small :fields="fields_school" :items="pesertas.data" :busy="isBusy" show-empty v-show="pesertas.data">
 						<template v-slot:cell(actions)="row">
 							<b-button variant="danger" size="sm" @click="deletePeserta(row.item.id)">
-								<font-awesome-icon icon="trash" /> Hapus
+								<i class="cil-trash"></i> Hapus
 							</b-button>
 						</template>
 					</b-table>

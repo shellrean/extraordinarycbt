@@ -44,10 +44,10 @@
                         </template>
 						<template v-slot:cell(actions)="row">
 							<b-button :disabled="isLoading" variant="success" v-if="$can('active_server')" title="Aktif/Matikan server" class="mr-1" size="sm" @click="reserveServer(row.item.id)">
-								<font-awesome-icon icon="dot-circle" /> Aktif/Matikan
+								<i class="cil-toggle-off"></i> Aktif/Matikan
 							</b-button>
 							<b-button :disabled="isLoading" variant="warning" v-if="$can('reset_server')" title="Hapus UUID" class="mr-1" size="sm" @click="resetSerial(row.item.id)">
-								<font-awesome-icon icon="sync" /> Reset UUID
+								<i class="cil-reload"></i> Reset UUID
 							</b-button>
 							<b-button :disabled="isLoading" variant="danger" v-if="$can('delete_server')" title="Hapus server" class="mr-1" size="sm" @click="deleteServer(row.item.id)">
 								<i class="cil-trash"></i> Hapus
@@ -92,17 +92,6 @@
                     </div>
                     <br>
 					<b-table striped hover bordered small :fields="fields_school" :items="servers.data" :busy="isBusy" show-empty v-show="servers.data">
-						<template v-slot:cell(actions)="row">
-							<b-button variant="success" title="Aktif/Matikan server" size="sm" @click="reserveServer(row.item.id)">
-								<font-awesome-icon icon="dot-circle" /> Aktif/Matikan
-							</b-button>
-							<b-button variant="warning" title="Reset Serial" size="sm" @click="resetSerial(row.item.id)">
-								<font-awesome-icon icon="sync" /> Reset UUID
-							</b-button>
-							<b-button variant="danger" title="Hapus server" size="sm" @click="deleteServer(row.item.id)">
-								<font-awesome-icon icon="trash" /> Hapus
-							</b-button>
-						</template>
 					</b-table>
 					<div class="row" v-show="servers.data">
                         <div class="col-md-6">

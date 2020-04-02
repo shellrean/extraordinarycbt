@@ -49,14 +49,14 @@
                       <label>File direction</label>
                       <div class="input-group">
                         <audio-player :file="'/storage/audio/'+direction"></audio-player>
-                        <b-button size="sm" variant="danger" @click="removeDirection"><font-awesome-icon icon="times" /></b-button>
+                        <b-button size="sm" variant="danger" @click="removeDirection"><i class="cil-x"></i></b-button>
                       </div>
                     </div>
                     <div class="form-group" v-if="audio != ''">
                       <label>File audio</label>
                       <div class="input-group">
                         <audio-player :file="'/storage/audio/'+audio"></audio-player>
-                        <b-button size="sm" variant="danger" @click="removeAudio"><font-awesome-icon icon="times" /></b-button>
+                        <b-button size="sm" variant="danger" @click="removeAudio"><i class="cil-x"></i></b-button>
                       </div>
                     </div>
                   </div>

@@ -10,7 +10,6 @@ import BootstrapVue from 'bootstrap-vue'
 import VueHtmlToPaper from 'vue-html-to-paper';
 
 import Permissions from './mixins/Permission.js'
-import Awesome from './awesome.js'
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 Vue.config.productionTip = false
