@@ -8,7 +8,8 @@ const state = () => ({
 	hasilUjian: [],
 	essies: [],
 	sekolahs: [],
-	banksoals: []
+	banksoals: [],
+	capaians: []
 })
 
 const mutations = {
@@ -35,6 +36,9 @@ const mutations = {
 	},
 	ASSIGN_DATA_BANKSOAL(state, payload) {
 		state.banksoals = payload
+	},
+	ASSIGN_CAPAIAN_SISWA(state, payload) {
+		state.capaians = payload
 	}
 }
 
@@ -86,6 +90,24 @@ const actions = {
 			})
 			.catch((err) => {
 				reject(err)
+			})
+		})
+	},
+	getBanksoalByJadwalAndSekolah({ state, commit }, payload) {
+		return new Promise((resolve, reject) => {
+			$axios.post(`/ujian/result/sekolah/banksoal`, payload)
+			.then((response) => {
+				commit('ASSIGN_DATA_BANKSOAL', response.data)
+				resolve(response)
+			})
+		})
+	},
+	getCapaianSiswa({ state, commit }, payload) {
+		return new Promise((resolve, reject) => {
+			$axios.post(`/ujian/resul/capaian-siswa`, payload)
+			.then((response) => {
+				commit('ASSIGN_CAPAIAN_SISWA', response.data)
+				resolve(response)
 			})
 		})
 	},

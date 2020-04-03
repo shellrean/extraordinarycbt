@@ -62,11 +62,11 @@
             <i class="c-sidebar-nav-icon cil-chart-line"></i>Reporting
           </a>
           <ul class="c-sidebar-nav-dropdown-items">
-<!--             <li class="c-sidebar-nav-item">
-              <router-link class="c-sidebar-nav-link" :to="{ name: 'ujian.data' }">
+            <li class="c-sidebar-nav-item">
+              <router-link class="c-sidebar-nav-link" :to="{ name: 'analys.siswa' }">
                 <span class="c-sidebar-nav-icon"></span> Capaian siswa
               </router-link>
-            </li> -->
+            </li>
             <li class="c-sidebar-nav-item">
               <router-link class="c-sidebar-nav-link" :to="{ name: 'analys.banksoal' }">
                 <span class="c-sidebar-nav-icon"></span> Kesulitan soal

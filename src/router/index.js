@@ -55,6 +55,8 @@ const HeagerDashboard = () => import('../views/heager/Dashboard.vue')
 import AnalysIndex from '../views/analys/Index.vue'
 const AnalysBanksoal = () => import('../views/analys/Banksoal.vue')
 const AnalysBanksoalSoal = () => import('../views/analys/SoalBanksoal.vue')
+const AnalysSiswa = () => import('../views/analys/Siswa.vue')
+const AnalysCapaian = () => import('../views/analys/CapaianSiswa.vue')
 
 Vue.use(VueRouter)
 
@@ -313,6 +315,18 @@ const routes = [
         name: 'analys.banksoal_soal',
         component: AnalysBanksoalSoal,
         meta: { title: 'Banksoal analys' }
+      },
+      {
+        path: 'siswa',
+        name: 'analys.siswa',
+        component: AnalysSiswa,
+        meta: { title: 'Capaian siswa analys' }
+      },
+      {
+        path: 'siswa/sekolah/:sekolah_id/banksoal/:banksoal_id/jadwal/:jadwal_id',
+        name: 'analys.capaian',
+        component: AnalysCapaian,
+        meta: { title: 'Capaian siswa banksoal' }
       }
     ]
   }
