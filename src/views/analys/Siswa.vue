@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <br>
-                    <div class="row" v-if="jadwals">
+                    <div class="row" v-if="jadwals ">
                         <div class="col-md-3">
                             <div class="form-group mb-3">
                                 <v-select label="alias" :options="jadwals.data" v-model="jadwal" :reduce="nama => nama.id"></v-select>
@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <b-table striped hover bordered small :fields="fields" :items="banksoals.data" show-empty v-if="banksoals">
+                    <b-table striped hover bordered small :fields="fields" :items="banksoals.data" show-empty v-if="banksoals && jadwal > 0 && sekolah > 0">
                         <template v-slot:cell(actions)="row">
                                 <router-link :to="{ name: 'analys.capaian', params: { banksoal_id: row.item.id , sekolah_id: sekolah, jadwal_id: jadwal } }" class="btn btn-primary btn-sm mr-1" v-if="$can('edit_matpel')">
                                     <i class="cil-badge"></i> Capaian siswa

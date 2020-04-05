@@ -57,6 +57,7 @@
             <i class="c-sidebar-nav-icon cil-folder"></i>File media
           </router-link>
         </li>
+        <li class="c-sidebar-nav-title">Menu heager</li>
         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown" v-if="$can('reporting')" >
           <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <i class="c-sidebar-nav-icon cil-chart-line"></i>Reporting
@@ -92,7 +93,7 @@
         </li>
         <li class="c-sidebar-nav-item" v-if="$can('setting')">
           <router-link class="c-sidebar-nav-link" :to="{ name: 'role.permissions' }">
-            <i class="c-sidebar-nav-icon cil-cog"></i>Setting
+            <i class="c-sidebar-nav-icon cil-cog"></i>Role & permission
           </router-link>
         </li>
         <li class="c-sidebar-nav-item" v-if="$can('setting')">

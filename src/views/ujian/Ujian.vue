@@ -54,7 +54,7 @@
 				</div>
 			</div>
 		</div>
-		 <b-modal id="modal-scoped" size="lg" hide-backdrop>
+		 <b-modal id="modal-scoped" size="lg">
 		    <template v-slot:modal-header="{ close }">
 		      <h5>Setting ujian</h5>
 		    </template>
@@ -91,8 +91,8 @@
 		    	<div class="invalid-feedback" v-if="errors.banksoal_id">{{ errors.banksoal_id[0] }}</div>
 		    </div>
 		    <div class="form-group">
-                <label>Alias(optional)</label>
-                <input type="text" class="form-control" v-model="data.alias">
+                <label>Nama ujian</label>
+                <input type="text" class="form-control" v-model="data.alias" required>
             </div>
 		    <div class="form-group">
 		    	<label>Tanggal ujian</label>

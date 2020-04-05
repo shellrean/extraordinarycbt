@@ -7,7 +7,7 @@
 		<app-sidebar v-show="isAuth"/>
 		<div class="c-wrapper">
 			<app-header v-if="isAuth" />
-			<transition name="slide-fade">
+			<transition name="fade" mode="out-in">
 				<router-view />
 			</transition>
 			<app-footer v-if="isAuth" />

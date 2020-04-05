@@ -105,6 +105,9 @@ const actions = {
 				commit('ASSIGN_USER_AUTH', response.data.data)
 				resolve(response.data)
 			})
+			.catch((err) => {
+				reject(err)
+			})
 		})
 	}
 }

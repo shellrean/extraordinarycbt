@@ -32,7 +32,7 @@
                                             <td>Jumlah esay</td><td v-text="row.item.jumlah_soal_esay"></td>
                                         </tr>
                                         <tr>
-                                            <td>Soal terimput</td><td v-text="row.item.inputed"></td>
+                                            <td>Soal terinput</td><td v-text="row.item.inputed"></td>
                                         </tr>
                                     </table>
                                 </b-card>
@@ -68,7 +68,7 @@
                 </div> 
             </div>
         </div>
-        <b-modal id="modal-scoped" size="md" hideBackdrop>
+        <b-modal id="modal-scoped" size="md">
             <template v-slot:modal-header="{ close }">
               <h5>Tambah banksoal</h5>
             </template>
@@ -91,6 +91,11 @@
                 <label>Jumlah soal esay</label>
                 <input type="number" class="form-control" :class="{ 'is-invalid' : errors.jumlah_soal_esay }" v-model="data.jumlah_soal_esay" placeholder="Jumlah soal esay">
                 <p class="text-danger" v-if="errors.jumlah_soal_esay">{{ errors.jumlah_soal_esay[0] }}</p>
+            </div>
+            <div class="form-group">
+                <label>Jumlah opsi</label>
+                <input type="number" class="form-control" :class="{ 'is-invalid' : errors.jumlah_pilihan }" v-model="data.jumlah_pilihan" placeholder="Jumlah opsi">
+                <p class="text-danger" v-if="errors.jumlah_pilihan">{{ errors.jumlah_pilihan[0] }}</p>
             </div>
             <template v-slot:modal-footer="{ ok, cancel}">
 
