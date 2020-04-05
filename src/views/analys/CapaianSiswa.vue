@@ -14,7 +14,10 @@
                 			<td v-for="(capaian, index) in capaians.soals" v-text="index+1"></td>
                 		</tr>
                 		<tr v-for="data in capaians.data">
-                			<td v-text="data[0].nama"></td>
+                			<td>
+                				{{ data[0].nama }} <br>
+                				{{ data[0].no_ujian }}
+                			</td>
                 			<td v-for="dat in data[1]" v-text="dat.iscorrect" :class="{ 'bg-danger': dat.iscorrect == 0 }"></td>
                 		</tr>
                 	</table>
