@@ -39,9 +39,9 @@
 				             				<b-card>
 				             					<strong>Jawaban peserta</strong><br><br>
 				             					<div v-html="row.item.esay"></div>
-				             					<div class="mt-2">
+				             					<!-- <div class="mt-2">
 				             						<b-button variant="primary" size="sm" @click="jadikanRujukan(row.item.soal_id, row.item.esay)" :disabled="isLoading">Jadikan rujukan</b-button>
-				             					</div>
+				             					</div> -->
 				             				</b-card>
 				             			</div>
 				                    </div>
