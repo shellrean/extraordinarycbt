@@ -11,28 +11,72 @@
                             <h4 id="traffic" class="card-title mb-0">Manage Matpel</h4>
                             <div class="small text-muted">Buat edit dan hapus matpel</div>
                         </div>
-                        <div class="d-none d-md-block col-sm-7">
-                            <button type="button" class="btn float-right btn-primary btn-sm mx-1">
-                                <i class="cil-print"></i> Cetak data matpel
-                            </button>
-                        </div>
                     </div>
                     <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b-form-group
+                              label="Filter"
+                              label-cols-sm="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                              label-for="filterInput"
+                            >
+                              <b-input-group size="sm">
+                                <b-form-input
+                                  v-model="search"
+                                  type="search"
+                                  id="filterInput"
+                                  placeholder="Cari dengan nama matpel"
+                                ></b-form-input>
+                                <b-input-group-append>
+                                  <b-button :disabled="!search" @click="search = ''">Clear</b-button>
+                                </b-input-group-append>
+                              </b-input-group>
+                            </b-form-group>
+                            <b-form-group
+                              label="Per page"
+                              label-cols-sm="6"
+                              label-cols-md="4"
+                              label-cols-lg="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                              label-for="perPageSelect"
+                            >
+                              <b-form-select
+                                v-model="perPage"
+                                id="perPageSelect"
+                                size="sm"
+                                :options="pageOptions"
+                              ></b-form-select>
+                            </b-form-group>
+                        </div>
+                    </div>
                     <template v-if="matpels && typeof matpels.data != 'undefined'">
                         <b-table 
+                        id="table-transition-example"
+                        primary-key="kode_mapel" :tbody-transition-props="transProps"
                         striped hover bordered small show-empty
                         :fields="fields" 
                         :items="matpels.data" 
                         >
-                            <template v-slot:cell(index)="data">
-                                {{ from ? from+data.index : 1+data.index }}
+                            <template v-slot:cell(show_details)="row">
+                                <b-button size="sm" @click="row.toggleDetails" :variant="row.detailsShowing ? 'danger' : 'info'"><i :class="row.detailsShowing ? 'cil-chevron-top' : 'cil-chevron-bottom'" /></b-button>
+                            </template>
+                            <template v-slot:row-details="row">
+                                <b-card>
+                                    <b-badge variant="success" class="mr-1" v-show="row.item.jurusans == 0 && row.item.agama == 0">umum</b-badge>
+                                    <b-badge variant="success" class="mr-1" v-show="row.item.jurusans != 0">khusus</b-badge>
+                                    <b-badge variant="success" class="mr-1" v-show="row.item.agama != 0">agama</b-badge>
+                                    <b-badge variant="info" class="mr-1" v-if="row.item.agama != 0" v-text="row.item.agama">agama</b-badge>
+                                    <b-badge variant="info" class="mr-1" v-if="row.item.jurusans != 0" v-for="(jur, index) in row.item.jurusans" v-text="jur.nama" :key="index"></b-badge>
+                                    <hr>
+                                    <b-badge variant="info" class="mr-1">Pengoreksi</b-badge>
+                                    <b-badge variant="success" class="mr-1" v-if="row.item.correctors_name != 0" v-for="(corector, index) in row.item.correctors_name" v-text="corector.name" :key="index"></b-badge>
+                                </b-card>
                             </template>
                             <template v-slot:cell(nama)="row">
                                 {{ row.item.nama }} 
-                                <b-badge variant="success" class="mr-1" v-show="row.item.jurusan_id != 0">khusus</b-badge>
-                                <b-badge variant="success" class="mr-1" v-show="row.item.agama_id != 0">agama</b-badge>
-                                <b-badge variant="info" class="mr-1" v-if="row.item.agama_id != 0" v-text="row.item.agama_id">agama</b-badge>
-                                <b-badge variant="info" class="mr-1" v-if="row.item.jurusan_id != 0" v-for="(jur, index) in row.item.jurusan_id" v-text="jur" :key="index"></b-badge>
                             </template>
                             <template v-slot:cell(actions)="row">
                                 <router-link :to="{ name: 'matpel.edit', params: { id: row.item.id } }" class="btn btn-warning btn-sm mr-1" v-if="$can('edit_matpel')">
@@ -77,16 +121,21 @@ import { mapActions, mapState, mapGetters, mapMutations } from 'vuex'
 export default {
     name: 'DataMatpel',
     created() {
-        this.getMatpels()
+        this.getMatpels({ perPage : this.perPage })
     },
     data() {
         return {
+            transProps: {
+              name: 'flip-list'
+            },
             fields: [
-                'index',
-                { key: 'kode_mapel', label: 'Kode matpel'},
-                { key: 'nama', label: 'Nama mata pelajaran'},
+                { key: 'show_details', label: 'Detail' },
+                { key: 'kode_mapel', label: 'Kode matpel', sortable: true},
+                { key: 'nama', label: 'Nama mata pelajaran', sortable: true},
                 { key: 'actions', label: 'Aksi' }
             ],
+            perPage: 20,
+            pageOptions: [20, 50, 100],
             search: '',
             data: {
                 nama: '',
@@ -126,7 +175,7 @@ export default {
                 if (result.value) {
                     this.removeMatpel(id)
                     .then(() => {
-                        this.getMatpels();
+                        this.getMatpels({ perPage : this.perPage });
                         this.$notify({
                             group: 'foo',
                             title: 'Sukses',
@@ -150,11 +199,11 @@ export default {
         page() {
             this.getMatpels()
         },
-        search() {
-            this.getMatpels(this.search)
-        },
-        matpels() {
-            this.isBusy = false
+        search:  _.debounce(function (value) {
+            this.getMatpels({ search: this.search, perPage: this.perPage })
+        }, 500),
+        perPage() {
+            this.getMatpels({ search: this.search, perPage: this.perPage })
         }
     },
 }

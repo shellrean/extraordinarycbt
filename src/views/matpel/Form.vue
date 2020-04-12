@@ -11,6 +11,18 @@
 			<p class="text-danger" v-if="errors.nama">{{ errors.nama[0] }}</p>
 		</div>
 		<div class="form-group">
+			<label>Tim pengoreksi</label>
+			<multiselect 
+			v-model="matpel.correctors" 
+			tag-placeholder="Cari untuk menambah tim pengoreksi" 
+			placeholder="Tambah anggota pengoreksi" 
+			label="name" track-by="id" 
+			:options="users" 
+			:multiple="true" 
+			:taggable="true"
+			v-if="users"></multiselect>
+		</div>
+		<div class="form-group">
 			<b-form-checkbox size="lg" v-model="produktif" switch value="1">Matpel khusus</b-form-checkbox>
 		</div>
 		<div class="form-group" v-show="produktif">
@@ -43,6 +55,7 @@ import 'vue-select/dist/vue-select.css';
 export default {
 	name: 'FormMatpel',
 	created() {
+		this.getUserLists()
 		this.getJurusans()
 		this.getAgamas()
 	},
@@ -64,11 +77,15 @@ export default {
 		...mapState('sekolah', {
 			jurusans: state => state.jurusan,
 			agamas: state => state.agama
+		}),
+		...mapState('user', {
+			users: state => state.users
 		})
 	},
 	methods: {
 		...mapMutations('matpel', ['CLEAR_FORM']),
-		...mapActions('sekolah',['getJurusans', 'getAgamas'])
+		...mapActions('sekolah',['getJurusans', 'getAgamas']),
+		...mapActions('user',['getUserLists'])
 	},
 	destroyed() {
 		this.CLEAR_FORM()

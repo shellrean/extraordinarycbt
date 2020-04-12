@@ -7,7 +7,8 @@ const state = () => ({
         kode_mapel: '',
         nama: '',
         jurusan_id: '',
-        agama_id: ''
+        agama_id: '',
+        correctors: ''
     },
 	page: 1,
     from: 1
@@ -35,7 +36,8 @@ const mutations = {
             kode_mapel: '',
             nama: '',
             jurusan_id: '',
-            agama_id: ''
+            agama_id: '',
+            correctors: ''
         }
     },
     SET_FROM_DATA(state, payload) {
@@ -45,10 +47,11 @@ const mutations = {
 
 const actions = {
 	getMatpels({ commit, state }, payload) {
-		let search = typeof payload != 'undefined' ? payload : ''
+		let search = typeof payload.search != 'undefined' ? payload.search : ''
+        let perPage = typeof payload.perPage != 'undefined' ? payload.perPage : ''
 		return new Promise(( resolve, reject ) =>  {
             commit('SET_LOADING', true, { root: true })
-			$axios.get(`/matpel?page=${state.page}&q=${search}`)
+			$axios.get(`/matpel?page=${state.page}&q=${search}&perPage=${perPage}`)
 			.then((response) => {
 				commit('ASSIGN_DATA', response.data.data)
                 commit('SET_FROM_DATA', response.data.data.from)
