@@ -3,9 +3,6 @@
     <button class="c-header-toggler c-class-toggler d-lg-none mr-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
       <span class="c-header-toggler-icon"></span>
     </button>
-    <a class="c-header-brand d-sm-none" href="#">
-      <img class="c-header-brand" src="/img/brand/dki.png" width="45" alt="Application Logo">
-    </a>
     <button class="c-header-toggler c-class-toggler ml-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show" responsive="true">
       <span class="c-header-toggler-icon"></span>
     </button>

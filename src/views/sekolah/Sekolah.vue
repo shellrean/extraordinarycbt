@@ -14,16 +14,10 @@
                             <h4 id="traffic" class="card-title mb-0">Manage Sekolah</h4>
                             <div class="small text-muted">Buat edit dan hapus sekolah</div>
                         </div>
-                        <div class="d-none d-md-block col-sm-7">
-                            <a :href="'/prev/sekolah'" target="_blank" class="btn float-right btn-primary btn-sm mx-1">
-                                <i class="cil-print"></i>
-                                Cetak data sekolah
-                            </a>
-                        </div>
                     </div>
                     <br>
                     <template v-if="sekolah && typeof sekolah.data != 'undefined'">
-						<b-table striped hover bordered small :fields="fields" :items="sekolah.data" v-if="sekolah" show-empty>
+						<b-table sticky-header striped hover bordered small :fields="fields" :items="sekolah.data" v-if="sekolah" show-empty>
 							<template v-slot:cell(show_details)="row">
 	                            <b-button 
 	                            size="sm" 

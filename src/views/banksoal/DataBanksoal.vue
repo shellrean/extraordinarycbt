@@ -13,8 +13,47 @@
                         </div>
                     </div>
                     <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b-form-group
+                              label="Filter"
+                              label-cols-sm="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                              label-for="filterInput"
+                            >
+                              <b-input-group size="sm">
+                                <b-form-input
+                                  v-model="search"
+                                  type="search"
+                                  id="filterInput"
+                                  placeholder="Cari kode banksoal"
+                                ></b-form-input>
+                                <b-input-group-append>
+                                  <b-button :disabled="!search" @click="search = ''">Clear</b-button>
+                                </b-input-group-append>
+                              </b-input-group>
+                            </b-form-group>
+                            <b-form-group
+                              label="Per page"
+                              label-cols-sm="6"
+                              label-cols-md="4"
+                              label-cols-lg="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                              label-for="perPageSelect"
+                            >
+                              <b-form-select
+                                v-model="perPage"
+                                id="perPageSelect"
+                                size="sm"
+                                :options="pageOptions"
+                              ></b-form-select>
+                            </b-form-group>
+                        </div>
+                    </div>
                     <template v-if="banksoals && typeof banksoals.data != 'undefined'">
-                        <b-table striped hover bordered small :fields="fields" :items="banksoals.data" show-empty>
+                        <b-table striped id="table-transition-example" primary-key="kode_banksoal" :tbody-transition-props="transProps" hover bordered small :fields="fields" :items="banksoals.data" show-empty>
                              <template v-slot:cell(show_details)="row">
                                 <b-button size="sm" @click="row.toggleDetails" :variant="row.detailsShowing ? 'danger' : 'info'"><i :class="row.detailsShowing ? 'cil-chevron-top' : 'cil-chevron-bottom'" /></b-button>
                             </template>
@@ -66,6 +105,7 @@
                         </div>
                     </template>
                 </div> 
+                <div class="card-footer"></div>
             </div>
         </div>
         <b-modal id="modal-scoped" size="md">
@@ -114,6 +154,7 @@
 import { mapActions, mapState, mapGetters } from 'vuex'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
+import _ from 'lodash'
 
 export default {
     name: 'DataBanksoal',
@@ -121,17 +162,22 @@ export default {
         'v-select': vSelect
     },
     created() {
-        this.getBanksoals().then(() => { this.isBusy = false })
+        this.getBanksoals({ perPage: this.perPage }).then(() => { this.isBusy = false })
         this.getAllMatpels()
     },
     data() {
         return {
+            transProps: {
+              name: 'flip-list'
+            },
             fields: [
                 { key: 'show_details', label: 'Detail' },
-                { key: 'kode_banksoal', label: 'Kode banksoal'},
-                { key: 'matpel.nama', label: 'Mata pelajaran'},
+                { key: 'kode_banksoal', label: 'Kode banksoal', sortable: true},
+                { key: 'matpel.nama', label: 'Mata pelajaran', sortable: true},
                 { key: 'actions', label: 'Aksi' }
             ],
+            perPage: 20,
+            pageOptions: [20, 50, 100],
             search: '',
             data: {
                 kode_banksoal: '',
@@ -178,7 +224,7 @@ export default {
                 jumlah_soal_esay: this.data.jumlah_soal_esay
             }).then( (data) => {
                 this.success('Banksoal berhasil ditambah.')
-                this.getBanksoals()  
+                this.getBanksoals({ perPage: this.perPage })  
                 this.clearForm()
                 this.$bvModal.hide('modal-scoped')
             })
@@ -190,7 +236,7 @@ export default {
             })
             .then(() => {
                 this.success('Banksoal berhasil diubah.')
-                this.getBanksoals()  
+                this.getBanksoals({ perPage: this.perPage })  
                 this.clearForm()
                 this.$bvModal.hide('modal-scoped')
                 this.update = 0
@@ -212,7 +258,7 @@ export default {
                 if (result.value) {
                     this.removeBanksoal(id)
                     .then(() => {
-                        this.getBanksoals()
+                        this.getBanksoals({ perPage: this.perPage })
                         this.success('Banksoal berhasil dihapus.')
                     })
                     .catch(() => {
@@ -267,11 +313,19 @@ export default {
     },
     watch: {
         page() {
-            this.getBanksoals()
+            this.getBanksoals({ perPage: this.perPage })
         },
-        search() {
-            this.getBanksoals(this.search)
+        search: _.debounce(function (value) {
+            this.getBanksoals({ search: this.search, perPage: this.perPage })
+        }, 500),
+        perPage() {
+            this.getBanksoals({ search: this.search, perPage: this.perPage })
         }
     },
 }
 </script>
+<style type="text/css">
+    table#table-transition-example .flip-list-move {
+      transition: transform 1s;
+    }
+</style>

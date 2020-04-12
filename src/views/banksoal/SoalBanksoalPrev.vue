@@ -21,7 +21,7 @@
 												<table class="table-sm">
 													<tr v-for="(jawaban, index) in soal.jawabans">
 														<td width="20px"></td>
-														<td style="text-transform: uppercase;"> {{ index | charIndex }} ) <i v-show="jawaban.correct == '1'"  class="cil-star text-warning"></i> </td>
+														<td style="text-transform: uppercase;" :class="{ 'corect' : jawaban.correct == '1' }"> {{ index | charIndex }} ) <i v-show="jawaban.correct == '1'"  class="cil-star text-warning"></i> </td>
 														<td v-html="jawaban.text_jawaban"></td>
 													</tr>
 												</table>
@@ -87,6 +87,10 @@
 		  margin-left: 40px;
 		  margin-right: 40px;	  
 		}
+	}
+	.corect {
+			font-weight: bold;
+			color: yellow;
 	}
 	.paper {
 		max-width: 1140px;
