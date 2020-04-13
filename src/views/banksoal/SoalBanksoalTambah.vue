@@ -503,6 +503,10 @@ import {
   Bold,
   Code,
   Italic,
+  Table,
+  TableHeader,
+  TableCell,
+  TableRow,
   Link,
   Strike,
   Underline,
@@ -539,6 +543,10 @@ export default {
           new Link(),
           new Bold(),
           new Code(),
+          new Table(),
+          new TableHeader(),
+          new TableCell(),
+          new TableRow(),
           new Italic(),
           new Strike(),
           new Underline(),
@@ -855,6 +863,12 @@ export default {
   span#{&}__button {
     font-size: 13.3333px;
   }
+}
+table {
+
+}
+td {
+  border: 1px solid #000;
 }
 .ProseMirror {
     border: 1px solid #676767;

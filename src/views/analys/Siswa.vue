@@ -17,14 +17,28 @@
                     <br>
                     <div class="row" v-if="jadwals ">
                         <div class="col-md-3">
-                            <div class="form-group mb-3">
+                            <b-form-group
+                              label="Ujian"
+                              label-cols-sm="6"
+                              label-cols-md="4"
+                              label-cols-lg="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                            >
                                 <v-select label="alias" :options="jadwals.data" v-model="jadwal" :reduce="nama => nama.id"></v-select>
-                            </div>
+                            </b-form-group>
                         </div>
                         <div class="col-md-3" v-if="sekolahs">
-                            <div class="form-group mb-3">
+                            <b-form-group
+                              label="Sekolah"
+                              label-cols-sm="6"
+                              label-cols-md="4"
+                              label-cols-lg="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                            >
                                 <v-select label="nama" :options="sekolahs.data" v-model="sekolah" :reduce="nama => nama.id"></v-select>
-                            </div>
+                            </b-form-group>
                         </div>
                     </div>
                     <b-table striped hover bordered small :fields="fields" :items="banksoals.data" show-empty v-if="banksoals && jadwal > 0 && sekolah > 0">
@@ -55,7 +69,7 @@
             downloadExcel
         },
         created() {
-            this.getUjians()
+            this.getUjians({})
         },
         data() {
             return {

@@ -27,14 +27,48 @@
                     <br>
                     <div class="row" v-if="jadwals">
                         <div class="col-md-3">
-                            <div class="form-group mb-3">
+                            <b-form-group
+                              label="Ujian"
+                              label-cols-sm="6"
+                              label-cols-md="4"
+                              label-cols-lg="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                            >
                                 <v-select label="alias" :options="jadwals.data" v-model="jadwal" :reduce="nama => nama.id"></v-select>
-                            </div>
+                            </b-form-group>
                         </div>
                         <div class="col-md-3" v-if="sekolahs">
-                            <div class="form-group mb-3">
+                            <b-form-group
+                              label="Sekolah"
+                              label-cols-sm="6"
+                              label-cols-md="4"
+                              label-cols-lg="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                            >
                                 <v-select label="nama" :options="sekolahs.data" v-model="sekolah" :reduce="nama => nama.id"></v-select>
-                            </div>
+                            </b-form-group>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b-form-group
+                              label="Per page"
+                              label-cols-sm="6"
+                              label-cols-md="4"
+                              label-cols-lg="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                              label-for="perPageSelect"
+                            >
+                              <b-form-select
+                                v-model="perPage"
+                                id="perPageSelect"
+                                size="sm"
+                                :options="pageOptions"
+                              ></b-form-select>
+                            </b-form-group>
                         </div>
                     </div>
                     <b-table striped hover bordered small :fields="fields" :items="hasils.data" show-empty v-if="hasils">
@@ -106,7 +140,7 @@
             downloadExcel
         },
         created() {
-            this.getUjians()
+            this.getUjians({})
         },
         data() {
             return {
@@ -120,6 +154,9 @@
                     'Point esay' : 'point_esay',
                     'Hasil akhir' : 'hasil'
                 },
+                perPage: 40,
+                pageOptions: [40, 100, 200],
+                search: '',
                 fields: [
                     { key: 'show_details', label: 'Detail' },
                     { key: 'peserta.name_server', label: 'Server' },
@@ -152,6 +189,7 @@
         watch: {
             page() {
                 this.getHasilByJadwalAndSekolah({
+                    perPage: this.perPage,
                     sekolah_id: this.sekolah,
                     jadwal_id: this.jadwal
                 })
@@ -170,6 +208,7 @@
             sekolah(val) {
                 if(val != 0 && val != '') {
                     this.getHasilByJadwalAndSekolah({
+                        perPage: this.perPage,
                         sekolah_id: this.sekolah,
                         jadwal_id: this.jadwal
                     })
@@ -177,6 +216,13 @@
 
                     })
                 }
+            },
+            perPage() {
+                this.getHasilByJadwalAndSekolah({
+                    perPage: this.perPage,
+                    sekolah_id: this.sekolah,
+                    jadwal_id: this.jadwal
+                })  
             }
         }
 	}

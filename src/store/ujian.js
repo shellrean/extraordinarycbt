@@ -2,6 +2,7 @@ import $axios from '../api.js'
 
 const state = () => ({
 	ujians: [],
+	ujiansExists: [],
 	ujianAll: [],
 	pesertas: [],
 	page: 1,
@@ -22,6 +23,9 @@ const mutations = {
 	},
 	ASSIGN_DATA_EVENT(state, payload) {
 		state.events = payload
+	},
+	ASSIGN_DATA_EXISTS(state, payload) {
+		state.ujiansExists = payload
 	},
 	SET_PAGE(state, payload) {
 		state.page = payload
@@ -103,7 +107,7 @@ const actions = {
 	},
 	getHasilByJadwalAndSekolah({ commit, state }, payload) {
 		return new Promise((resolve, reject) => {
-			$axios.post(`/ujian/result/sekolah/hasil?page=${state.page}`,payload)
+			$axios.post(`/ujian/result/sekolah/hasil?page=${state.page}&perPage=${payload.perPage}`,payload)
 			.then((response) => {
 				commit('ASSIGN_HASIL_UJIAN', response.data.data)
 				resolve(response.data)
@@ -241,7 +245,7 @@ const actions = {
 		return new Promise((resolve, reject) => {
 			$axios.get(`/ujian/esay/exists`, payload)
 			.then((response) => {
-				commit('ASSIGN_DATA', response.data)
+				commit('ASSIGN_DATA_EXISTS', response.data)
 				resolve()
 			})
 			.catch((err) => {

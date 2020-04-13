@@ -51,7 +51,7 @@ export default {
 	},
 	computed: {
 		...mapState('ujian', {
-			banksoals: state => state.ujians
+			banksoals: state => state.ujiansExists
 		})
 	},
 	methods: {
