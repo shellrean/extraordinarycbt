@@ -8,12 +8,12 @@
                 </div>
                 <div class="card-body back" >
                 	<div class="paper" id="printKartu">
-                		<div class="page" v-for="peserta in pesertas.data">
+                		<div class="page">
 							<center>
 								<table align="center" width="100%">
 						        	<tr>
-						        		<td style="padding:3px;">
-											<table style="width:10.4cm;border:1px solid #666;" class="kartu" >
+						        		<td style="padding:3px; display: flex; flex-wrap: wrap;" v-for="peserta in pesertas.data">
+											<table style="width:10.4cm;border:1px solid #666; " class="kartu" >
 												<tr>
 													<td colspan="3" style="border-bottom:1px solid #666; padding: 0;">
 														<table width="100%" class="kartu">

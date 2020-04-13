@@ -89,6 +89,16 @@ export default {
 	},
 	destroyed() {
 		this.CLEAR_FORM()
+	},
+	watch: {
+		matpel() {
+			if(this.matpel.jurusan_id != 0) {
+				this.produktif = 1
+			}
+			if(this.matpel.agama_id != 0) {
+				this.agama = 1
+			}
+		}
 	}
 }
 </script>

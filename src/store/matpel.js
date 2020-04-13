@@ -28,7 +28,9 @@ const mutations = {
         state.matpel = {
             kode_mapel: payload.kode_mapel,
             nama: payload.nama,
-            agama_id: payload.agama_id
+            agama_id: payload.agama_id,
+            correctors: payload.correctors_name,
+            jurusan_id: payload.jurusans
         }
     },
     CLEAR_FORM(state) {

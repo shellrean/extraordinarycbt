@@ -20,6 +20,45 @@
                         </div>
                     </div>
                     <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b-form-group
+                              label="Filter"
+                              label-cols-sm="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                              label-for="filterInput"
+                            >
+                              <b-input-group size="sm">
+                                <b-form-input
+                                  v-model="search"
+                                  type="search"
+                                  id="filterInput"
+                                  placeholder="Cari pertanyaan"
+                                ></b-form-input>
+                                <b-input-group-append>
+                                  <b-button :disabled="!search" @click="search = ''">Clear</b-button>
+                                </b-input-group-append>
+                              </b-input-group>
+                            </b-form-group>
+                            <b-form-group
+                              label="Per page"
+                              label-cols-sm="6"
+                              label-cols-md="4"
+                              label-cols-lg="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                              label-for="perPageSelect"
+                            >
+                              <b-form-select
+                                v-model="perPage"
+                                id="perPageSelect"
+                                size="sm"
+                                :options="pageOptions"
+                              ></b-form-select>
+                            </b-form-group>
+                        </div>
+                    </div>
                     <template v-if="soals && typeof soals.data != 'undefined'">
                         <b-table striped hover bordered small :fields="fields" :items="soals.data" show-empty>
                         	<template v-slot:cell(index)="data">
@@ -83,8 +122,8 @@
                         </div>
                     </template>
                     <template v-else>
-                        <div class="text-center text-light my-2">
-                            <b-spinner small type="grow"></b-spinner>
+                        <div class="text-center my-2">
+                            Loading...
                         </div>
                     </template>
                 </div>
@@ -97,13 +136,15 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
 import AudioPlayer from '../../components/AudioPlayer.vue'
+import _ from 'lodash'
+
 export default {
 	name: 'SoalBanksoal',
     components: {
         AudioPlayer
     },
 	created() {
-		this.getAllSoal()
+		this.getAllSoal({ perPage: this.perPage })
 	},
 	data() {
 		return {
@@ -113,6 +154,8 @@ export default {
 				{ key: 'dibuat', label: 'Dibuat pada'},
 				{ key: 'actions', label: 'Aksi'}
 			],
+            perPage: 10,
+            pageOptions: [10, 25, 50],
 			search: '',
             isBusy: true
 		}
@@ -134,8 +177,8 @@ export default {
 	},
 	methods: {
 		...mapActions('soal',['getSoals','removeSoal']),
-		getAllSoal() {
-			this.getSoals({ banksoal_id: this.$route.params.banksoal_id })
+		getAllSoal(payload) {
+			this.getSoals({ search: payload.search, perPage: payload.perPage, banksoal_id: this.$route.params.banksoal_id })
             .then(() => {
                 this.isBusy = false
             })
@@ -175,10 +218,13 @@ export default {
 	},
 	watch: {
         page() {
-            this.getAllSoal()
+            this.getAllSoal({ search: this.search, perPage: this.perPage })
         },
-        search() {
-            this.getAllSoal(this.search)
+        search: _.debounce(function (value) {
+            this.getAllSoal({ search: this.search, perPage: this.perPage })
+        }, 500),
+        perPage() {
+            this.getAllSoal({ search: this.search, perPage: this.perPage })
         }
     },
 }

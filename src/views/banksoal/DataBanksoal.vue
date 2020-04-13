@@ -100,8 +100,8 @@
                         </div>
                     </template>
                     <template v-else>
-                        <div class="text-center text-light my-2">
-                            <b-spinner small type="grow"></b-spinner>
+                        <div class="text-center my-2">
+                            Loading...
                         </div>
                     </template>
                 </div> 

@@ -12,10 +12,16 @@
                             <div class="small text-muted">Manage servers</div>
                         </div>
                         <div class="d-none d-md-block col-sm-7">
-                            <a :href="'/prev/server'" target="_blank" class="btn float-right btn-primary btn-sm mx-1">
-                                <i class="cil-print"></i>
-                                Cetak data servers
-                            </a>
+                        	<download-excel
+                                v-if="servers && typeof servers.data != 'undefined'"
+                                class="btn float-right btn-success btn-sm mx-1"
+                                :data = "servers.data"
+                                :fields="json_fields"
+                                :name="'Data server sekolah '+sekolah+'.xls'"
+                            >
+                                <i class="cil-cloud-download"></i>
+                                Download data servers
+                        	</download-excel>
                         </div>
                     </div>
                     <br>
@@ -122,11 +128,13 @@
 import { mapActions, mapState, mapGetters } from 'vuex'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
+import downloadExcel from 'vue-json-excel';
 
 export default {
 	name: 'DataServer',
 	components: {
-        vSelect
+        vSelect,
+        downloadExcel
     },
 	created() {
 		if(!this.$role('school')) {
@@ -139,6 +147,11 @@ export default {
 	},
 	data() {
 		return {
+			json_fields: {
+       	        'Server name' : 'server_name',
+       	        'Keterangan' : 'description',
+       	        'Password'	: 'password'
+            },
 			fields: [
 				{ key: 'show_details', label: 'Detail' },
 				{ key: 'server_name', label: 'Server name' },
@@ -208,8 +221,8 @@ export default {
                 }
             })
 		},
-		reserveServer($id) {
-			this.revertServer($id)
+		reserveServer(id) {
+			this.revertServer(id)
 			.then(() => {
 				this.$notify({
                   group: 'foo',

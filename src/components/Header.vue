@@ -15,7 +15,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right pt-0">
               <div class="dropdown-header bg-light py-2"><strong>Account</strong></div>
-              <a class="dropdown-item" @click.prevent="logout">
+              <a class="dropdown-item" href="#" @click.prevent="logout">
                 <i class="cil-account-logout"></i> &nbsp; Logout
               </a>
             </div>

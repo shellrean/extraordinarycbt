@@ -13,11 +13,16 @@
                         </div>
                     </div>
                     <br>
-					<b-table striped hover bordered :busy="isBusy" small :fields="fields" :items="banksoals" show-empty v-if="banksoals">
+					<b-table striped hover bordered :busy="isBusy" small :fields="fields" :items="banksoals.data" show-empty v-if="banksoals && typeof banksoals.data != 'undefined'"">
 						<template v-slot:cell(aksi)="row">
 							<router-link :to="{ name: 'koreksi.esay', params: { banksoal: row.item.id } }" class="btn btn-sm btn-primary"><i class="cil-task"></i> Koreksi banksoal ini</router-link>
 						</template>
 					</b-table>
+					<template v-else>
+                        <div class="text-center my-2">
+                            Loading...
+                        </div>
+                    </template>
 				</div>
 				<div class="card-footer">
 				</div>

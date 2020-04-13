@@ -9,7 +9,8 @@ const state = () => ({
 	essies: [],
 	sekolahs: [],
 	banksoals: [],
-	capaians: []
+	capaians: [],
+	events: []
 })
 
 const mutations = {
@@ -18,6 +19,9 @@ const mutations = {
 	},
 	ASSIGN_DATA_ALL(state, payload) {
 		state.ujianAll = payload
+	},
+	ASSIGN_DATA_EVENT(state, payload) {
+		state.events = payload
 	},
 	SET_PAGE(state, payload) {
 		state.page = payload
@@ -44,11 +48,27 @@ const mutations = {
 
 const actions = {
 	getUjians({ commit, state }, payload) {
-		let search = typeof payload != 'undefined' ? payload: ''
+		let search = typeof payload.search != 'undefined' ? payload.search: ''
+		let perPage = typeof payload.perPage != 'undefined' ? payload.perPage: ''
 		return new Promise((resolve, reject) => {
-			$axios.get(`/ujian?page=${state.page}&q=${search}`)
+			commit('SET_LOADING', true, { root: true })
+			$axios.get(`/ujian?page=${state.page}&q=${search}&perPage=${perPage}`)
 			.then((response) => {
 				commit('ASSIGN_DATA', response.data.data)
+				commit('SET_LOADING', false, { root: true })
+				resolve(response.data)
+			})
+			.catch((err) => {
+				commit('SET_LOADING', false, { root: true })
+				reject()
+			})
+		})
+	},
+	getEvents({ commit, state }, payload) {
+		return new Promise((resolve, reject) => {
+			$axios.get(`/event-ujian`)
+			.then((response) => {
+				commit('ASSIGN_DATA_EVENT', response.data)
 				resolve(response.data)
 			})
 			.catch((err) => {
@@ -143,6 +163,23 @@ const actions = {
 				}
 				commit('SET_LOADING', false, { root: true })
 				reject()
+			})
+		})
+	},
+	addEvent({ commit, state }, payload) {
+		return new Promise((resolve, reject) => {
+			commit('SET_LOADING', true, { roo: true })
+			$axios.post('/event-ujian', payload)
+			.then((response) => {
+				commit('SET_LOADING', false, { root: true })
+				resolve(response)
+			})
+			.catch((err) => {
+				if (error.response.status == 422) {
+					commit('SET_ERRORS', error.response.data.errors, { root: true })
+				}
+				commit('SET_LOADING', false, { root: true })
+				reject(err)
 			})
 		})
 	},

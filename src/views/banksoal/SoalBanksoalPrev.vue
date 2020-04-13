@@ -88,10 +88,6 @@
 		  margin-right: 40px;	  
 		}
 	}
-	.corect {
-			font-weight: bold;
-			color: yellow;
-	}
 	.paper {
 		max-width: 1140px;
 		padding-right: 15px;

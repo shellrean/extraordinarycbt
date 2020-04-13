@@ -105,8 +105,8 @@
                         </div>
                     </template>
                     <template v-else>
-                        <div class="text-center text-light my-2">
-                            <b-spinner small type="grow"></b-spinner>
+                        <div class="text-center my-2">
+                            Loading...
                         </div>
                     </template>
     			</div> 
@@ -117,6 +117,7 @@
 </template>
 <script>
 import { mapActions, mapState, mapGetters, mapMutations } from 'vuex'
+import _ from 'lodash'
 
 export default {
     name: 'DataMatpel',
@@ -197,7 +198,7 @@ export default {
     },
     watch: {
         page() {
-            this.getMatpels()
+            this.getMatpels({ search: this.search, perPage: this.perPage })
         },
         search:  _.debounce(function (value) {
             this.getMatpels({ search: this.search, perPage: this.perPage })

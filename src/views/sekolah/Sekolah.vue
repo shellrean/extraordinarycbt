@@ -4,9 +4,6 @@
 			<div class="card">
 				<div class="card-header">
 					<router-link :to="{ name: 'sekolah.add' }" class="btn btn-primary btn-sm" v-if="$can('create_sekolah')">Tambah sekolah</router-link>
-					<div class="float-right">
-						<input type="text" class="form-control" placeholder="Cari sekolah..." v-model="search">
-					</div>
 				</div>
 				<div class="card-body">
 					<div class="row">
@@ -14,8 +11,59 @@
                             <h4 id="traffic" class="card-title mb-0">Manage Sekolah</h4>
                             <div class="small text-muted">Buat edit dan hapus sekolah</div>
                         </div>
+                        <div class="d-none d-md-block col-sm-7">
+                            <download-excel
+                                v-if="sekolah && typeof sekolah.data != 'undefined'"
+                                class="btn float-right btn-success btn-sm mx-1"
+                                :data = "sekolah.data"
+                                :fields="json_fields"
+                                :name="'Data sekolah_page_'+$store.state.sekolah.page+'.xls'"
+                            >
+                                <i class="cil-cloud-download"></i>
+                                Download data sekolah
+                            </download-excel>
+                        </div>
                     </div>
                     <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <b-form-group
+                              label="Filter"
+                              label-cols-sm="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                              label-for="filterInput"
+                            >
+                              <b-input-group size="sm">
+                                <b-form-input
+                                  v-model="search"
+                                  type="search"
+                                  id="filterInput"
+                                  placeholder="Cari nama sekolah"
+                                ></b-form-input>
+                                <b-input-group-append>
+                                  <b-button :disabled="!search" @click="search = ''">Clear</b-button>
+                                </b-input-group-append>
+                              </b-input-group>
+                            </b-form-group>
+                            <b-form-group
+                              label="Per page"
+                              label-cols-sm="6"
+                              label-cols-md="4"
+                              label-cols-lg="3"
+                              label-align-sm="right"
+                              label-size="sm"
+                              label-for="perPageSelect"
+                            >
+                              <b-form-select
+                                v-model="perPage"
+                                id="perPageSelect"
+                                size="sm"
+                                :options="pageOptions"
+                              ></b-form-select>
+                            </b-form-group>
+                        </div>
+                    </div>
                     <template v-if="sekolah && typeof sekolah.data != 'undefined'">
 						<b-table sticky-header striped hover bordered small :fields="fields" :items="sekolah.data" v-if="sekolah" show-empty>
 							<template v-slot:cell(show_details)="row">
@@ -62,8 +110,8 @@
 	                    </div>
 	                </template>
 	                <template v-else>
-                        <div class="text-center text-light my-2">
-                            <b-spinner small type="grow"></b-spinner>
+                        <div class="text-center my-2">
+                        	Loading...
                         </div>
                     </template>
 				</div>
@@ -74,23 +122,35 @@
 </template>
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
+import downloadExcel from 'vue-json-excel';
+import _ from 'lodash'
 
 export default {
 	name: 'DataSekolah',
+	components: {
+		downloadExcel
+	},
 	created() {
-		this.getSekolah()
+		this.getSekolah({ perPage: this.perPage, search: this.search })
 		.catch(() => {
 			this.notifError()
 		})
 	},
 	data() {
 		return {
+			json_fields: {
+                'NO sekolah' : 'nis',
+                'Nama sekolah' : 'nama',
+                'Alamat' : 'alamat'
+            },
 			fields: [
 				{ key: 'show_details', label: 'Detail' },
 				{ key: 'nis',label: 'No Induk sekolah' },
 				{ key: 'nama', label: 'Nama sekolah' },
 				{ key: 'actions', label: 'Aksi'}
 			],
+			perPage: 20,
+            pageOptions: [20, 50, 100],
 			search: '',
 		}
 	},
@@ -123,7 +183,7 @@ export default {
                 if (result.value) {
                     this.removeSekolah(id)
                     .then(() => {
-                    	this.getSekolah()
+                    	this.getSekolah({ perPage: this.perPage, search: this.search })
                     	this.notifSuccess('Berhasil menghapus data sekolah');
                     })
                     .catch(() => {
@@ -151,16 +211,22 @@ export default {
 	},
 	watch: {
 		page() {
-			this.getSekolah()
+			this.getSekolah({ perPage: this.perPage, search: this.search })
 			.catch(() => {
 				this.notifError()
 			})
 		},
-		search() {
-			this.getSekolah(this.search)
+		search: _.debounce(function (value) {
+			this.getSekolah({ perPage: this.perPage, search: this.search })
 			.catch(() => {
 				this.notifError()
 			})
+		}, 500),
+		perPage() {
+			this.getSekolah({ perPage: this.perPage, search: this.search })
+			.catch(() => {
+				this.notifError()
+			})	
 		}
 	}
 }

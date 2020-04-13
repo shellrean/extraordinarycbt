@@ -48,8 +48,9 @@ const actions = {
 	getSekolah({ commit, state }, payload) {
 		return new Promise(( resolve, reject) => {
 			commit('SET_LOADING', true, { root: true })
-			let search = typeof payload != 'undefined' ? payload : ''
-			$axios.get(`/sekolah?page=${state.page}&q=${search}`)
+			let search = typeof payload.search != 'undefined' ? payload.search : ''
+			let perPage = typeof payload.perPage != 'undefined' ? payload.perPage : ''
+			$axios.get(`/sekolah?page=${state.page}&q=${search}&perPage=${perPage}`)
 			.then((response) => {
 				commit('ASSIGN_DATA', response.data.data)
 				commit('SET_LOADING', false, { root: true })

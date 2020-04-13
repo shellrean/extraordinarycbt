@@ -6,7 +6,7 @@
 					Daftar direktori tersedia
 				</div>
 				<div class="card-body">
-					<b-list-group>
+					<b-list-group v-if="directories">
 					  <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="(directory,index) in directories" :key="index">
 					    <router-link :to="{ name: 'filemedia.directory', params: { 'directory_id' : directory.id } }">{{ directory.name }}</router-link> 
 					    <div>
@@ -15,6 +15,11 @@
 					    </div>
 					  </b-list-group-item>
 					</b-list-group>
+					<template v-else>
+                        <div class="text-center my-2">
+                            Loading...
+                        </div>
+                    </template>
 				</div>
 			</div>
 		</div>
