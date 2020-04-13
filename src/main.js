@@ -29,7 +29,8 @@ const options = {
     'scrollbars=yes'
   ],
   styles: [
-    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
+    'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',
+    '/css/free.min.css'
   ]
 }
 
