@@ -90,7 +90,8 @@
                     </template>
 				</div>
 				<div class="card-footer">
-
+					<strong>Sematic Nama event : </strong> <u>namaEvent tahun</u> <strong>Contoh : </strong> USBN 2020 <br>
+					<strong>Sematic Nama ujian : </strong> <u>beri nama sesuai ujian banksoal yang didaftarkan</u> <strong>Contoh : </strong> Matematika Teknik
 				</div>
 			</div>
 		</div>

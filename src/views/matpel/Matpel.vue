@@ -110,7 +110,9 @@
                         </div>
                     </template>
     			</div> 
-                <div class="card-footer"></div>
+                <div class="card-footer">
+                    <strong>Sematic kode matpel : </strong> <u>kode-nomor-kategori</u> <strong>Contoh :</strong> BC-012-U (U: Umum, A: Agama, K: khusus)
+                </div>
     		</div>
     	</div>
     </div>

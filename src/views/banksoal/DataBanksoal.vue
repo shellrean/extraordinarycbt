@@ -105,7 +105,9 @@
                         </div>
                     </template>
                 </div> 
-                <div class="card-footer"></div>
+                <div class="card-footer">
+                    <strong>Sematic kode banksoal : </strong> <u>kode-matpel(singkat)-tahun</u> <strong>Contoh : </strong> E3D-MTK-2020
+                </div>
             </div>
         </div>
         <b-modal id="modal-scoped" size="md">

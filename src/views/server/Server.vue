@@ -78,7 +78,9 @@
                         </div>
                     </div>
 				</div>
-				<div class="card-footer"></div>
+				<div class="card-footer">
+					<strong>Sematic kode server : </strong> <u>kodeSekolah-kodeAcak</u> <strong>Contoh : </strong> K0104002S-QRT
+				</div>
 			</div>
 			<div class="card" v-if="$role('school')">
 				<div class="card-header">
