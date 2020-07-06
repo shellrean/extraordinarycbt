@@ -33,7 +33,7 @@ export default {
 		...mapActions('sekolah',['submitSekolah']),
 		submit() {
 			this.submitSekolah()
-			.then(() => {
+			.then((res) => {
 				this.$notify({
 	                group: 'foo',
 	                title: 'Success',
@@ -42,7 +42,7 @@ export default {
 	            })
 				this.$router.replace({ name: 'sekolah.data' })
 			})
-			.catch(() => {
+			.catch((error) => {
 				this.$notify({
 	                group: 'foo',
 	                title: 'Error',
