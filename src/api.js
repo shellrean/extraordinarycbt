@@ -5,7 +5,7 @@ import router from './router';
 const $axios = axios.create({
 	baseURL: process.env.VUE_APP_API_SERVER+'/api/v1',
 	headers: {
-		'Content-Type' : 'application/json'
+		'Accept': 'application/json'
 	}
 })
 

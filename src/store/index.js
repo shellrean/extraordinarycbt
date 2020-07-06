@@ -12,6 +12,7 @@ import soal from './soal.js'
 import filemedia from './filemedia.js'
 import ujian from './ujian.js'
 import heager from './heager.js'
+import jurusan from './jurusan.js'
 
 Vue.use(Vuex)
 
@@ -27,7 +28,8 @@ export default new Vuex.Store({
     soal,
     filemedia,
     ujian,
-    heager
+    heager,
+    jurusan
   },
   state: {
     errors: [],

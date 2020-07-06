@@ -61,7 +61,7 @@ const actions = {
 				resolve(response.data)
 			})
             .catch((err) => {
-                commit('SET_LOADING', true, { root: true })
+                commit('SET_LOADING', false, { root: true })
                 reject()
             })
 		}) 

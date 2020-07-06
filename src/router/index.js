@@ -19,6 +19,11 @@ const DataMatpel = () => import('../views/matpel/Matpel.vue')
 const AddMatpel = () => import('../views/matpel/Add.vue')
 const EditMatpel = () => import('../views/matpel/Edit.vue')
 
+import JurusanIndex from '../views/jurusan/Index.vue'
+const DataJurusan = () => import('../views/jurusan/Jurusan.vue')
+const EditJurusan = () => import('../views/jurusan/Edit.vue')
+const AddJurusan = () => import('../views/jurusan/Add.vue')
+
 import PesertaIndex from '../views/peserta/Index.vue'
 const DataPeserta = () => import('../views/peserta/Peserta.vue')
 const AddPeserta = () => import('../views/peserta/Add.vue')
@@ -138,6 +143,31 @@ const routes = [
         name: 'matpel.edit',
         component: EditMatpel,
         meta: { title: 'Edit mata pelajaran' }
+      }
+    ]
+  },
+  {
+    path: '/jurusan',
+    component: JurusanIndex,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'jurusan.data',
+        component: DataJurusan,
+        meta: { title: 'Manage jurusan' }
+      },
+      {
+        path: 'add',
+        name: 'jurusan.add',
+        component: AddJurusan,
+        meta: { title: 'Tambah jurusan' }
+      },
+      {
+        path: 'edit/:id',
+        name: 'jurusan.edit',
+        component: EditJurusan,
+        meta: { title: 'Edit nama jurusan' }
       }
     ]
   },

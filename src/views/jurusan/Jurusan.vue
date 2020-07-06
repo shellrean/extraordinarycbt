@@ -3,13 +3,13 @@
     	<div class="col-md-12">
     		<div class="card">
     			<div class="card-header">
-                    <router-link :to="{ name: 'matpel.add' }" v-if="$can('create_matpel')" class="btn btn-primary btn-sm">Tambah matpel</router-link>
+                    <router-link :to="{ name: 'jurusan.add' }" class="btn btn-primary btn-sm">Tambah jurusan</router-link>
     			</div>
     			<div class="card-body">
                     <div class="row">
                         <div class="col-sm-5">
-                            <h4 id="traffic" class="card-title mb-0">Manage Matpel</h4>
-                            <div class="small text-muted">Buat edit dan hapus matpel</div>
+                            <h4 id="traffic" class="card-title mb-0">Manage Jurusan</h4>
+                            <div class="small text-muted">Buat edit dan hapus jurusan</div>
                         </div>
                     </div>
                     <br>
@@ -27,7 +27,7 @@
                                   v-model="search"
                                   type="search"
                                   id="filterInput"
-                                  placeholder="Cari dengan nama matpel"
+                                  placeholder="Cari nama jurusan"
                                 ></b-form-input>
                                 <b-input-group-append>
                                   <b-button :disabled="!search" @click="search = ''">Clear</b-button>
@@ -52,52 +52,34 @@
                             </b-form-group>
                         </div>
                     </div>
-                    <template v-if="matpels && typeof matpels.data != 'undefined'">
+                    <template v-if="jurusans && typeof jurusans.data != 'undefined'">
                         <b-table 
                         id="table-transition-example"
                         primary-key="kode_mapel" :tbody-transition-props="transProps"
                         striped hover bordered small show-empty
                         :fields="fields" 
-                        :items="matpels.data" 
+                        :items="jurusans.data" 
                         >
-                            <template v-slot:cell(show_details)="row">
-                                <b-button size="sm" @click="row.toggleDetails" :variant="row.detailsShowing ? 'danger' : 'info'"><i :class="row.detailsShowing ? 'cil-chevron-top' : 'cil-chevron-bottom'" /></b-button>
-                            </template>
-                            <template v-slot:row-details="row">
-                                <b-card>
-                                    <b-badge variant="success" class="mr-1" v-show="row.item.jurusans == 0 && row.item.agama == 0">umum</b-badge>
-                                    <b-badge variant="success" class="mr-1" v-show="row.item.jurusans != 0">khusus</b-badge>
-                                    <b-badge variant="success" class="mr-1" v-show="row.item.agama != 0">agama</b-badge>
-                                    <b-badge variant="info" class="mr-1" v-if="row.item.agama != 0" v-text="row.item.agama">agama</b-badge>
-                                    <b-badge variant="info" class="mr-1" v-if="row.item.jurusans != 0" v-for="(jur, index) in row.item.jurusans" v-text="jur.nama" :key="index"></b-badge>
-                                    <hr>
-                                    <b-badge variant="info" class="mr-1">Pengoreksi</b-badge>
-                                    <b-badge variant="success" class="mr-1" v-if="row.item.correctors_name != 0" v-for="(corector, index) in row.item.correctors_name" v-text="corector.name" :key="index"></b-badge>
-                                </b-card>
-                            </template>
-                            <template v-slot:cell(nama)="row">
-                                {{ row.item.nama }} 
-                            </template>
-                            <template v-slot:cell(actions)="row">
-                                <router-link :to="{ name: 'matpel.edit', params: { id: row.item.id } }" class="btn btn-warning btn-sm mr-1" v-if="$can('edit_matpel')">
-                                    <i class="cil-pencil"></i> Edit
-                                </router-link>
-                                <button v-if="$can('delete_matpel')" class="btn btn-danger btn-sm" @click="deleteMatpel(row.item.id)" :disabled="isLoading">
-                                    <i class="cil-trash"></i> Hapus
-                                </button>
-                            </template>
+                        <template v-slot:cell(actions)="row">
+                            <router-link :to="{ name: 'jurusan.edit', params: { id: row.item.id } }" class="btn btn-warning btn-sm mr-1">
+                                <i class="cil-pencil"></i> Edit
+                            </router-link>
+                            <button class="btn btn-danger btn-sm" @click="deleteJurusan(row.item.id)" :disabled="isLoading">
+                                <i class="cil-trash"></i> Hapus
+                            </button>
+                        </template>
                         </b-table>
                         <div class="row">
                             <div class="col-md-6">
-                                <p><i class="fa fa-bars"></i> {{ matpels.data.length }} item dari {{ matpels.total }} total data</p>
+                                <p><i class="fa fa-bars"></i> {{ jurusans.data.length }} item dari {{ jurusans.total }} total data</p>
                             </div>
                             <div class="col-md-6">
                                 <div class="float-right">
                                     <b-pagination
                                         size="sm"
                                         v-model="page"
-                                        :total-rows="matpels.total"
-                                        :per-page="matpels.per_page"
+                                        :total-rows="jurusans.total"
+                                        :per-page="jurusans.per_page"
                                         :disabled="isLoading"
                                         ></b-pagination>
                                 </div>
@@ -109,22 +91,19 @@
                             Loading...
                         </div>
                     </template>
-    			</div> 
-                <div class="card-footer">
-                    <strong>Sematic kode matpel : </strong> <u>kode-nomor-kategori</u> <strong>Contoh :</strong> BC-012-U (U: Umum, A: Agama, K: khusus)
                 </div>
-    		</div>
-    	</div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
 import { mapActions, mapState, mapGetters, mapMutations } from 'vuex'
 import _ from 'lodash'
-
+    
 export default {
-    name: 'DataMatpel',
+    name: 'DataJurusan',
     created() {
-        this.getMatpels({ perPage : this.perPage })
+        this.getJurusans({ perPage : this.perPage })
     },
     data() {
         return {
@@ -132,40 +111,34 @@ export default {
               name: 'flip-list'
             },
             fields: [
-                { key: 'show_details', label: 'Detail' },
-                { key: 'kode_mapel', label: 'Kode matpel', sortable: true},
-                { key: 'nama', label: 'Nama mata pelajaran', sortable: true},
-                { key: 'actions', label: 'Aksi' }
+               { key: 'id', label: 'ID Jurusan' },
+               { key: 'nama', label: 'Nama' },
+               { key: 'actions', label: 'Aksi' } 
             ],
-            perPage: 20,
-            pageOptions: [20, 50, 100],
+            perPage: 30,
+            pageOptions: [30, 100, 200],
             search: '',
-            data: {
-                nama: '',
-                kode_mapel: ''
-            },
             isBusy: true
         }
     },
     computed: {
         ...mapGetters(['isLoading']),
         ...mapState(['errors']),
-        ...mapState('matpel', {
-            matpels: state => state.matpels,
-            from: state => state.from
+        ...mapState('jurusan', {
+            jurusans: state => state.jurusans
         }),
         page: {
             get() {
-                return this.$store.state.matpel.page
+                return this.$store.state.jurusan.page
             },
             set(val) {
-                this.$store.commit('matpel/SET_PAGE', val)
+                this.$store.commit('jurusan/SET_PAGE', val)
             }
         }
     },
     methods: {
-        ...mapActions('matpel', ['getMatpels','removeMatpel']),
-        deleteMatpel(id) {
+        ...mapActions('jurusan', ['getJurusans', 'removeJurusan']),
+        deleteJurusan(id) {
             this.$swal({
                 title: 'Informasi',
                 text: "Tindakan ini akan menghapus secara permanent!",
@@ -176,14 +149,14 @@ export default {
                 confirmButtonText: 'Iya, Lanjutkan!'
             }).then((result) => {
                 if (result.value) {
-                    this.removeMatpel(id)
+                    this.removeJurusan(id)
                     .then(() => {
-                        this.getMatpels({ perPage : this.perPage });
+                        this.getJurusans({ perPage : this.perPage });
                         this.$notify({
                             group: 'foo',
                             title: 'Sukses',
                             type: 'success',
-                            text: 'Data matpel berhasil dihapus.'
+                            text: 'Data jurusan berhasil dihapus.'
                         })
                     })
                     .catch((err) => {
@@ -200,14 +173,14 @@ export default {
     },
     watch: {
         page() {
-            this.getMatpels({ search: this.search, perPage: this.perPage })
+            this.getJurusans({ search: this.search, perPage: this.perPage })
         },
         search:  _.debounce(function (value) {
-            this.getMatpels({ search: this.search, perPage: this.perPage })
+            this.getJurusans({ search: this.search, perPage: this.perPage })
         }, 500),
         perPage() {
-            this.getMatpels({ search: this.search, perPage: this.perPage })
+            this.getJurusans({ search: this.search, perPage: this.perPage })
         }
-    },
+    }
 }
 </script>

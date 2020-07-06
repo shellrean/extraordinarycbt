@@ -26,6 +26,9 @@
           </a>
 
           <ul class="c-sidebar-nav-dropdown-items">
+            <li class="c-sidebar-nav-item">
+              <router-link class="c-sidebar-nav-link" to="/jurusan"> <span class="c-sidebar-nav-icon"></span> Jurusan</router-link>
+            </li>
             <li class="c-sidebar-nav-item" v-if="$can('peserta')">
               <router-link class="c-sidebar-nav-link" to="/peserta">
                 <span class="c-sidebar-nav-icon"></span> Peserta
