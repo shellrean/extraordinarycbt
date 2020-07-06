@@ -360,6 +360,7 @@ router.beforeEach((to, from , next) => {
 
 router.afterEach(() => {
   store.commit('LOADING_PAGE', false)
+  store.commit('SET_LOADING', false)
 })
 
 export default router
