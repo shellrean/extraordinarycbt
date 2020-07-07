@@ -1,4 +1,5 @@
 module.exports = {
+	runtimeCompiler: true,
 	pwa: {
 		name: 'Extraordinary CBT',
 		themeColor: '#636f83',

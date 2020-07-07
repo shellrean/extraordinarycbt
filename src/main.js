@@ -8,6 +8,7 @@ import Notifications from 'vue-notification'
 import VueSweetalert2 from 'vue-sweetalert2'
 import BootstrapVue from 'bootstrap-vue'
 import VueHtmlToPaper from 'vue-html-to-paper';
+import CKEditor from 'ckeditor4-vue';
 
 import Permissions from './mixins/Permission.js'
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -41,6 +42,7 @@ Vue.use(CoreuiVue)
 Vue.use(Notifications)
 Vue.use(BootstrapVue)
 Vue.use(VueSweetalert2)
+Vue.use( CKEditor );
 
 import { mapActions, mapGetters } from 'vuex'
 import './registerServiceWorker'

@@ -13,6 +13,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">
+                    <ckeditor v-model="editorData" :config="editorConfig"></ckeditor>
                     <div class="form-group">
                       <label>Tipe soal</label>
                       <select class="form-control" v-model="tipe_soal">
@@ -48,14 +49,14 @@
                     <div class="form-group" v-if="direction != ''">
                       <label>File direction</label>
                       <div class="input-group">
-                        <audio-player :file="baseURL+'/storage/audio/'+direction"></audio-player>
+                        <audio-player :file="'/storage/audio/'+direction"></audio-player>
                         <b-button size="sm" variant="danger" @click="removeDirection"><i class="cil-x"></i></b-button>
                       </div>
                     </div>
                     <div class="form-group" v-if="audio != ''">
                       <label>File audio</label>
                       <div class="input-group">
-                        <audio-player :file="baseURL+'/storage/audio/'+audio"></audio-player>
+                        <audio-player :file="'/storage/audio/'+audio"></audio-player>
                         <b-button size="sm" variant="danger" @click="removeAudio"><i class="cil-x"></i></b-button>
                       </div>
                     </div>
@@ -488,9 +489,22 @@
   </div>
 </template>
 <script>
-import Image from './Image.js'
-import $axios from '@/api.js'
-
+import axios from 'axios'
+import store from '@/store'
+import Image from './Image.js';
+async function upload(file) {
+  console.log('okeee')
+  let formData = new FormData();
+  formData.append('image', file);
+  const headers = {
+    'Accept': 'application/json',
+    'Authorization' : 'Bearer '+store.state.token,
+    'Content-Type': 'multipart/form-data'
+  };
+  const response = await axios.post('http://localhost/api/v1/upl-d', formData, {headers: headers} );
+  console.log(response.data.src)
+  return response.data.src;
+}
 import { mapActions, mapState, mapGetters, mapMutations } from 'vuex'
 import { Editor, EditorContent, EditorFloatingMenu,EditorMenuBar } from 'tiptap'
 import {
@@ -515,6 +529,7 @@ import {
   Underline,
   History,
   Placeholder,
+  // Image,
 } from 'tiptap-extensions'
 import AudioPlayer from '../../components/AudioPlayer.vue'
 export default {
@@ -529,11 +544,15 @@ export default {
   },
   data() {
     return {
+      editorData: '<p>Content of the editor.</p>',
+      editorConfig: {
+          // The configuration of the editor.
+      },
       correct: '',
       question : new Editor({
         extensions: [
           new Blockquote(),
-          new Image(null, null, this.upload),
+          new Image(null, null, upload),
           new BulletList(),
           new CodeBlock(),
           new HardBreak(),
@@ -602,7 +621,8 @@ export default {
       labelDirection: '',
       label: '',
       image: '',
-      baseURL: process.env.VUE_APP_API_SERVER
+      baseURL: process.env.VUE_APP_API_SERVER,
+      
     }
   },
   computed: {
@@ -625,21 +645,14 @@ export default {
     }
   },
   filters: {
-		charIndex(i) {
-			return String.fromCharCode(97 + i)
-		}
-	},
+    charIndex(i) {
+      return String.fromCharCode(97 + i)
+    }
+  },
   methods: {
     ...mapActions('filemedia', ['getContentFilemedia','getDirectories','uploadFileAudio','getDirectory','addFilemedia']),
     ...mapActions('banksoal',['addSoalBanksoal','getBanksoal']),
     ...mapMutations(['CLEAR_ERRORS','SET_LOADING']),
-    async upload(file) {
-      let formData = new FormData();
-      formData.append('image', file);
-      formData.append('directory_id', this.banksoal.directory_id)
-      const response = await $axios.post('directory/filemedia', formData);
-      return this.baseURL+'/storage/'+response.data.data.dirname+'/'+response.data.data.filename
-    },
     postSoalBanksoal() {
       if (this.correct === '' && this.tipe_soal == 1) {
         this.$swal({

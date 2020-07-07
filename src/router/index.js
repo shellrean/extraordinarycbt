@@ -34,6 +34,7 @@ import BanksoalIndex from '../views/banksoal/Index.vue'
 const DataBanksoal = () => import('../views/banksoal/DataBanksoal.vue')
 const SoalBanksoal = () => import('../views/banksoal/SoalBanksoal.vue')
 const SoalBanksoalTambah = () => import('../views/banksoal/SoalBanksoalTambah.vue')
+const SoalBanksoalTemplate = () => import('../views/banksoal/SoalBanksoalTemplate.vue')
 const SoalBanksoalEdit = () => import('../views/banksoal/SoalBanksoalEdit.vue')
 const SoalBanksoalPrev = () => import('../views/banksoal/SoalBanksoalPrev.vue')
 
@@ -223,6 +224,12 @@ const routes = [
         path: 'soal/:banksoal_id/tambah',
         name: 'banksoal.soal.tambah',
         component: SoalBanksoalTambah,
+        meta: { title: 'Tambah soal' }
+      },
+      {
+        path: 'soal/:banksoal_id/paste',
+        name: 'banksoal.soal.paste',
+        component: SoalBanksoalTemplate,
         meta: { title: 'Tambah soal' }
       },
       {

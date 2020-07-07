@@ -4,7 +4,8 @@
             <div class="card">
                 <div class="card-header">
                     <router-link :to="{ name: 'banksoal.data' }" class="btn btn-light btn-sm mr-1">Kembali</router-link>
-                    <router-link :to="{ name: 'banksoal.soal.tambah', params: { 'banksoal_id' : $route.params.banksoal_id } }" class="btn btn-primary btn-sm  ">Tambah pertanyaan</router-link>
+                    <router-link :to="{ name: 'banksoal.soal.tambah', params: { 'banksoal_id' : $route.params.banksoal_id } }" class="btn btn-primary btn-sm ">Tambah pertanyaan</router-link>
+                    <router-link :to="{ name: 'banksoal.soal.paste', params: { 'banksoal_id' : $route.params.banksoal_id } }" class="btn btn-primary ml-1 btn-sm  ">Paste pertanyaan</router-link>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -75,10 +76,12 @@
     					        <b-card>
                                   <div v-if="row.item.direction != null" class="mb-3">
                                     <strong>Direction</strong><br>
-                                    <audio-player :file="'/storage/audio/'+row.item.direction"></audio-player>
+                                    <audio-player :file="baseURL+'/storage/audio/'+row.item.direction"></audio-player>
                                   </div>
     					          <div v-html="row.item.pertanyaan"></div>
-    					          <div v-if="row.item.audio != null" class="mb-2"><audio-player :file="'/storage/audio/'+row.item.audio"></audio-player></div>
+    					          <div v-if="row.item.audio != null" class="mb-2">
+                                    <audio-player :file="baseURL+'/storage/audio/'+row.item.audio"></audio-player>
+                                </div>
     					          <table class="table" v-if="row.item.jawabans != ''">
     					          	<tr v-for="(jawab, index) in row.item.jawabans" :key="index">
                                         <td width="20px">
@@ -157,7 +160,8 @@ export default {
             perPage: 10,
             pageOptions: [10, 25, 50],
 			search: '',
-            isBusy: true
+            isBusy: true,
+            baseURL: process.env.VUE_APP_API_SERVER
 		}
 	},
 	computed: {
@@ -208,7 +212,7 @@ export default {
                         this.$notify({
                             group: 'foo',
                             title: 'Error',
-                            type: 'errir',
+                            type: 'error',
                             text: 'Terjadi kesalahan.'
                         })
                     })
