@@ -488,7 +488,7 @@
   </div>
 </template>
 <script>
-import Image from './Image.js'
+import Image from '@/mixins/Image.js'
 import $axios from '@/api.js'
 
 import { mapActions, mapState, mapGetters, mapMutations } from 'vuex'

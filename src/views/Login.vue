@@ -78,7 +78,7 @@ export default {
         this.$notify({
           group: 'foo',
           title: 'Error',
-          type: 'errir',
+          type: 'error',
           text: 'Terjadi kesalahan.'
         })
       })
