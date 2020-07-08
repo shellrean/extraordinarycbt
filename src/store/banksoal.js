@@ -64,7 +64,7 @@ const actions = {
             })
         })
     },
-	addBanksoal({ commit }, payload) {g
+	addBanksoal({ commit }, payload) {
         return new Promise((resolve, reject) => {
             commit('SET_LOADING',true, { root: true })
             $axios.post(`/banksoal`, payload)
