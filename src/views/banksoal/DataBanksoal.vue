@@ -259,11 +259,11 @@ export default {
             }).then((result) => {
                 if (result.value) {
                     this.removeBanksoal(id)
-                    .then(() => {
+                    .then((res) => {
                         this.getBanksoals({ perPage: this.perPage })
                         this.success('Banksoal berhasil dihapus.')
                     })
-                    .catch(() => {
+                    .catch((err) => {
                         this.error('Terjadi kesalahan saat menghapus banksoal')
                     })
                 }

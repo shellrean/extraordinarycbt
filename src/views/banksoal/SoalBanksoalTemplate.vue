@@ -3,7 +3,9 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <router-link :to="{ name: 'banksoal.soal', params: { 'banksoal_id' : $route.params.banksoal_id } }" class="btn btn-light btn-sm">Kembali</router-link>
+          <router-link :to="{ name: 'banksoal.soal', params: { 'banksoal_id' : $route.params.banksoal_id } }" class="btn btn-light btn-sm mr-1">Kembali</router-link>
+          <a :href="baseURL+'/download/format-input-soal-pg.docx'" class="btn btn-primary btn-sm mr-1" download>Download format PG</a>
+          <a :href="baseURL+'/download/format-input-soal-esay.docx'" class="btn btn-primary btn-sm" download>Download format Esay</a>        
         </div>
         <div class="card-body">
             <div class="card">
@@ -77,11 +79,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions('banksoal',['addPasteSoalBanksoal']),
+    ...mapActions('banksoal',['getBanksoal','addPasteSoalBanksoal']),
     async simpan() {
       try {
         let provider = await this.addPasteSoalBanksoal({
-          paste: this.editorData,
+          soal: this.editorData,
           banksoal_id: this.$route.params.banksoal_id,
           tipe_soal: this.tipe_soal
         })

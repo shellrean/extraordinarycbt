@@ -90,11 +90,11 @@ const actions = {
 			$axios.delete(`/soal/banksoal/${payload}`)
 			.then((response) => {
 				commit('SET_LOADING',false, { root: true })
-				resolve(response.data)
+				resolve(response)
 			})
 			.catch((err) => {
 				commit('SET_LOADING',false, { root: true })
-				reject()
+				reject(err)
 			})
 		})
 	}

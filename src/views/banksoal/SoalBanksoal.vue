@@ -199,8 +199,8 @@ export default {
             }).then((result) => {
                 if (result.value) {
                     this.removeSoal(id)
-                    .then(() => {
-                        this.getAllSoal()
+                    .then((res) => {
+                        this.getAllSoal({ search: this.search, perPage: this.perPage })
                         this.$notify({
                             group: 'foo',
                             title: 'Sukses',

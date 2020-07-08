@@ -40,20 +40,6 @@ const actions = {
             })
 		}) 
     },
-    addPasteSoalBanksoal({ commit, state }, payload) {
-        commit('SET_LOADING', true, { root: true })
-        return new Promise(async (resolve, reject) => {
-            try {
-                let network = await $axios.post('soal/banksoal/paste', payload)
-
-                commit('SET_LOADING', false, { root: true })
-                resolve(network.data)
-            } catch (error) {
-                commit('SET_LOADING', false, { root: true })
-                reject(error.response)
-            }
-        })
-    },
     getAllBanksoals({ commit, state }, payload) {
 		let search = typeof payload != 'undefined' ? payload : ''
 		return new Promise(( resolve, reject ) =>  {
@@ -78,7 +64,7 @@ const actions = {
             })
         })
     },
-	addBanksoal({ commit }, payload) {
+	addBanksoal({ commit }, payload) {g
         return new Promise((resolve, reject) => {
             commit('SET_LOADING',true, { root: true })
             $axios.post(`/banksoal`, payload)
@@ -112,6 +98,20 @@ const actions = {
                     reject()
                 }
             })
+        })
+    },
+    addPasteSoalBanksoal({ commit, state }, payload) {
+        commit('SET_LOADING', true, { root: true })
+        return new Promise(async (resolve, reject) => {
+            try {
+                let network = await $axios.post('soal/banksoal/paste', payload)
+
+                commit('SET_LOADING', false, { root: true })
+                resolve(network.data)
+            } catch (error) {
+                commit('SET_LOADING', false, { root: true })
+                reject(error.response)
+            }
         })
     },
     getDataById({ commit }, payload) {
