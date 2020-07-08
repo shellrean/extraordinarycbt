@@ -55,7 +55,7 @@ const actions = {
             commit('SET_LOADING', true, { root: true })
             $axios.get(`/banksoal/${payload}`)
             .then((response) => {
-                commit('ASSIGN_FORM', response.data)
+                commit('ASSIGN_FORM', response.data.data)
                 commit('SET_LOADING', false, { root: true })
                 resolve()
             })

@@ -606,7 +606,7 @@ export default {
     ...mapGetters(['isLoading']),
     ...mapState(['errors']),
     ...mapState('banksoal',{
-      banksoal: state => state.banksoal.data
+      banksoal: state => state.banksoal
     }),
     ...mapState('filemedia', {
       contentDirectory: state => state.contentFilemedia,
