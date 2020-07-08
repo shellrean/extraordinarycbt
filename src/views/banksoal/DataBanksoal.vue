@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <b-button @click="$bvModal.show('modal-scoped')" v-if="$can('create_banksoal')" size="sm" variant="primary">Tambah banksoal</b-button>
+                    <b-button @click="showModalCreate" v-if="$can('create_banksoal')" size="sm" variant="primary">Tambah banksoal</b-button>
                 </div>
                 <div class="card-body">
                      <div class="row">
@@ -128,17 +128,41 @@
             </div>
             <div class="form-group">
                 <label>Jumlah soal pilihan ganda</label>
-                <input type="number" class="form-control" :class="{ 'is-invalid' : errors.jumlah_soal }" v-model="data.jumlah_soal" placeholder="Jumlah soal pilihan ganda">
+                <div class="input-group">
+                    <div class="input-group-prepend" v-show="data.jumlah_soal > 0">
+                        <button class="btn btn-outline-secondary" type="button" @click="data.jumlah_soal -= 1"><b>-</b></button>
+                    </div>
+                    <input type="number" class="form-control" :class="{ 'is-invalid' : errors.jumlah_soal }" v-model="data.jumlah_soal" placeholder="Jumlah soal pilihan ganda">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" @click="data.jumlah_soal += 1"><b>+</b></button>
+                    </div>
+                </div>
                 <p class="text-danger" v-if="errors.jumlah_soal">{{ errors.jumlah_soal[0] }}</p>
             </div>
             <div class="form-group">
                 <label>Jumlah soal esay</label>
-                <input type="number" class="form-control" :class="{ 'is-invalid' : errors.jumlah_soal_esay }" v-model="data.jumlah_soal_esay" placeholder="Jumlah soal esay">
+                <div class="input-group">
+                    <div class="input-group-prepend" v-show="data.jumlah_soal_esay > 0">
+                        <button class="btn btn-outline-secondary" type="button" @click="data.jumlah_soal_esay -= 1"><b>-</b></button>
+                    </div>
+                    <input type="number" class="form-control" :class="{ 'is-invalid' : errors.jumlah_soal_esay }" v-model="data.jumlah_soal_esay" placeholder="Jumlah soal esay">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" @click="data.jumlah_soal_esay += 1"><b>+</b></button>
+                    </div>
+                </div>
                 <p class="text-danger" v-if="errors.jumlah_soal_esay">{{ errors.jumlah_soal_esay[0] }}</p>
             </div>
             <div class="form-group">
                 <label>Jumlah opsi</label>
-                <input type="number" class="form-control" :class="{ 'is-invalid' : errors.jumlah_pilihan }" v-model="data.jumlah_pilihan" placeholder="Jumlah opsi">
+                <div class="input-group">
+                    <div class="input-group-prepend" v-show="data.jumlah_pilihan > 0">
+                        <button class="btn btn-outline-secondary" type="button" @click="data.jumlah_pilihan -= 1"><b>-</b></button>
+                    </div>
+                    <input type="number" class="form-control" :class="{ 'is-invalid' : errors.jumlah_pilihan }" v-model="data.jumlah_pilihan" placeholder="Jumlah opsi">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" @click="data.jumlah_pilihan += 1"><b>+</b></button>
+                    </div>
+                </div>
                 <p class="text-danger" v-if="errors.jumlah_pilihan">{{ errors.jumlah_pilihan[0] }}</p>
             </div>
             <template v-slot:modal-footer="{ ok, cancel}">
@@ -159,6 +183,7 @@ import { mapActions, mapState, mapGetters } from 'vuex'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css';
 import _ from 'lodash'
+import { generateBanksoalCode } from '@/mixins/generate'
 
 export default {
     name: 'DataBanksoal',
@@ -219,6 +244,10 @@ export default {
     methods: {
         ...mapActions('banksoal', ['getBanksoals','addBanksoal','removeBanksoal','getDataById','updateDataBanksoal']),
         ...mapActions('matpel',['getAllMatpels']),
+        showModalCreate() {
+            this.data.kode_banksoal = generateBanksoalCode()
+            this.$bvModal.show('modal-scoped')
+        },
         postBanksoal() {
             this.addBanksoal({
                 kode_banksoal : this.data.kode_banksoal,

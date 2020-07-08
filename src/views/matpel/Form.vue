@@ -51,6 +51,7 @@ import { mapState, mapMutations, mapActions } from 'vuex'
 import vSelect from 'vue-select'
 import Multiselect from 'vue-multiselect'
 import 'vue-select/dist/vue-select.css';
+import { generateMatpelCode } from '@/mixins/generate'
 
 export default {
 	name: 'FormMatpel',
@@ -98,6 +99,11 @@ export default {
 			if(this.matpel.agama_id != 0) {
 				this.agama = 1
 			}
+		}
+	},
+	mounted() {
+		if(this.$route.name == 'matpel.add') {
+			this.matpel.kode_mapel = generateMatpelCode()
 		}
 	}
 }
