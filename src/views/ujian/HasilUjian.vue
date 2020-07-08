@@ -25,8 +25,10 @@
 							</div>
 						</div>
 					</div>
+					<div class="table-responsive-md">
 					<b-table v-if="ujians && ujians.data" striped hover bordered :busy="isBusy" small :fields="fields" :items="ujians.data" show-empty>
-          </b-table>
+          			</b-table>
+          			</div>
 				</div>
 				<div class="card-footer">
 				</div>

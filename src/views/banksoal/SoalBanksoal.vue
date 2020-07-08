@@ -3,9 +3,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <router-link :to="{ name: 'banksoal.data' }" class="btn btn-light btn-sm mr-1">Kembali</router-link>
-                    <router-link :to="{ name: 'banksoal.soal.tambah', params: { 'banksoal_id' : $route.params.banksoal_id } }" class="btn btn-primary btn-sm ">Tambah pertanyaan</router-link>
-                    <router-link :to="{ name: 'banksoal.soal.paste', params: { 'banksoal_id' : $route.params.banksoal_id } }" class="btn btn-primary ml-1 btn-sm  ">Paste pertanyaan</router-link>
+                    <router-link :to="{ name: 'banksoal.data' }" class="btn btn-light btn-sm mr-1 mt-1">Kembali</router-link>
+                    <router-link :to="{ name: 'banksoal.soal.tambah', params: { 'banksoal_id' : $route.params.banksoal_id } }" class="btn btn-primary mr-1 btn-sm mt-1">Tambah pertanyaan</router-link>
+                    <router-link :to="{ name: 'banksoal.soal.paste', params: { 'banksoal_id' : $route.params.banksoal_id } }" class="btn btn-primary btn-sm  mt-1">Paste pertanyaan</router-link>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -13,7 +13,7 @@
                             <h4 id="traffic" class="card-title mb-0">Manage Soal</h4>
                             <div class="small text-muted">Tambah lihat edit dan hapus soal pada banksoal dipilih </div>
                         </div>
-                        <div class="d-none d-md-block col-sm-7">
+                        <div class="d-md-block col-sm-7">
                             <router-link :to="{ name: 'banksoal.prev', params: { 'banksoal_id' : $route.params.banksoal_id }}" class="btn float-right btn-primary btn-sm mx-1">
                                 <i class="cil-print"></i>
                                 Preview banksoal
@@ -22,7 +22,7 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <b-form-group
                               label="Filter"
                               label-cols-sm="3"
@@ -61,6 +61,7 @@
                         </div>
                     </div>
                     <template v-if="soals && typeof soals.data != 'undefined'">
+                        <div class="table-responsive-md">
                         <b-table striped hover bordered small :fields="fields" :items="soals.data" show-empty>
                         	<template v-slot:cell(index)="data">
     				        	{{ from+data.index }}
@@ -107,6 +108,7 @@
                                 <button class="btn btn-danger btn-sm  " @click="deleteBanksoal(row.item.id)" :disabled="isLoading"><i class="cil-trash"></i> Hapus</button>
                             </template>
                         </b-table>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <p v-if="soals.data"><i class="fa fa-bars"></i> {{ soals.data.length }} item dari {{ soals.total }} total data</p>

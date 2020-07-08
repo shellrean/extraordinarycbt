@@ -26,7 +26,7 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <b-form-group
                               label="Filter"
                               label-cols-sm="3"
@@ -64,7 +64,7 @@
                             </b-form-group>
                         </div>
                     </div>
-                    <template v-if="sekolah && typeof sekolah.data != 'undefined'">
+                    <div class="table-responsive-md" v-if="sekolah && typeof sekolah.data != 'undefined'">
 						<b-table sticky-header striped hover bordered small :fields="fields" :items="sekolah.data" v-if="sekolah" show-empty>
 							<template v-slot:cell(show_details)="row">
 	                            <b-button 
@@ -108,7 +108,7 @@
 	                            </div>
 	                        </div>
 	                    </div>
-	                </template>
+	                </div>
 	                <template v-else>
                         <div class="text-center my-2">
                         	Loading...

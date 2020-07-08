@@ -7,7 +7,7 @@
                 	<button class="btn float-right btn-primary btn-sm mx-1" @click="print">Print</button>
                 </div>
                 <div class="card-body" id="printSoal">
-                	<div class="table-responsive">
+                	<div class="table-responsive-md">
                 	<table class="table table-bordered">
                 		<tr>
                 			<td>Nomor</td>

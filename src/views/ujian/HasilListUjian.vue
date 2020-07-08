@@ -8,6 +8,7 @@
 					<b-button class="float-right mx-1" size="sm" squared variant="danger">Download hasil pdf</b-button>
 				</div>
 				<div class="card-body">
+					<div class="table-responsive-md">
 					<b-table striped hover bordered small :fields="fields" :items="hasilUjian.data" :busy="isBusy" show-empty>
 						<template v-slot:table-busy>
                             <div class="text-center text-warning my-2">
@@ -20,6 +21,7 @@
 							</router-link>
 						</template>
 					</b-table>
+					</div>
 				</div>
 			</div>
 		</div>

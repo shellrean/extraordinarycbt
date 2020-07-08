@@ -8,9 +8,11 @@
                 </div>
                 <div class="card-body back" id="printSoal">
                 	<div class="paper">
+                		<div class="table-responsive-md">
                 		<table class="table table-sm">
 							<tr v-for="(soal, index) in soals.data">
 								<td>
+									<div class="table-responsive-md">
 									<table class="table-sm table-mx table-borderless">
 										<tr>
 											<td width="20px">{{ index+1 }}.</td>
@@ -18,6 +20,7 @@
 										</tr>
 										<tr>
 											<td colspan="2">
+												<div class="table-responsive-md">
 												<table class="table-sm">
 													<tr>
 														<td width="20px"></td>
@@ -36,12 +39,15 @@
 														</td>
 													</tr>
 												</table>
+												</div>
 											</td>
 										</tr>
 									</table>
+									</div>
 								</td>
 							</tr>
 						</table>
+						</div>
                 	</div>
                 </div>
             </div>

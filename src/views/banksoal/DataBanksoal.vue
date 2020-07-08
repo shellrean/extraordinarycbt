@@ -14,7 +14,7 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <b-form-group
                               label="Filter"
                               label-cols-sm="3"
@@ -53,6 +53,7 @@
                         </div>
                     </div>
                     <template v-if="banksoals && typeof banksoals.data != 'undefined'">
+                        <div class="table-responsive-md">
                         <b-table striped id="table-transition-example" primary-key="kode_banksoal" :tbody-transition-props="transProps" hover bordered small :fields="fields" :items="banksoals.data" show-empty>
                              <template v-slot:cell(show_details)="row">
                                 <b-button size="sm" @click="row.toggleDetails" :variant="row.detailsShowing ? 'danger' : 'info'"><i :class="row.detailsShowing ? 'cil-chevron-top' : 'cil-chevron-bottom'" /></b-button>
@@ -82,6 +83,7 @@
                                 <button :disabled="isLoading" v-if="$can('edit_banksoal')" class="btn btn-danger btn-sm" @click="deleteBanksoal(row.item.id)"><i class="cil-trash"></i> Hapus</button>
                             </template>
                         </b-table>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <p v-if="banksoals.data"><i class="fa fa-bars"></i> {{ banksoals.data.length }} item dari {{ banksoals.total }} total data</p>

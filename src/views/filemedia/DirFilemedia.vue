@@ -22,6 +22,7 @@
 					<div class="row mt-2">
 						<template v-if="contentDirectory && typeof contentDirectory.data != 'undefined'">
 	  						<div class="col-md-12">
+	  							<div class="table-responsive-md">
 	  							<table class="table table-stipped table-hovered table-bordered">
 	  								<tr>
 	  									<td>link</td>
@@ -40,6 +41,7 @@
 	  									</td>
 	  								</tr>
 	  							</table>
+	  							</div>
 	  						</div>
 	  						<div class="col-md-12">
 	  							<div class="float-right">

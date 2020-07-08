@@ -14,7 +14,7 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <b-form-group
                               label="Filter"
                               label-cols-sm="3"
@@ -53,6 +53,7 @@
                         </div>
                     </div>
                     <template v-if="jurusans && typeof jurusans.data != 'undefined'">
+                        <div class="table-responsive-md">
                         <b-table 
                         id="table-transition-example"
                         primary-key="kode_mapel" :tbody-transition-props="transProps"
@@ -84,6 +85,7 @@
                                         ></b-pagination>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </template>
                     <template v-else>

@@ -32,6 +32,7 @@
 							</div>
 						</div>
 					</div>
+					<div class="table-responsive-md">
 					<b-table striped hover bordered small :fields="fields" :items="servers.data" show-empty v-show="servers.data" v-if="servers">
 						<template v-slot:cell(show_details)="row">
                            <b-button size="sm" @click="row.toggleDetails" :variant="row.detailsShowing ? 'danger' : 'info'"><i :class="row.detailsShowing ? 'cil-chevron-top' : 'cil-chevron-bottom'" /></b-button>
@@ -60,6 +61,7 @@
 							</b-button>
 						</template>
 					</b-table>
+					</div>
 					<div class="row" v-if="servers && typeof servers.data != 'undefined'"">
                         <div class="col-md-6">
                             <p><i class="fa fa-bars"></i> {{ servers.data.length }} item dari {{ servers.total }} total data</p>
@@ -99,8 +101,10 @@
                         </div>
                     </div>
                     <br>
+                    <div class="table-responsive-md">
 					<b-table striped hover bordered small :fields="fields_school" :items="servers.data" :busy="isBusy" show-empty v-show="servers.data">
 					</b-table>
+					</div>
 					<div class="row" v-show="servers.data">
                         <div class="col-md-6">
                             <p v-if="servers.data"><i class="fa fa-bars"></i> {{ servers.data.length }} server dari {{ servers.meta.total }} total server</p>

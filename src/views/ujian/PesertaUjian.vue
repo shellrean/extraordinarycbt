@@ -7,6 +7,7 @@
 					<b-button variant="info" size="sm" squared @click="refreshTable">Refresh</b-button>
 				</div>
 				<div class="card-body">
+					<div class="table-responsive-md">
 					<b-table striped hover bordered :busy="isBusy" small :fields="fields" :items="pesertas.data" show-empty>
 						<template v-slot:table-busy>
                             <div class="text-center text-warning my-2">
@@ -21,6 +22,7 @@
                         	{{ Math.floor(row.item.sisa_waktu/60)+' Menit' }}
                         </template>
 					</b-table>
+					</div>
 				</div>
 				<div class="card-footer">
 				</div>

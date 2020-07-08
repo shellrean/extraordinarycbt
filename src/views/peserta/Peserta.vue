@@ -14,7 +14,7 @@
                             <h4 id="traffic" class="card-title mb-0">Manage Peserta</h4>
                             <div class="small text-muted">Manage data peserta</div>
                         </div>
-                        <div class="d-none d-md-block col-sm-7">
+                        <div class="d-md-block col-sm-7">
                             <router-link :to="{ name: 'peserta.kartu', params: { 'id': sekolah } }" class="btn float-right btn-primary btn-sm mx-1">
                                 <i class="cil-print"></i>
                                 Cetak kartu peserta
@@ -27,12 +27,13 @@
                     </div>
                     <br>
 					<div class="row" v-if="sekolahs">
-						<div class="col-md-3">
+						<div class="col-md-5">
 							<div class="form-group mb-3">
 								<v-select label="nama" :options="sekolahs.data" v-model="sekolah" :reduce="nama => nama.id"></v-select>
 							</div>
 						</div>
 					</div>
+					<div class="table-responsive-md">
 					<b-table 
 					striped hover bordered small show-empty 
 					:fields="fields" 
@@ -45,6 +46,7 @@
 							</b-button>
 						</template>
 					</b-table>
+					</div>
 					<div class="row" v-if="pesertas && typeof pesertas.data != 'undefined'">
 	                       <div class="col-md-6">
 	                           <p><i class="fa fa-bars"></i> {{ pesertas.data.length }} item dari {{ pesertas.total }} total data</p>
@@ -84,6 +86,7 @@
                         </div>
                     </div>
                     <br>
+                    <div class="table-responsive-md">
 					<b-table striped hover bordered small :fields="fields_school" :items="pesertas.data" :busy="isBusy" show-empty v-show="pesertas.data">
 						<template v-slot:cell(actions)="row">
 							<b-button variant="danger" size="sm" @click="deletePeserta(row.item.id)">
@@ -91,6 +94,7 @@
 							</b-button>
 						</template>
 					</b-table>
+					</div>
 					<div class="row" v-show="pesertas.data">
                         <div class="col-md-6">
                             <p v-if="pesertas.data"><i class="fa fa-bars"></i> {{ pesertas.data.length }} item dari {{ pesertas.meta.total }} total data</p>

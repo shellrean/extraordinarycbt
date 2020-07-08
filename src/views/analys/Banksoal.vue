@@ -14,7 +14,7 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <b-form-group
                               label="Filter"
                               label-cols-sm="3"
@@ -53,11 +53,13 @@
                         </div>
                     </div>
                     <template v-if="banksoals && typeof banksoals.data != 'undefined'">
+                        <div class="table-responsive-md">
                         <b-table striped hover bordered small :fields="fields" :items="banksoals.data" show-empty>
                            <template v-slot:cell(actions)="row">
                                 <router-link :to="{ name: 'analys.banksoal_soal', params: {banksoal_id: row.item.id} }" class="btn btn-info btn-sm mr-1"><i class="cil-chart-pie"></i> Hasil analisa</router-link>
                             </template>
                         </b-table>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <p v-if="banksoals.data"><i class="fa fa-bars"></i> {{ banksoals.data.length }} item dari {{ banksoals.total }} total data</p>

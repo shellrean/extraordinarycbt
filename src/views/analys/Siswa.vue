@@ -16,7 +16,7 @@
                     </div>
                     <br>
                     <div class="row" v-if="jadwals ">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <b-form-group
                               label="Ujian"
                               label-cols-sm="6"
@@ -28,7 +28,9 @@
                                 <v-select label="alias" :options="jadwals.data" v-model="jadwal" :reduce="nama => nama.id"></v-select>
                             </b-form-group>
                         </div>
-                        <div class="col-md-3" v-if="sekolahs">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5" v-if="sekolahs">
                             <b-form-group
                               label="Sekolah"
                               label-cols-sm="6"
@@ -41,13 +43,15 @@
                             </b-form-group>
                         </div>
                     </div>
-                    <b-table striped hover bordered small :fields="fields" :items="banksoals.data" show-empty v-if="banksoals && jadwal > 0 && sekolah > 0">
-                        <template v-slot:cell(actions)="row">
-                                <router-link :to="{ name: 'analys.capaian', params: { banksoal_id: row.item.id , sekolah_id: sekolah, jadwal_id: jadwal } }" class="btn btn-primary btn-sm mr-1" v-if="$can('edit_matpel')">
-                                    <i class="cil-badge"></i> Capaian siswa
-                                </router-link>
-                            </template>
-                    </b-table>
+                    <div class="table-responsive-md">
+                        <b-table striped hover bordered small :fields="fields" :items="banksoals.data" show-empty v-if="banksoals && jadwal > 0 && sekolah > 0">
+                            <template v-slot:cell(actions)="row">
+                                    <router-link :to="{ name: 'analys.capaian', params: { banksoal_id: row.item.id , sekolah_id: sekolah, jadwal_id: jadwal } }" class="btn btn-primary btn-sm mr-1" v-if="$can('edit_matpel')">
+                                        <i class="cil-badge"></i> Capaian siswa
+                                    </router-link>
+                                </template>
+                        </b-table>
+                    </div>
                 </div>
                 <div class="card-footer">
                     

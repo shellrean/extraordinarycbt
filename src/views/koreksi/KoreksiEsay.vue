@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <br>
-                    <template v-if="esies && typeof esies.data != 'undefined'">
+                    <div class="table-responsive" v-if="esies && typeof esies.data != 'undefined'">
 					<b-table striped hover bordered small :fields="fields" :items="esies.data" show-empty>
 			            <template v-slot:cell(show_details)="row">
 			        	     <b-button size="sm" @click="row.toggleDetails" :variant="row.detailsShowing ? 'danger' : 'info'"><i :class="row.detailsShowing ? 'cil-chevron-top' : 'cil-chevron-bottom'" /></b-button>
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                	</template>
+                	</div>
                 	<template v-else>
                         <div class="text-center text-light my-2">
                             <b-spinner small type="grow"></b-spinner>

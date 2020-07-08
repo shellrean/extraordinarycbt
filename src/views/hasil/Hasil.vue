@@ -26,7 +26,7 @@
                     </div>
                     <br>
                     <div class="row" v-if="jadwals">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <b-form-group
                               label="Ujian"
                               label-cols-sm="6"
@@ -38,7 +38,7 @@
                                 <v-select label="alias" :options="jadwals.data" v-model="jadwal" :reduce="nama => nama.id"></v-select>
                             </b-form-group>
                         </div>
-                        <div class="col-md-3" v-if="sekolahs">
+                        <div class="col-md-5" v-if="sekolahs">
                             <b-form-group
                               label="Sekolah"
                               label-cols-sm="6"
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <b-form-group
                               label="Per page"
                               label-cols-sm="6"
@@ -71,6 +71,7 @@
                             </b-form-group>
                         </div>
                     </div>
+                    <div class="table-responsive-md">
                     <b-table striped hover bordered small :fields="fields" :items="hasils.data" show-empty v-if="hasils">
                         <template v-slot:cell(show_details)="row">
                            <b-button size="sm" @click="row.toggleDetails" :variant="row.detailsShowing ? 'danger' : 'info'"><i :class="row.detailsShowing ? 'cil-chevron-top' : 'cil-chevron-bottom'" /></b-button>
@@ -102,6 +103,7 @@
                             </b-card>
                         </template>
                     </b-table>
+                    </div>
                     <div class="row" v-show="hasils.data">
                         <div class="col-md-6">
                             <p v-if="hasils.data"><i class="fa fa-bars"></i> {{ hasils.data.length }} server dari {{ hasils.total }} total hasil ujian</p>

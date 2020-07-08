@@ -14,7 +14,7 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <b-form-group
                               label="Filter"
                               label-cols-sm="3"
@@ -52,7 +52,7 @@
                             </b-form-group>
                         </div>
                     </div>
-                    <template v-if="matpels && typeof matpels.data != 'undefined'">
+                    <div class="table-responsive-md" v-if="matpels && typeof matpels.data != 'undefined'">
                         <b-table 
                         id="table-transition-example"
                         primary-key="kode_mapel" :tbody-transition-props="transProps"
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
                         </div>
-                    </template>
+                    </div>
                     <template v-else>
                         <div class="text-center my-2">
                             Loading...
