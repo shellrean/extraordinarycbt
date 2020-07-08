@@ -30,7 +30,7 @@
             <div class="card-header">
               <b>Soal</b>
             </div>
-            <ckeditor v-if="typeof banksoal.directory_id != 'undefined'" v-model="editorData" :config="editorConfig"></ckeditor>
+            <ckeditor v-if="showEditor" v-model="editorData" :config="editorConfig"></ckeditor>
           </div>
             <div class="alert alert-info">Tekan <code>enter</code> pada akhir baris setelah gambar terload</div>
         </div>
@@ -53,6 +53,7 @@ export default {
   },
   data() {
     return {
+      showEditor: false,
       editorData: '',
       editorConfig: {
         extraPlugins: 'sourcedialog',
@@ -109,6 +110,7 @@ export default {
   watch: {
     banksoal(value) {
       this.editorConfig.filebrowserUploadUrl = process.env.VUE_APP_API_SERVER+'/api/v1/file/upload?directory_id='+this.banksoal.directory_id
+      this.showEditor = true
     }
   }
 }
